@@ -1,0 +1,278 @@
+<div>
+  <div>
+    <h1>
+      List of all accounts
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new account
+    </h2>
+
+    <form action="/insert_account" method="post">
+      <div>
+        <label for="account_type_box">
+          Account type
+        </label>
+
+        <input type="text" id="account_type_box" name="query_account_type">
+      </div>
+
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id">
+      </div>
+
+      <div>
+        <label for="item_id_box">
+          Item
+        </label>
+
+        <input type="text" id="item_id_box" name="query_item_id">
+      </div>
+
+      <div>
+        <label for="name_plaid_box">
+          Name plaid
+        </label>
+
+        <textarea id="name_plaid_box" name="query_name_plaid" rows="3"></textarea>
+      </div>
+
+      <div>
+        <label for="plaid_account_id_box">
+          Plaid account
+        </label>
+
+        <textarea id="plaid_account_id_box" name="query_plaid_account_id" rows="3"></textarea>
+      </div>
+
+      <div>
+        <label for="mask_plaid_box">
+          Mask plaid
+        </label>
+
+        <textarea id="mask_plaid_box" name="query_mask_plaid" rows="3"></textarea>
+      </div>
+
+      <div>
+        <label for="official_name_plaid_box">
+          Official name plaid
+        </label>
+
+        <textarea id="official_name_plaid_box" name="query_official_name_plaid" rows="3"></textarea>
+      </div>
+
+      <div>
+        <label for="current_balance_plaid_box">
+          Current balance plaid
+        </label>
+
+        <input type="text" id="current_balance_plaid_box" name="query_current_balance_plaid">
+      </div>
+
+      <div>
+        <label for="available_balance_plaid_box">
+          Available balance plaid
+        </label>
+
+        <input type="text" id="available_balance_plaid_box" name="query_available_balance_plaid">
+      </div>
+
+      <div>
+        <label for="iso_currency_code_plaid_box">
+          Iso currency code plaid
+        </label>
+
+        <textarea id="iso_currency_code_plaid_box" name="query_iso_currency_code_plaid" rows="3"></textarea>
+      </div>
+
+      <div>
+        <label for="type_plaid_box">
+          Type plaid
+        </label>
+
+        <textarea id="type_plaid_box" name="query_type_plaid" rows="3"></textarea>
+      </div>
+
+      <div>
+        <label for="subtype_plaid_box">
+          Subtype plaid
+        </label>
+
+        <textarea id="subtype_plaid_box" name="query_subtype_plaid" rows="3"></textarea>
+      </div>
+
+      <div>
+        <label for="credit_cards_count_box">
+          Credit cards count
+        </label>
+
+        <input type="text" id="credit_cards_count_box" name="query_credit_cards_count">
+      </div>
+
+      <button>
+        Create account
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Account type
+        </th>
+
+        <th>
+          User
+        </th>
+
+        <th>
+          Item
+        </th>
+
+        <th>
+          Name plaid
+        </th>
+
+        <th>
+          Plaid account
+        </th>
+
+        <th>
+          Mask plaid
+        </th>
+
+        <th>
+          Official name plaid
+        </th>
+
+        <th>
+          Current balance plaid
+        </th>
+
+        <th>
+          Available balance plaid
+        </th>
+
+        <th>
+          Iso currency code plaid
+        </th>
+
+        <th>
+          Type plaid
+        </th>
+
+        <th>
+          Subtype plaid
+        </th>
+
+        <th>
+          Credit cards count
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_accounts.each do |an_account| %>
+      <tr>
+        <td>
+          <%= an_account.id %>
+        </td>
+
+        <td>
+          <%= an_account.account_type %>
+        </td>
+
+        <td>
+          <%= an_account.user_id %>
+        </td>
+
+        <td>
+          <%= an_account.item_id %>
+        </td>
+
+        <td>
+          <%= an_account.name_plaid %>
+        </td>
+
+        <td>
+          <%= an_account.plaid_account_id %>
+        </td>
+
+        <td>
+          <%= an_account.mask_plaid %>
+        </td>
+
+        <td>
+          <%= an_account.official_name_plaid %>
+        </td>
+
+        <td>
+          <%= an_account.current_balance_plaid %>
+        </td>
+
+        <td>
+          <%= an_account.available_balance_plaid %>
+        </td>
+
+        <td>
+          <%= an_account.iso_currency_code_plaid %>
+        </td>
+
+        <td>
+          <%= an_account.type_plaid %>
+        </td>
+
+        <td>
+          <%= an_account.subtype_plaid %>
+        </td>
+
+        <td>
+          <%= an_account.credit_cards_count %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(an_account.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(an_account.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/accounts/<%= an_account.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

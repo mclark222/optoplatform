@@ -1,0 +1,358 @@
+<div>
+  <div>
+    <h1>
+      Transaction #<%= @the_transaction.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/transactions">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_transaction/<%= @the_transaction.id %>">
+          Delete transaction
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Name plaid
+      </dt>
+      <dd>
+        <%= @the_transaction.name_plaid %>
+      </dd>
+
+      <dt>
+        Transaction amount
+      </dt>
+      <dd>
+        <%= @the_transaction.transaction_amount %>
+      </dd>
+
+      <dt>
+        Transaction datetime
+      </dt>
+      <dd>
+        <%= @the_transaction.transaction_datetime %>
+      </dd>
+
+      <dt>
+        Recurring frequency
+      </dt>
+      <dd>
+        <%= @the_transaction.recurring_frequency %>
+      </dd>
+
+      <dt>
+        Recurring end date
+      </dt>
+      <dd>
+        <%= @the_transaction.recurring_end_date %>
+      </dd>
+
+      <dt>
+        Spend category
+      </dt>
+      <dd>
+        <%= @the_transaction.spend_category_id %>
+      </dd>
+
+      <dt>
+        Income flag
+      </dt>
+      <dd>
+        <%= @the_transaction.income_flag %>
+      </dd>
+
+      <dt>
+        Recurring flag
+      </dt>
+      <dd>
+        <%= @the_transaction.recurring_flag %>
+      </dd>
+
+      <dt>
+        Iso currency code
+      </dt>
+      <dd>
+        <%= @the_transaction.iso_currency_code %>
+      </dd>
+
+      <dt>
+        Merchant name
+      </dt>
+      <dd>
+        <%= @the_transaction.merchant_name %>
+      </dd>
+
+      <dt>
+        Payment channel
+      </dt>
+      <dd>
+        <%= @the_transaction.payment_channel %>
+      </dd>
+
+      <dt>
+        Transaction category plaid
+      </dt>
+      <dd>
+        <%= @the_transaction.transaction_category_plaid %>
+      </dd>
+
+      <dt>
+        Authorized datetime
+      </dt>
+      <dd>
+        <%= @the_transaction.authorized_datetime %>
+      </dd>
+
+      <dt>
+        Transaction location
+      </dt>
+      <dd>
+        <%= @the_transaction.transaction_location %>
+      </dd>
+
+      <dt>
+        Transaction subcategory plaid
+      </dt>
+      <dd>
+        <%= @the_transaction.transaction_subcategory_plaid %>
+      </dd>
+
+      <dt>
+        Account
+      </dt>
+      <dd>
+        <%= @the_transaction.account_id %>
+      </dd>
+
+      <dt>
+        Plaid transaction
+      </dt>
+      <dd>
+        <%= @the_transaction.plaid_transaction_id %>
+      </dd>
+
+      <dt>
+        Plaid category
+      </dt>
+      <dd>
+        <%= @the_transaction.plaid_category_id %>
+      </dd>
+
+      <dt>
+        Type plaid
+      </dt>
+      <dd>
+        <%= @the_transaction.type_plaid %>
+      </dd>
+
+      <dt>
+        Pending
+      </dt>
+      <dd>
+        <%= @the_transaction.pending %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_transaction.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_transaction.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit transaction
+    </h2>
+
+    <form action="/modify_transaction/<%= @the_transaction.id %>"  method="post" >
+      <div>
+        <label for="name_plaid_box">
+          Name plaid
+        </label>
+
+        <textarea id="name_plaid_box" name="query_name_plaid"><%= @the_transaction.name_plaid %></textarea>
+      </div>
+
+      <div>
+        <label for="transaction_amount_box">
+          Transaction amount
+        </label>
+
+        <input type="text" id="transaction_amount_box" name="query_transaction_amount" value="<%= @the_transaction.transaction_amount %>">
+      </div>
+
+      <div>
+        <label for="transaction_datetime_box">
+          Transaction datetime
+        </label>
+
+        <input type="datetime-local" id="transaction_datetime_box" name="query_transaction_datetime"
+         value="<%= @the_transaction.transaction_datetime %>">
+      </div>
+
+      <div>
+        <label for="recurring_frequency_box">
+          Recurring frequency
+        </label>
+
+        <input type="text" id="recurring_frequency_box" name="query_recurring_frequency" value="<%= @the_transaction.recurring_frequency %>">
+      </div>
+
+      <div>
+        <label for="recurring_end_date_box">
+          Recurring end date
+        </label>
+
+        <input type="date" id="recurring_end_date_box" name="query_recurring_end_date" value="<%= @the_transaction.recurring_end_date %>">
+      </div>
+
+      <div>
+        <label for="spend_category_id_box">
+          Spend category
+        </label>
+
+        <input type="text" id="spend_category_id_box" name="query_spend_category_id" value="<%= @the_transaction.spend_category_id %>">
+      </div>
+
+      <div>
+        <input type="checkbox" id="income_flag_box" name="query_income_flag" value="1" <%= "checked" if @the_transaction.income_flag %>>
+
+        <label for="income_flag_box">
+            Income flag
+        </label>
+      </div>
+
+      <div>
+        <input type="checkbox" id="recurring_flag_box" name="query_recurring_flag" value="1" <%= "checked" if @the_transaction.recurring_flag %>>
+
+        <label for="recurring_flag_box">
+            Recurring flag
+        </label>
+      </div>
+
+      <div>
+        <label for="iso_currency_code_box">
+          Iso currency code
+        </label>
+
+        <textarea id="iso_currency_code_box" name="query_iso_currency_code"><%= @the_transaction.iso_currency_code %></textarea>
+      </div>
+
+      <div>
+        <label for="merchant_name_box">
+          Merchant name
+        </label>
+
+        <input type="text" id="merchant_name_box" name="query_merchant_name" value="<%= @the_transaction.merchant_name %>">
+      </div>
+
+      <div>
+        <label for="payment_channel_box">
+          Payment channel
+        </label>
+
+        <input type="text" id="payment_channel_box" name="query_payment_channel" value="<%= @the_transaction.payment_channel %>">
+      </div>
+
+      <div>
+        <label for="transaction_category_plaid_box">
+          Transaction category plaid
+        </label>
+
+        <textarea id="transaction_category_plaid_box" name="query_transaction_category_plaid"><%= @the_transaction.transaction_category_plaid %></textarea>
+      </div>
+
+      <div>
+        <label for="authorized_datetime_box">
+          Authorized datetime
+        </label>
+
+        <input type="datetime-local" id="authorized_datetime_box" name="query_authorized_datetime"
+         value="<%= @the_transaction.authorized_datetime %>">
+      </div>
+
+      <div>
+        <label for="transaction_location_box">
+          Transaction location
+        </label>
+
+        <input type="text" id="transaction_location_box" name="query_transaction_location" value="<%= @the_transaction.transaction_location %>">
+      </div>
+
+      <div>
+        <label for="transaction_subcategory_plaid_box">
+          Transaction subcategory plaid
+        </label>
+
+        <textarea id="transaction_subcategory_plaid_box" name="query_transaction_subcategory_plaid"><%= @the_transaction.transaction_subcategory_plaid %></textarea>
+      </div>
+
+      <div>
+        <label for="account_id_box">
+          Account
+        </label>
+
+        <input type="text" id="account_id_box" name="query_account_id" value="<%= @the_transaction.account_id %>">
+      </div>
+
+      <div>
+        <label for="plaid_transaction_id_box">
+          Plaid transaction
+        </label>
+
+        <textarea id="plaid_transaction_id_box" name="query_plaid_transaction_id"><%= @the_transaction.plaid_transaction_id %></textarea>
+      </div>
+
+      <div>
+        <label for="plaid_category_id_box">
+          Plaid category
+        </label>
+
+        <textarea id="plaid_category_id_box" name="query_plaid_category_id"><%= @the_transaction.plaid_category_id %></textarea>
+      </div>
+
+      <div>
+        <label for="type_plaid_box">
+          Type plaid
+        </label>
+
+        <textarea id="type_plaid_box" name="query_type_plaid"><%= @the_transaction.type_plaid %></textarea>
+      </div>
+
+      <div>
+        <input type="checkbox" id="pending_box" name="query_pending" value="1" <%= "checked" if @the_transaction.pending %>>
+
+        <label for="pending_box">
+            Pending
+        </label>
+      </div>
+
+      <button>
+        Update transaction
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

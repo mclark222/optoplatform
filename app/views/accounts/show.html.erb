@@ -1,0 +1,251 @@
+<div>
+  <div>
+    <h1>
+      Account #<%= @the_account.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/accounts">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_account/<%= @the_account.id %>">
+          Delete account
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Account type
+      </dt>
+      <dd>
+        <%= @the_account.account_type %>
+      </dd>
+
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @the_account.user_id %>
+      </dd>
+
+      <dt>
+        Item
+      </dt>
+      <dd>
+        <%= @the_account.item_id %>
+      </dd>
+
+      <dt>
+        Name plaid
+      </dt>
+      <dd>
+        <%= @the_account.name_plaid %>
+      </dd>
+
+      <dt>
+        Plaid account
+      </dt>
+      <dd>
+        <%= @the_account.plaid_account_id %>
+      </dd>
+
+      <dt>
+        Mask plaid
+      </dt>
+      <dd>
+        <%= @the_account.mask_plaid %>
+      </dd>
+
+      <dt>
+        Official name plaid
+      </dt>
+      <dd>
+        <%= @the_account.official_name_plaid %>
+      </dd>
+
+      <dt>
+        Current balance plaid
+      </dt>
+      <dd>
+        <%= @the_account.current_balance_plaid %>
+      </dd>
+
+      <dt>
+        Available balance plaid
+      </dt>
+      <dd>
+        <%= @the_account.available_balance_plaid %>
+      </dd>
+
+      <dt>
+        Iso currency code plaid
+      </dt>
+      <dd>
+        <%= @the_account.iso_currency_code_plaid %>
+      </dd>
+
+      <dt>
+        Type plaid
+      </dt>
+      <dd>
+        <%= @the_account.type_plaid %>
+      </dd>
+
+      <dt>
+        Subtype plaid
+      </dt>
+      <dd>
+        <%= @the_account.subtype_plaid %>
+      </dd>
+
+      <dt>
+        Credit cards count
+      </dt>
+      <dd>
+        <%= @the_account.credit_cards_count %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_account.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_account.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit account
+    </h2>
+
+    <form action="/modify_account/<%= @the_account.id %>"  method="post" >
+      <div>
+        <label for="account_type_box">
+          Account type
+        </label>
+
+        <input type="text" id="account_type_box" name="query_account_type" value="<%= @the_account.account_type %>">
+      </div>
+
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_account.user_id %>">
+      </div>
+
+      <div>
+        <label for="item_id_box">
+          Item
+        </label>
+
+        <input type="text" id="item_id_box" name="query_item_id" value="<%= @the_account.item_id %>">
+      </div>
+
+      <div>
+        <label for="name_plaid_box">
+          Name plaid
+        </label>
+
+        <textarea id="name_plaid_box" name="query_name_plaid"><%= @the_account.name_plaid %></textarea>
+      </div>
+
+      <div>
+        <label for="plaid_account_id_box">
+          Plaid account
+        </label>
+
+        <textarea id="plaid_account_id_box" name="query_plaid_account_id"><%= @the_account.plaid_account_id %></textarea>
+      </div>
+
+      <div>
+        <label for="mask_plaid_box">
+          Mask plaid
+        </label>
+
+        <textarea id="mask_plaid_box" name="query_mask_plaid"><%= @the_account.mask_plaid %></textarea>
+      </div>
+
+      <div>
+        <label for="official_name_plaid_box">
+          Official name plaid
+        </label>
+
+        <textarea id="official_name_plaid_box" name="query_official_name_plaid"><%= @the_account.official_name_plaid %></textarea>
+      </div>
+
+      <div>
+        <label for="current_balance_plaid_box">
+          Current balance plaid
+        </label>
+
+        <input type="text" id="current_balance_plaid_box" name="query_current_balance_plaid" value="<%= @the_account.current_balance_plaid %>">
+      </div>
+
+      <div>
+        <label for="available_balance_plaid_box">
+          Available balance plaid
+        </label>
+
+        <input type="text" id="available_balance_plaid_box" name="query_available_balance_plaid" value="<%= @the_account.available_balance_plaid %>">
+      </div>
+
+      <div>
+        <label for="iso_currency_code_plaid_box">
+          Iso currency code plaid
+        </label>
+
+        <textarea id="iso_currency_code_plaid_box" name="query_iso_currency_code_plaid"><%= @the_account.iso_currency_code_plaid %></textarea>
+      </div>
+
+      <div>
+        <label for="type_plaid_box">
+          Type plaid
+        </label>
+
+        <textarea id="type_plaid_box" name="query_type_plaid"><%= @the_account.type_plaid %></textarea>
+      </div>
+
+      <div>
+        <label for="subtype_plaid_box">
+          Subtype plaid
+        </label>
+
+        <textarea id="subtype_plaid_box" name="query_subtype_plaid"><%= @the_account.subtype_plaid %></textarea>
+      </div>
+
+      <div>
+        <label for="credit_cards_count_box">
+          Credit cards count
+        </label>
+
+        <input type="text" id="credit_cards_count_box" name="query_credit_cards_count" value="<%= @the_account.credit_cards_count %>">
+      </div>
+
+      <button>
+        Update account
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

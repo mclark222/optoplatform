@@ -1,0 +1,191 @@
+<div>
+  <div>
+    <h1>
+      Credit card #<%= @the_credit_card.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/credit_cards">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_credit_card/<%= @the_credit_card.id %>">
+          Delete credit card
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Apr
+      </dt>
+      <dd>
+        <%= @the_credit_card.apr %>
+      </dd>
+
+      <dt>
+        Card name
+      </dt>
+      <dd>
+        <%= @the_credit_card.card_name %>
+      </dd>
+
+      <dt>
+        Credit line
+      </dt>
+      <dd>
+        <%= @the_credit_card.credit_line %>
+      </dd>
+
+      <dt>
+        Current balance
+      </dt>
+      <dd>
+        <%= @the_credit_card.current_balance %>
+      </dd>
+
+      <dt>
+        Minimum payment
+      </dt>
+      <dd>
+        <%= @the_credit_card.minimum_payment %>
+      </dd>
+
+      <dt>
+        Payment date
+      </dt>
+      <dd>
+        <%= @the_credit_card.payment_date %>
+      </dd>
+
+      <dt>
+        Statement start date
+      </dt>
+      <dd>
+        <%= @the_credit_card.statement_start_date %>
+      </dd>
+
+      <dt>
+        Plaid account
+      </dt>
+      <dd>
+        <%= @the_credit_card.plaid_account_id %>
+      </dd>
+
+      <dt>
+        Account
+      </dt>
+      <dd>
+        <%= @the_credit_card.account_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_credit_card.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_credit_card.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit credit card
+    </h2>
+
+    <form action="/modify_credit_card/<%= @the_credit_card.id %>"  method="post" >
+      <div>
+        <label for="apr_box">
+          Apr
+        </label>
+
+        <input type="text" id="apr_box" name="query_apr" value="<%= @the_credit_card.apr %>">
+      </div>
+
+      <div>
+        <label for="card_name_box">
+          Card name
+        </label>
+
+        <input type="text" id="card_name_box" name="query_card_name" value="<%= @the_credit_card.card_name %>">
+      </div>
+
+      <div>
+        <label for="credit_line_box">
+          Credit line
+        </label>
+
+        <input type="text" id="credit_line_box" name="query_credit_line" value="<%= @the_credit_card.credit_line %>">
+      </div>
+
+      <div>
+        <label for="current_balance_box">
+          Current balance
+        </label>
+
+        <input type="text" id="current_balance_box" name="query_current_balance" value="<%= @the_credit_card.current_balance %>">
+      </div>
+
+      <div>
+        <label for="minimum_payment_box">
+          Minimum payment
+        </label>
+
+        <input type="text" id="minimum_payment_box" name="query_minimum_payment" value="<%= @the_credit_card.minimum_payment %>">
+      </div>
+
+      <div>
+        <label for="payment_date_box">
+          Payment date
+        </label>
+
+        <input type="date" id="payment_date_box" name="query_payment_date" value="<%= @the_credit_card.payment_date %>">
+      </div>
+
+      <div>
+        <label for="statement_start_date_box">
+          Statement start date
+        </label>
+
+        <input type="date" id="statement_start_date_box" name="query_statement_start_date" value="<%= @the_credit_card.statement_start_date %>">
+      </div>
+
+      <div>
+        <label for="plaid_account_id_box">
+          Plaid account
+        </label>
+
+        <input type="text" id="plaid_account_id_box" name="query_plaid_account_id" value="<%= @the_credit_card.plaid_account_id %>">
+      </div>
+
+      <div>
+        <label for="account_id_box">
+          Account
+        </label>
+
+        <input type="text" id="account_id_box" name="query_account_id" value="<%= @the_credit_card.account_id %>">
+      </div>
+
+      <button>
+        Update credit card
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

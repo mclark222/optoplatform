@@ -1,0 +1,182 @@
+<div>
+  <div>
+    <h1>
+      List of all plaid items
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new plaid item
+    </h2>
+
+    <form action="/insert_plaid_item" method="post">
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id">
+      </div>
+
+      <div>
+        <label for="plaid_access_token_box">
+          Plaid access token
+        </label>
+
+        <textarea id="plaid_access_token_box" name="query_plaid_access_token" rows="3"></textarea>
+      </div>
+
+      <div>
+        <label for="plaid_item_id_box">
+          Plaid item
+        </label>
+
+        <textarea id="plaid_item_id_box" name="query_plaid_item_id" rows="3"></textarea>
+      </div>
+
+      <div>
+        <label for="plaid_institution_id_box">
+          Plaid institution
+        </label>
+
+        <textarea id="plaid_institution_id_box" name="query_plaid_institution_id" rows="3"></textarea>
+      </div>
+
+      <div>
+        <label for="status_box">
+          Status
+        </label>
+
+        <textarea id="status_box" name="query_status" rows="3"></textarea>
+      </div>
+
+      <div>
+        <label for="transactions_cursor_box">
+          Transactions cursor
+        </label>
+
+        <textarea id="transactions_cursor_box" name="query_transactions_cursor" rows="3"></textarea>
+      </div>
+
+      <div>
+        <label for="accounts_count_box">
+          Accounts count
+        </label>
+
+        <input type="text" id="accounts_count_box" name="query_accounts_count">
+      </div>
+
+      <button>
+        Create plaid item
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          User
+        </th>
+
+        <th>
+          Plaid access token
+        </th>
+
+        <th>
+          Plaid item
+        </th>
+
+        <th>
+          Plaid institution
+        </th>
+
+        <th>
+          Status
+        </th>
+
+        <th>
+          Transactions cursor
+        </th>
+
+        <th>
+          Accounts count
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_plaid_items.each do |a_plaid_item| %>
+      <tr>
+        <td>
+          <%= a_plaid_item.id %>
+        </td>
+
+        <td>
+          <%= a_plaid_item.user_id %>
+        </td>
+
+        <td>
+          <%= a_plaid_item.plaid_access_token %>
+        </td>
+
+        <td>
+          <%= a_plaid_item.plaid_item_id %>
+        </td>
+
+        <td>
+          <%= a_plaid_item.plaid_institution_id %>
+        </td>
+
+        <td>
+          <%= a_plaid_item.status %>
+        </td>
+
+        <td>
+          <%= a_plaid_item.transactions_cursor %>
+        </td>
+
+        <td>
+          <%= a_plaid_item.accounts_count %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_plaid_item.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_plaid_item.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/plaid_items/<%= a_plaid_item.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

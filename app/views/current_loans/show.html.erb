@@ -1,0 +1,236 @@
+<div>
+  <div>
+    <h1>
+      Current loan #<%= @the_current_loan.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/current_loans">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_current_loan/<%= @the_current_loan.id %>">
+          Delete current loan
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Amount borrowed
+      </dt>
+      <dd>
+        <%= @the_current_loan.amount_borrowed %>
+      </dd>
+
+      <dt>
+        Amount remaining
+      </dt>
+      <dd>
+        <%= @the_current_loan.amount_remaining %>
+      </dd>
+
+      <dt>
+        Apr
+      </dt>
+      <dd>
+        <%= @the_current_loan.apr %>
+      </dd>
+
+      <dt>
+        First payment date
+      </dt>
+      <dd>
+        <%= @the_current_loan.first_payment_date %>
+      </dd>
+
+      <dt>
+        Lender name
+      </dt>
+      <dd>
+        <%= @the_current_loan.lender_name %>
+      </dd>
+
+      <dt>
+        Loan start date
+      </dt>
+      <dd>
+        <%= @the_current_loan.loan_start_date %>
+      </dd>
+
+      <dt>
+        Loan total cost
+      </dt>
+      <dd>
+        <%= @the_current_loan.loan_total_cost %>
+      </dd>
+
+      <dt>
+        Monthly payments after school
+      </dt>
+      <dd>
+        <%= @the_current_loan.monthly_payments_after_school %>
+      </dd>
+
+      <dt>
+        Monthly payments in school
+      </dt>
+      <dd>
+        <%= @the_current_loan.monthly_payments_in_school %>
+      </dd>
+
+      <dt>
+        Repayment period
+      </dt>
+      <dd>
+        <%= @the_current_loan.repayment_period %>
+      </dd>
+
+      <dt>
+        Total loan amount
+      </dt>
+      <dd>
+        <%= @the_current_loan.total_loan_amount %>
+      </dd>
+
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @the_current_loan.user_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_current_loan.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_current_loan.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit current loan
+    </h2>
+
+    <form action="/modify_current_loan/<%= @the_current_loan.id %>"  method="post" >
+      <div>
+        <label for="amount_borrowed_box">
+          Amount borrowed
+        </label>
+
+        <input type="text" id="amount_borrowed_box" name="query_amount_borrowed" value="<%= @the_current_loan.amount_borrowed %>">
+      </div>
+
+      <div>
+        <label for="amount_remaining_box">
+          Amount remaining
+        </label>
+
+        <input type="text" id="amount_remaining_box" name="query_amount_remaining" value="<%= @the_current_loan.amount_remaining %>">
+      </div>
+
+      <div>
+        <label for="apr_box">
+          Apr
+        </label>
+
+        <input type="text" id="apr_box" name="query_apr" value="<%= @the_current_loan.apr %>">
+      </div>
+
+      <div>
+        <label for="first_payment_date_box">
+          First payment date
+        </label>
+
+        <input type="date" id="first_payment_date_box" name="query_first_payment_date" value="<%= @the_current_loan.first_payment_date %>">
+      </div>
+
+      <div>
+        <label for="lender_name_box">
+          Lender name
+        </label>
+
+        <input type="text" id="lender_name_box" name="query_lender_name" value="<%= @the_current_loan.lender_name %>">
+      </div>
+
+      <div>
+        <label for="loan_start_date_box">
+          Loan start date
+        </label>
+
+        <input type="date" id="loan_start_date_box" name="query_loan_start_date" value="<%= @the_current_loan.loan_start_date %>">
+      </div>
+
+      <div>
+        <label for="loan_total_cost_box">
+          Loan total cost
+        </label>
+
+        <input type="text" id="loan_total_cost_box" name="query_loan_total_cost" value="<%= @the_current_loan.loan_total_cost %>">
+      </div>
+
+      <div>
+        <label for="monthly_payments_after_school_box">
+          Monthly payments after school
+        </label>
+
+        <input type="text" id="monthly_payments_after_school_box" name="query_monthly_payments_after_school" value="<%= @the_current_loan.monthly_payments_after_school %>">
+      </div>
+
+      <div>
+        <label for="monthly_payments_in_school_box">
+          Monthly payments in school
+        </label>
+
+        <input type="text" id="monthly_payments_in_school_box" name="query_monthly_payments_in_school" value="<%= @the_current_loan.monthly_payments_in_school %>">
+      </div>
+
+      <div>
+        <label for="repayment_period_box">
+          Repayment period
+        </label>
+
+        <input type="text" id="repayment_period_box" name="query_repayment_period" value="<%= @the_current_loan.repayment_period %>">
+      </div>
+
+      <div>
+        <label for="total_loan_amount_box">
+          Total loan amount
+        </label>
+
+        <input type="text" id="total_loan_amount_box" name="query_total_loan_amount" value="<%= @the_current_loan.total_loan_amount %>">
+      </div>
+
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_current_loan.user_id %>">
+      </div>
+
+      <button>
+        Update current loan
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

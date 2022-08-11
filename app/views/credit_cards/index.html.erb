@@ -1,0 +1,214 @@
+<div>
+  <div>
+    <h1>
+      List of all credit cards
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new credit card
+    </h2>
+
+    <form action="/insert_credit_card" method="post">
+      <div>
+        <label for="apr_box">
+          Apr
+        </label>
+
+        <input type="text" id="apr_box" name="query_apr">
+      </div>
+
+      <div>
+        <label for="card_name_box">
+          Card name
+        </label>
+
+        <input type="text" id="card_name_box" name="query_card_name">
+      </div>
+
+      <div>
+        <label for="credit_line_box">
+          Credit line
+        </label>
+
+        <input type="text" id="credit_line_box" name="query_credit_line">
+      </div>
+
+      <div>
+        <label for="current_balance_box">
+          Current balance
+        </label>
+
+        <input type="text" id="current_balance_box" name="query_current_balance">
+      </div>
+
+      <div>
+        <label for="minimum_payment_box">
+          Minimum payment
+        </label>
+
+        <input type="text" id="minimum_payment_box" name="query_minimum_payment">
+      </div>
+
+      <div>
+        <label for="payment_date_box">
+          Payment date
+        </label>
+
+        <input type="date" id="payment_date_box" name="query_payment_date">
+      </div>
+
+      <div>
+        <label for="statement_start_date_box">
+          Statement start date
+        </label>
+
+        <input type="date" id="statement_start_date_box" name="query_statement_start_date">
+      </div>
+
+      <div>
+        <label for="plaid_account_id_box">
+          Plaid account
+        </label>
+
+        <input type="text" id="plaid_account_id_box" name="query_plaid_account_id">
+      </div>
+
+      <div>
+        <label for="account_id_box">
+          Account
+        </label>
+
+        <input type="text" id="account_id_box" name="query_account_id">
+      </div>
+
+      <button>
+        Create credit card
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Apr
+        </th>
+
+        <th>
+          Card name
+        </th>
+
+        <th>
+          Credit line
+        </th>
+
+        <th>
+          Current balance
+        </th>
+
+        <th>
+          Minimum payment
+        </th>
+
+        <th>
+          Payment date
+        </th>
+
+        <th>
+          Statement start date
+        </th>
+
+        <th>
+          Plaid account
+        </th>
+
+        <th>
+          Account
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_credit_cards.each do |a_credit_card| %>
+      <tr>
+        <td>
+          <%= a_credit_card.id %>
+        </td>
+
+        <td>
+          <%= a_credit_card.apr %>
+        </td>
+
+        <td>
+          <%= a_credit_card.card_name %>
+        </td>
+
+        <td>
+          <%= a_credit_card.credit_line %>
+        </td>
+
+        <td>
+          <%= a_credit_card.current_balance %>
+        </td>
+
+        <td>
+          <%= a_credit_card.minimum_payment %>
+        </td>
+
+        <td>
+          <%= a_credit_card.payment_date %>
+        </td>
+
+        <td>
+          <%= a_credit_card.statement_start_date %>
+        </td>
+
+        <td>
+          <%= a_credit_card.plaid_account_id %>
+        </td>
+
+        <td>
+          <%= a_credit_card.account_id %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_credit_card.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_credit_card.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/credit_cards/<%= a_credit_card.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

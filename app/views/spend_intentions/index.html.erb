@@ -1,0 +1,102 @@
+<div>
+  <div>
+    <h1>
+      List of all spend intentions
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new spend intention
+    </h2>
+
+    <form action="/insert_spend_intention" method="post">
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id">
+      </div>
+
+      <div>
+        <label for="spend_intention_box">
+          Spend intention
+        </label>
+
+        <textarea id="spend_intention_box" name="query_spend_intention" rows="3"></textarea>
+      </div>
+
+      <button>
+        Create spend intention
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          User
+        </th>
+
+        <th>
+          Spend intention
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_spend_intentions.each do |a_spend_intention| %>
+      <tr>
+        <td>
+          <%= a_spend_intention.id %>
+        </td>
+
+        <td>
+          <%= a_spend_intention.user_id %>
+        </td>
+
+        <td>
+          <%= a_spend_intention.spend_intention %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_spend_intention.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_spend_intention.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/spend_intentions/<%= a_spend_intention.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

@@ -1,0 +1,64 @@
+class BudgetExpensesController < ApplicationController
+  def index
+    matching_budget_expenses = BudgetExpense.all
+
+    @list_of_budget_expenses = matching_budget_expenses.order({ :created_at => :desc })
+
+    render({ :template => "budget_expenses/index.html.erb" })
+  end
+
+  def show
+    the_id = params.fetch("path_id")
+
+    matching_budget_expenses = BudgetExpense.where({ :id => the_id })
+
+    @the_budget_expense = matching_budget_expenses.at(0)
+
+    render({ :template => "budget_expenses/show.html.erb" })
+  end
+
+  def create
+    the_budget_expense = BudgetExpense.new
+    the_budget_expense.expense_name = params.fetch("query_expense_name")
+    the_budget_expense.expense_amount = params.fetch("query_expense_amount")
+    the_budget_expense.expense_category_id = params.fetch("query_expense_category_id")
+    the_budget_expense.recurring_frequency = params.fetch("query_recurring_frequency")
+    the_budget_expense.user_id = params.fetch("query_user_id")
+    the_budget_expense.first_recurrence_date = params.fetch("query_first_recurrence_date")
+
+    if the_budget_expense.valid?
+      the_budget_expense.save
+      redirect_to("/budget_expenses", { :notice => "Budget expense created successfully." })
+    else
+      redirect_to("/budget_expenses", { :alert => the_budget_expense.errors.full_messages.to_sentence })
+    end
+  end
+
+  def update
+    the_id = params.fetch("path_id")
+    the_budget_expense = BudgetExpense.where({ :id => the_id }).at(0)
+
+    the_budget_expense.expense_name = params.fetch("query_expense_name")
+    the_budget_expense.expense_amount = params.fetch("query_expense_amount")
+    the_budget_expense.expense_category_id = params.fetch("query_expense_category_id")
+    the_budget_expense.recurring_frequency = params.fetch("query_recurring_frequency")
+    the_budget_expense.user_id = params.fetch("query_user_id")
+    the_budget_expense.first_recurrence_date = params.fetch("query_first_recurrence_date")
+
+    if the_budget_expense.valid?
+      the_budget_expense.save
+      redirect_to("/budget_expenses/#{the_budget_expense.id}", { :notice => "Budget expense updated successfully."} )
+    else
+      redirect_to("/budget_expenses/#{the_budget_expense.id}", { :alert => the_budget_expense.errors.full_messages.to_sentence })
+    end
+  end
+
+  def destroy
+    the_id = params.fetch("path_id")
+    the_budget_expense = BudgetExpense.where({ :id => the_id }).at(0)
+
+    the_budget_expense.destroy
+
+    redirect_to("/budget_expenses", { :notice => "Budget expense deleted successfully."} )
+  end
+end

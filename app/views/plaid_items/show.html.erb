@@ -1,0 +1,161 @@
+<div>
+  <div>
+    <h1>
+      Plaid item #<%= @the_plaid_item.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/plaid_items">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_plaid_item/<%= @the_plaid_item.id %>">
+          Delete plaid item
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @the_plaid_item.user_id %>
+      </dd>
+
+      <dt>
+        Plaid access token
+      </dt>
+      <dd>
+        <%= @the_plaid_item.plaid_access_token %>
+      </dd>
+
+      <dt>
+        Plaid item
+      </dt>
+      <dd>
+        <%= @the_plaid_item.plaid_item_id %>
+      </dd>
+
+      <dt>
+        Plaid institution
+      </dt>
+      <dd>
+        <%= @the_plaid_item.plaid_institution_id %>
+      </dd>
+
+      <dt>
+        Status
+      </dt>
+      <dd>
+        <%= @the_plaid_item.status %>
+      </dd>
+
+      <dt>
+        Transactions cursor
+      </dt>
+      <dd>
+        <%= @the_plaid_item.transactions_cursor %>
+      </dd>
+
+      <dt>
+        Accounts count
+      </dt>
+      <dd>
+        <%= @the_plaid_item.accounts_count %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_plaid_item.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_plaid_item.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit plaid item
+    </h2>
+
+    <form action="/modify_plaid_item/<%= @the_plaid_item.id %>"  method="post" >
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_plaid_item.user_id %>">
+      </div>
+
+      <div>
+        <label for="plaid_access_token_box">
+          Plaid access token
+        </label>
+
+        <textarea id="plaid_access_token_box" name="query_plaid_access_token"><%= @the_plaid_item.plaid_access_token %></textarea>
+      </div>
+
+      <div>
+        <label for="plaid_item_id_box">
+          Plaid item
+        </label>
+
+        <textarea id="plaid_item_id_box" name="query_plaid_item_id"><%= @the_plaid_item.plaid_item_id %></textarea>
+      </div>
+
+      <div>
+        <label for="plaid_institution_id_box">
+          Plaid institution
+        </label>
+
+        <textarea id="plaid_institution_id_box" name="query_plaid_institution_id"><%= @the_plaid_item.plaid_institution_id %></textarea>
+      </div>
+
+      <div>
+        <label for="status_box">
+          Status
+        </label>
+
+        <textarea id="status_box" name="query_status"><%= @the_plaid_item.status %></textarea>
+      </div>
+
+      <div>
+        <label for="transactions_cursor_box">
+          Transactions cursor
+        </label>
+
+        <textarea id="transactions_cursor_box" name="query_transactions_cursor"><%= @the_plaid_item.transactions_cursor %></textarea>
+      </div>
+
+      <div>
+        <label for="accounts_count_box">
+          Accounts count
+        </label>
+
+        <input type="text" id="accounts_count_box" name="query_accounts_count" value="<%= @the_plaid_item.accounts_count %>">
+      </div>
+
+      <button>
+        Update plaid item
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

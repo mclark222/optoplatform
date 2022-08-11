@@ -1,0 +1,86 @@
+<div>
+  <div>
+    <h1>
+      Spend intention #<%= @the_spend_intention.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/spend_intentions">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_spend_intention/<%= @the_spend_intention.id %>">
+          Delete spend intention
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @the_spend_intention.user_id %>
+      </dd>
+
+      <dt>
+        Spend intention
+      </dt>
+      <dd>
+        <%= @the_spend_intention.spend_intention %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_spend_intention.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_spend_intention.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit spend intention
+    </h2>
+
+    <form action="/modify_spend_intention/<%= @the_spend_intention.id %>"  method="post" >
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_spend_intention.user_id %>">
+      </div>
+
+      <div>
+        <label for="spend_intention_box">
+          Spend intention
+        </label>
+
+        <textarea id="spend_intention_box" name="query_spend_intention"><%= @the_spend_intention.spend_intention %></textarea>
+      </div>
+
+      <button>
+        Update spend intention
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

@@ -1,0 +1,2 @@
+class SchoolFee < ApplicationRecord
+end
