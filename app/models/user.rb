@@ -1,3 +1,30 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                           :integer          not null, primary key
+#  accounts_count               :integer
+#  birth_date                   :date
+#  budget_expenses_count        :integer
+#  budget_incomes_count         :integer
+#  current_loans_count          :integer
+#  email                        :string
+#  first_name                   :string
+#  gender                       :string
+#  graduation_date              :date
+#  international_student_status :boolean
+#  last_name                    :string
+#  loan_comparisons_count       :integer
+#  password_digest              :string
+#  plaid_items_count            :integer
+#  premba_industry              :string
+#  school                       :string
+#  school_events_count          :integer
+#  spend_intentions_count       :integer
+#  transaction_categories_count :integer
+#  created_at                   :datetime         not null
+#  updated_at                   :datetime         not null
+#
 class User < ApplicationRecord
   validates :email, :uniqueness => { :case_sensitive => false }
   validates :email, :presence => true

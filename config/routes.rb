@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  #------------------------------
+
+  get("/home", { :controller => "application", :action => "homepage" })
+  get("/budgeting-and-planning", { :controller => "application", :action => "budgeting_and_planning" })
+  get("/profile", { :controller => "application", :action => "profile" })
+  get("/student-loans", { :controller => "application", :action => "student_loans" })
 
   # Routes for the Plaid item resource:
 
@@ -310,9 +316,5 @@ Rails.application.routes.draw do
   # SIGN OUT        
   get("/user_sign_out", { :controller => "user_authentication", :action => "destroy_cookies" })
              
-  #------------------------------
 
-  get("/home", { :controller => "application", :action => "homepage" })
-  #get("/budgeting-and-planning", { :controller => "application", :action => "budgeting_and_planning" })
-  #get("/student-loans", { :controller => "application", :action => "student_loans" })
 end
