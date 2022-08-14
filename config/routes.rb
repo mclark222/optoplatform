@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   #------------------------------
 
+  get("/", { :controller => "application", :action => "homepage" })
   get("/home", { :controller => "application", :action => "homepage" })
   get("/budgeting-and-planning", { :controller => "application", :action => "budgeting_and_planning" })
   get("/profile", { :controller => "application", :action => "profile" })
