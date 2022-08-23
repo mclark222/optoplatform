@@ -49,15 +49,26 @@ class UserAuthenticationController < ApplicationController
     @user.premba_industry = params.fetch("query_premba_industry")
     @user.gender = params.fetch("query_gender")
     @user.birth_date = params.fetch("query_birth_date")
-    @user.loan_comparisons_count = params.fetch("query_loan_comparisons_count")
-    @user.spend_intentions_count = params.fetch("query_spend_intentions_count")
-    @user.accounts_count = params.fetch("query_accounts_count")
-    @user.budget_expenses_count = params.fetch("query_budget_expenses_count")
-    @user.budget_incomes_count = params.fetch("query_budget_incomes_count")
-    @user.current_loans_count = params.fetch("query_current_loans_count")
-    @user.transaction_categories_count = params.fetch("query_transaction_categories_count")
-    @user.school_events_count = params.fetch("query_school_events_count")
-    @user.plaid_items_count = params.fetch("query_plaid_items_count")
+
+    # @user.loan_comparisons_count = params.fetch("query_loan_comparisons_count")
+    # @user.spend_intentions_count = params.fetch("query_spend_intentions_count")
+    # @user.accounts_count = params.fetch("query_accounts_count")
+    # @user.budget_expenses_count = params.fetch("query_budget_expenses_count")
+    # @user.budget_incomes_count = params.fetch("query_budget_incomes_count")
+    # @user.current_loans_count = params.fetch("query_current_loans_count")
+    # @user.transaction_categories_count = params.fetch("query_transaction_categories_count")
+    # @user.school_events_count = params.fetch("query_school_events_count")
+    # @user.plaid_items_count = params.fetch("query_plaid_items_count")
+
+    @user.loan_comparisons_count = "0"
+    @user.spend_intentions_count = "0"
+    @user.accounts_count = "0"
+    @user.budget_expenses_count = "0"
+    @user.budget_incomes_count = "0"
+    @user.current_loans_count = "0"
+    @user.transaction_categories_count = "0"
+    @user.school_events_count = "0"
+    @user.plaid_items_count = "0"
 
     save_status = @user.save
 
@@ -87,15 +98,28 @@ class UserAuthenticationController < ApplicationController
     @user.premba_industry = params.fetch("query_premba_industry")
     @user.gender = params.fetch("query_gender")
     @user.birth_date = params.fetch("query_birth_date")
-    @user.loan_comparisons_count = params.fetch("query_loan_comparisons_count")
-    @user.spend_intentions_count = params.fetch("query_spend_intentions_count")
-    @user.accounts_count = params.fetch("query_accounts_count")
-    @user.budget_expenses_count = params.fetch("query_budget_expenses_count")
-    @user.budget_incomes_count = params.fetch("query_budget_incomes_count")
-    @user.current_loans_count = params.fetch("query_current_loans_count")
-    @user.transaction_categories_count = params.fetch("query_transaction_categories_count")
-    @user.school_events_count = params.fetch("query_school_events_count")
-    @user.plaid_items_count = params.fetch("query_plaid_items_count")
+    
+    #The below fields are hidden because a user shouldn't be updating them directly. But I would ensure that we still have a way to update them.
+
+    @user.loan_comparisons_count = @current_user.loan_comparisons_count
+    @user.spend_intentions_count = @current_user.spend_intentions_count
+    @user.accounts_count = @current_user.accounts_count
+    @user.budget_expenses_count = @current_user.budget_expenses_count
+    @user.budget_incomes_count = @current_user.budget_incomes_count
+    @user.current_loans_count = @current_user.current_loans_count
+    @user.transaction_categories_count = @current_user.transaction_categories_count
+    @user.school_events_count = @current_user.school_events_count
+    @user.plaid_items_count = @current_user.plaid_items_count
+
+    # @user.loan_comparisons_count = params.fetch("query_loan_comparisons_count")
+    # @user.spend_intentions_count = params.fetch("query_spend_intentions_count")
+    # @user.accounts_count = params.fetch("query_accounts_count")
+    # @user.budget_expenses_count = params.fetch("query_budget_expenses_count")
+    # @user.budget_incomes_count = params.fetch("query_budget_incomes_count")
+    # @user.current_loans_count = params.fetch("query_current_loans_count")
+    # @user.transaction_categories_count = params.fetch("query_transaction_categories_count")
+    # @user.school_events_count = params.fetch("query_school_events_count")
+    # @user.plaid_items_count = params.fetch("query_plaid_items_count")
     
     if @user.valid?
       @user.save

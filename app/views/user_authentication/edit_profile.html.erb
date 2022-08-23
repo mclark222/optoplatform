@@ -10,15 +10,15 @@
         <input id="email_box" name="query_email" value="<%= @current_user.email %>">
       </div>
       <div>
-        <label for="first_name_box">First name</label>
+        <label for="first_name_box">First Name</label>
         <input id="first_name_box" name="query_first_name" value="<%= @current_user.first_name %>">
       </div>
       <div>
-        <label for="last_name_box">Last name</label>
+        <label for="last_name_box">Last Name</label>
         <input id="last_name_box" name="query_last_name" value="<%= @current_user.last_name %>">
       </div>
       <div>
-        <label for="graduation_date_box">Graduation date</label>
+        <label for="graduation_date_box">Graduation Date</label>
         <input id="graduation_date_box" name="query_graduation_date" value="<%= @current_user.graduation_date %>">
       </div>
       <div>
@@ -26,11 +26,11 @@
         <input id="school_box" name="query_school" value="<%= @current_user.school %>">
       </div>
       <div>
-        <label for="international_student_status_box">International student status</label>
+        <label for="international_student_status_box">International Student Status</label>
         <input id="international_student_status_box" name="query_international_student_status" type="checkbox" value="1" <%= "checked" if @current_user.international_student_status %>>
       </div>
       <div>
-        <label for="premba_industry_box">Premba industry</label>
+        <label for="premba_industry_box">Pre-MBA Industry</label>
         <input id="premba_industry_box" name="query_premba_industry" value="<%= @current_user.premba_industry %>">
       </div>
       <div>
@@ -38,10 +38,51 @@
         <input id="gender_box" name="query_gender" value="<%= @current_user.gender %>">
       </div>
       <div>
-        <label for="birth_date_box">Birth date</label>
+        <label for="birth_date_box">Birthdate</label>
         <input id="birth_date_box" name="query_birth_date" value="<%= @current_user.birth_date %>">
       </div>
+
       <div>
+        <label for="password_box">Password</label>
+        <input id="password_box" name="query_password" placeholder="Choose a password..." type="password">
+      </div>
+    
+      <div>
+        <label for="password_confirmation_box">Password Confirmation</label>
+        <input id="password_confirmation_box" name="query_password_confirmation" placeholder="Confirm your password..." type="password">
+      </div>
+
+<!--Made all of the below hidden fields in order to update them solely on the backend and not from the user-->
+
+      <div>
+        <input type="hidden" name="query_loan_comparisons_count" value="<%= @current_user.loan_comparisons_count %>">
+      </div>
+      <div>
+        <input type="hidden" name="query_spend_intentions_count" value="<%= @current_user.spend_intentions_count %>">
+      </div>
+      <div>
+        <input type="hidden"  name="query_accounts_count" value="<%= @current_user.accounts_count %>">
+      </div>
+      <div>
+        <input type="hidden" name="query_budget_expenses_count" value="<%= @current_user.budget_expenses_count %>">
+      </div>
+      <div>
+        <input type="hidden"  name="query_budget_incomes_count" value="<%= @current_user.budget_incomes_count %>">
+      </div>
+      <div>
+        <input type="hidden"  name="query_current_loans_count" value="<%= @current_user.current_loans_count %>">
+      </div>
+      <div>
+        <input type="hidden" name="query_transaction_categories_count" value="<%= @current_user.transaction_categories_count %>">
+      </div>
+      <div>
+        <input type="hidden"  name="query_school_events_count" value="<%= @current_user.school_events_count %>">
+      </div>
+      <div>
+        <input type="hidden" name="query_plaid_items_count" value="<%= @current_user.plaid_items_count %>">
+      </div>
+
+      <!--<div>
         <label for="loan_comparisons_count_box">Loan comparisons count</label>
         <input id="loan_comparisons_count_box" name="query_loan_comparisons_count" value="<%= @current_user.loan_comparisons_count %>">
       </div>
@@ -77,16 +118,7 @@
         <label for="plaid_items_count_box">Plaid items count</label>
         <input id="plaid_items_count_box" name="query_plaid_items_count" value="<%= @current_user.plaid_items_count %>">
       </div>
-
-      <div>
-        <label for="password_box">Password</label>
-        <input id="password_box" name="query_password" placeholder="Choose a password..." type="password">
-      </div>
-    
-      <div>
-        <label for="password_confirmation_box">Password Confirmation</label>
-        <input id="password_confirmation_box" name="query_password_confirmation" placeholder="Confirm your password..." type="password">
-      </div>
+      -->
 
       <button>
         Update account
