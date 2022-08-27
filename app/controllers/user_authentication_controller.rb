@@ -1,6 +1,6 @@
 class UserAuthenticationController < ApplicationController
   # Uncomment line 3 in this file and line 5 in ApplicationController if you want to force users to sign in before any other actions.
-  # skip_before_action(:force_user_sign_in, { :only => [:sign_up_form, :create, :sign_in_form, :create_cookie] })
+  skip_before_action(:force_user_sign_in, { :only => [:sign_up_form, :create, :sign_in_form, :create_cookie] })
 
   def sign_in_form
     render({ :template => "user_authentication/sign_in.html.erb" })
@@ -49,22 +49,33 @@ class UserAuthenticationController < ApplicationController
     @user.premba_industry = params.fetch("query_premba_industry")
     @user.gender = params.fetch("query_gender")
     @user.birth_date = params.fetch("query_birth_date")
-    @user.loan_comparisons_count = params.fetch("query_loan_comparisons_count")
-    @user.spend_intentions_count = params.fetch("query_spend_intentions_count")
-    @user.accounts_count = params.fetch("query_accounts_count")
-    @user.budget_expenses_count = params.fetch("query_budget_expenses_count")
-    @user.budget_incomes_count = params.fetch("query_budget_incomes_count")
-    @user.current_loans_count = params.fetch("query_current_loans_count")
-    @user.transaction_categories_count = params.fetch("query_transaction_categories_count")
-    @user.school_events_count = params.fetch("query_school_events_count")
-    @user.plaid_items_count = params.fetch("query_plaid_items_count")
+
+    # @user.loan_comparisons_count = params.fetch("query_loan_comparisons_count")
+    # @user.spend_intentions_count = params.fetch("query_spend_intentions_count")
+    # @user.accounts_count = params.fetch("query_accounts_count")
+    # @user.budget_expenses_count = params.fetch("query_budget_expenses_count")
+    # @user.budget_incomes_count = params.fetch("query_budget_incomes_count")
+    # @user.current_loans_count = params.fetch("query_current_loans_count")
+    # @user.transaction_categories_count = params.fetch("query_transaction_categories_count")
+    # @user.school_events_count = params.fetch("query_school_events_count")
+    # @user.plaid_items_count = params.fetch("query_plaid_items_count")
+
+    @user.loan_comparisons_count = "0"
+    @user.spend_intentions_count = "0"
+    @user.accounts_count = "0"
+    @user.budget_expenses_count = "0"
+    @user.budget_incomes_count = "0"
+    @user.current_loans_count = "0"
+    @user.transaction_categories_count = "0"
+    @user.school_events_count = "0"
+    @user.plaid_items_count = "0"
 
     save_status = @user.save
 
     if save_status == true
       session[:user_id] = @user.id
    
-      redirect_to("/", { :notice => "User account created successfully."})
+      redirect_to("/home", { :notice => "User account created successfully."})
     else
       redirect_to("/user_sign_up", { :alert => @user.errors.full_messages.to_sentence })
     end
@@ -87,20 +98,33 @@ class UserAuthenticationController < ApplicationController
     @user.premba_industry = params.fetch("query_premba_industry")
     @user.gender = params.fetch("query_gender")
     @user.birth_date = params.fetch("query_birth_date")
-    @user.loan_comparisons_count = params.fetch("query_loan_comparisons_count")
-    @user.spend_intentions_count = params.fetch("query_spend_intentions_count")
-    @user.accounts_count = params.fetch("query_accounts_count")
-    @user.budget_expenses_count = params.fetch("query_budget_expenses_count")
-    @user.budget_incomes_count = params.fetch("query_budget_incomes_count")
-    @user.current_loans_count = params.fetch("query_current_loans_count")
-    @user.transaction_categories_count = params.fetch("query_transaction_categories_count")
-    @user.school_events_count = params.fetch("query_school_events_count")
-    @user.plaid_items_count = params.fetch("query_plaid_items_count")
+    
+    #The below fields are hidden because a user shouldn't be updating them directly. But I would ensure that we still have a way to update them.
+
+    @user.loan_comparisons_count = @current_user.loan_comparisons_count
+    @user.spend_intentions_count = @current_user.spend_intentions_count
+    @user.accounts_count = @current_user.accounts_count
+    @user.budget_expenses_count = @current_user.budget_expenses_count
+    @user.budget_incomes_count = @current_user.budget_incomes_count
+    @user.current_loans_count = @current_user.current_loans_count
+    @user.transaction_categories_count = @current_user.transaction_categories_count
+    @user.school_events_count = @current_user.school_events_count
+    @user.plaid_items_count = @current_user.plaid_items_count
+
+    # @user.loan_comparisons_count = params.fetch("query_loan_comparisons_count")
+    # @user.spend_intentions_count = params.fetch("query_spend_intentions_count")
+    # @user.accounts_count = params.fetch("query_accounts_count")
+    # @user.budget_expenses_count = params.fetch("query_budget_expenses_count")
+    # @user.budget_incomes_count = params.fetch("query_budget_incomes_count")
+    # @user.current_loans_count = params.fetch("query_current_loans_count")
+    # @user.transaction_categories_count = params.fetch("query_transaction_categories_count")
+    # @user.school_events_count = params.fetch("query_school_events_count")
+    # @user.plaid_items_count = params.fetch("query_plaid_items_count")
     
     if @user.valid?
       @user.save
 
-      redirect_to("/", { :notice => "User account updated successfully."})
+      redirect_to("/home", { :notice => "User account updated successfully."})
     else
       render({ :template => "user_authentication/edit_profile_with_errors.html.erb" , :alert => @user.errors.full_messages.to_sentence })
     end
@@ -110,7 +134,7 @@ class UserAuthenticationController < ApplicationController
     @current_user.destroy
     reset_session
     
-    redirect_to("/", { :notice => "User account cancelled" })
+    redirect_to("/home", { :notice => "User account cancelled" })
   end
  
 end
