@@ -36,7 +36,13 @@
           Expense category
         </label>
 
-        <input type="text" id="expense_category_id_box" name="query_expense_category_id">
+        <select id="expense_category_id_box"name="query_expense_category_id">
+          <option value="Rent & Mortgage">Rent & Mortgage</option>
+          <option value="Services">Services</option>
+        </select>
+
+
+        <!-- <input type="text" id="expense_category_id_box"name="query_expense_category_id"> -->
       </div>
 
       <div>
@@ -47,13 +53,18 @@
         <input type="text" id="recurring_frequency_box" name="query_recurring_frequency">
       </div>
 
+
+
       <div>
+        <input type="hidden" name="query_user_id" value="<%= @current_user.id %>">
+      </div>
+      <!-- <div>
         <label for="user_id_box">
           User
         </label>
 
         <input type="text" id="user_id_box" name="query_user_id">
-      </div>
+      </div> -->
 
       <div>
         <label for="first_recurrence_date_box">
