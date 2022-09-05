@@ -57,6 +57,7 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   host = 'localhost:3000'                     # Local server (need to update before dev)
+  #host = 'http://opto-financial.herokuapp.com/' #Production
   config.action_mailer.default_url_options = { host: host, protocol: 'http' } #Need to update this before going to dev
 
   # Print deprecation notices to the Rails logger.

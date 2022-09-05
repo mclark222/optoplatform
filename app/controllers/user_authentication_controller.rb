@@ -74,7 +74,9 @@ class UserAuthenticationController < ApplicationController
 
     if save_status == true
       session[:user_id] = @user.id
-   
+      
+      UserMailer.account_activation(@user).deliver_now
+
       redirect_to("/home", { :notice => "User account created successfully."})
     else
       redirect_to("/user_sign_up", { :alert => @user.errors.full_messages.to_sentence })
