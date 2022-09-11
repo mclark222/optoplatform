@@ -59,7 +59,7 @@ class BudgetExpensesController < ApplicationController
 
     if the_budget_expense.valid?
       the_budget_expense.save
-      redirect_to("/budget_expenses/#{the_budget_expense.id}", { :notice => "Budget expense updated successfully."} )
+      redirect_to("/budget_expenses", { :notice => "Budget expense updated successfully."} )
     else
       redirect_to("/budget_expenses/#{the_budget_expense.id}", { :alert => the_budget_expense.errors.full_messages.to_sentence })
     end
