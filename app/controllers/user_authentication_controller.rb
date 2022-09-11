@@ -77,12 +77,14 @@ class UserAuthenticationController < ApplicationController
       
       UserMailer.account_activation(@user).deliver_now
 
+      #UserSetup.create_expense_categories(@user)
+
       redirect_to("/home", { :notice => "User account created successfully."})
     else
       redirect_to("/user_sign_up", { :alert => @user.errors.full_messages.to_sentence })
     end
   end
-    
+
   def edit_profile_form
     render({ :template => "user_authentication/edit_profile.html.erb" })
   end
