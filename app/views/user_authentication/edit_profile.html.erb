@@ -23,7 +23,13 @@
       </div>
       <div>
         <label for="school_box">School</label>
-        <input id="school_box" name="query_school" value="<%= @current_user.school %>">
+        <!--<input id="school_box" name="query_school" value="<%= @current_user.school %>">-->
+        <select id="school_box"name="query_school">          
+          <option value="Select One">Select One</option>
+          <option value="Kellogg">Kellogg</option>
+          <option value="Booth">Booth</option>
+          <option value="Other">Other</option>
+        </select>
       </div>
       <div>
         <label for="international_student_status_box">International Student Status</label>

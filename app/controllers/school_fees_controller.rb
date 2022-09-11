@@ -2,7 +2,7 @@ class SchoolFeesController < ApplicationController
   def index
     matching_school_fees = SchoolFee.all
 
-    @list_of_school_fees = matching_school_fees.order({ :created_at => :desc })
+    @list_of_school_fees = matching_school_fees.order({ :created_at => :asc })
 
     render({ :template => "school_fees/index.html.erb" })
   end
