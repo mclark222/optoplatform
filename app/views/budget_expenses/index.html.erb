@@ -38,24 +38,24 @@
 
         <select id="expense_category_id_box"name="query_expense_category_id">
           <option value="Select One">Select One</option>
-          <option value=3>Auto & Transportation</option>
-          <option value=4>Bills & Utilities</option>
-          <option value=5>Debt Payments</option>
-          <option value=6>Dining & Drinking</option>
-          <option value=7>Education</option>
-          <option value=8>Entertainment</option>
-          <option value=9>Fitness & Personal Care</option>
-          <option value=10>Gifts & Donationse</option>
-          <option value=11>Government</option>
-          <option value=12>Groceries</option>
-          <option value=13>Health & Insurance</option>
-          <option value=14>Home</option>
-          <option value=15>Pets</option>
-          <option value=16>Rent & Mortgage</option>
-          <option value=17>Services</option>
-          <option value=18>Shopping</option>
-          <option value=19>Travel</option>
-          <option value=20>Other</option>
+          <option value=1>Auto & Transportation</option>
+          <option value=2>Bills & Utilities</option>
+          <option value=3>Debt Payments</option>
+          <option value=4>Dining & Drinking</option>
+          <option value=5>Education</option>
+          <option value=6>Entertainment</option>
+          <option value=7>Fitness & Personal Care</option>
+          <option value=8>Gifts & Donationse</option>
+          <option value=9>Government</option>
+          <option value=10>Groceries</option>
+          <option value=11>Health & Insurance</option>
+          <option value=12>Home</option>
+          <option value=13>Pets</option>
+          <option value=14>Rent & Mortgage</option>
+          <option value=15>Services</option>
+          <option value=16>Shopping</option>
+          <option value=17>Travel</option>
+          <option value=18>Other</option>
         </select>
 
 
@@ -71,8 +71,8 @@
           <option value="Select One">Select One</option>
           <option value="52">Weekly</option>
           <option value="26">Biweekly</option>
-          <option value="4">Quarterly</option>
           <option value="12">Monthly</option>
+          <option value="4">Quarterly</option>
         </select>
           
           
@@ -113,9 +113,9 @@
   <div>
     <table border="1">
       <tr>
-        <th>
+        <!--<th>
           ID
-        </th>
+        </th>-->
 
         <th>
           Expense name
@@ -141,38 +141,53 @@
           First recurrence date
         </th>
 
-        <th>
+        <!--<th>
           Created at
         </th>
 
         <th>
           Updated at
-        </th>
+        </th>-->
 
         <th>
+          Update Expense
         </th>
+
+        <!--<th>
+        </th>-->
       </tr>
 
       <% @list_of_budget_expenses.each do |a_budget_expense| %>
       <tr>
-        <td>
+        <!--<td>
           <%= a_budget_expense.id %>
-        </td>
+        </td>-->
 
         <td>
           <%= a_budget_expense.expense_name %>
         </td>
 
         <td>
+          <%= "$" %>
           <%= a_budget_expense.expense_amount %>
         </td>
 
         <td>
-          <%= a_budget_expense.expense_category_id %>
+          <!--<%= a_budget_expense.expense_category_id %>-->
+          <%= @category_reference = TransactionCategory.where({id: a_budget_expense.expense_category_id}).first
+           @category_reference.spend_category_name %>
         </td>
 
         <td>
-          <%= a_budget_expense.recurring_frequency %>
+          <%= if a_budget_expense.recurring_frequency == 52
+              "Weekly"
+              elsif a_budget_expense.recurring_frequency == 26
+              "Biweekly"
+              elsif a_budget_expense.recurring_frequency == 12
+              "Monthly"
+              elsif a_budget_expense.recurring_frequency == 4
+              "Quarterly"
+              end %>
         </td>
 
         <!--<td>
@@ -183,12 +198,12 @@
           <%= a_budget_expense.first_recurrence_date %>
         </td>
 
-        <td>
+        <!--<td>
           <%= time_ago_in_words(a_budget_expense.created_at) %> ago
         </td>
         <td>
           <%= time_ago_in_words(a_budget_expense.updated_at) %> ago
-        </td>
+        </td>-->
 
         <td>
           <a href="/budget_expenses/<%= a_budget_expense.id %>">
