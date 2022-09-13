@@ -19,11 +19,17 @@
       </div>
       <div>
         <label for="graduation_date_box">Graduation Date</label>
-        <input id="graduation_date_box" name="query_graduation_date" value="<%= @current_user.graduation_date %>">
+        <input type="date" id="graduation_date_box" name="query_graduation_date" value="<%= @current_user.graduation_date %>">
       </div>
       <div>
         <label for="school_box">School</label>
-        <input id="school_box" name="query_school" value="<%= @current_user.school %>">
+        <!--<input id="school_box" name="query_school" value="<%= @current_user.school %>">-->
+        <select id="school_box"name="query_school">          
+          <option value="Select One">Select One</option>
+          <option value="Kellogg">Kellogg</option>
+          <option value="Booth">Booth</option>
+          <option value="Other">Other</option>
+        </select>
       </div>
       <div>
         <label for="international_student_status_box">International Student Status</label>
@@ -39,7 +45,7 @@
       </div>
       <div>
         <label for="birth_date_box">Birthdate</label>
-        <input id="birth_date_box" name="query_birth_date" value="<%= @current_user.birth_date %>">
+        <input type="date" id="birth_date_box" name="query_birth_date" value="<%= @current_user.birth_date %>">
       </div>
 
       <div>

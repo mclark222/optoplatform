@@ -4,7 +4,7 @@
 #
 #  id                          :integer          not null, primary key
 #  estimated_cost              :float
-#  event_end_date              :datetime
+#  event_end_date              :date
 #  event_name                  :string
 #  event_start_date            :date
 #  host                        :string

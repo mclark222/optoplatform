@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   
   def force_user_sign_in
     if @current_user == nil
-      redirect_to("/user_sign_in", { :notice => "You have to sign in first." })
+      redirect_to("/user_sign_in", { :notice => "Welcome to Opto! Please sign in or create an account to begin viewing your business school finances more clearly." })
     end
   end
 

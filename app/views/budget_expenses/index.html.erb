@@ -1,8 +1,8 @@
 <div>
   <div>
-    <h1>
+    <h2>
       List of all budget expenses
-    </h1>
+    </h2>
   </div>
 </div>
 
@@ -10,9 +10,9 @@
 
 <div>
   <div>
-    <h2>
+    <h3>
       Add a new budget expense
-    </h2>
+    </h3>
 
     <form action="/insert_budget_expense" method="post">
       <div>
@@ -21,22 +21,41 @@
         </label>
 
         <input type="text" id="expense_name_box" name="query_expense_name">
-      </div>
-
-      <div>
+ 
         <label for="expense_amount_box">
           Expense amount
         </label>
 
         <input type="text" id="expense_amount_box" name="query_expense_amount">
-      </div>
-
-      <div>
+ 
         <label for="expense_category_id_box">
           Expense category
         </label>
 
-        <input type="text" id="expense_category_id_box" name="query_expense_category_id">
+        <select id="expense_category_id_box"name="query_expense_category_id">
+          <option value="Select One">Select One</option>
+          <option value=1>Auto & Transportation</option>
+          <option value=2>Bills & Utilities</option>
+          <option value=3>Debt Payments</option>
+          <option value=4>Dining & Drinking</option>
+          <option value=5>Education</option>
+          <option value=6>Entertainment</option>
+          <option value=7>Fitness & Personal Care</option>
+          <option value=8>Gifts & Donationse</option>
+          <option value=9>Government</option>
+          <option value=10>Groceries</option>
+          <option value=11>Health & Insurance</option>
+          <option value=12>Home</option>
+          <option value=13>Pets</option>
+          <option value=14>Rent & Mortgage</option>
+          <option value=15>Services</option>
+          <option value=16>Shopping</option>
+          <option value=17>Travel</option>
+          <option value=18>Other</option>
+        </select>
+
+
+        <!-- <input type="text" id="expense_category_id_box"name="query_expense_category_id"> -->
       </div>
 
       <div>
@@ -44,18 +63,30 @@
           Recurring frequency
         </label>
 
-        <input type="text" id="recurring_frequency_box" name="query_recurring_frequency">
-      </div>
+        <select id="recurring_frequency_box"name="query_recurring_frequency">
+          <option value="Select One">Select One</option>
+          <option value="1">One-Time</option>
+          <option value="52">Weekly</option>
+          <option value="26">Biweekly</option>
+          <option value="12">Monthly</option>
+          <option value="4">Quarterly</option>
+        </select>
+          
+          
 
-      <div>
+        <!--<input type="text" id="recurring_frequency_box" name="query_recurring_frequency">-->
+
+
+        <input type="hidden" name="query_user_id" value="<%= @current_user.id %>">
+
+      <!-- <div>
         <label for="user_id_box">
           User
         </label>
 
         <input type="text" id="user_id_box" name="query_user_id">
-      </div>
+      </div> -->
 
-      <div>
         <label for="first_recurrence_date_box">
           First recurrence date
         </label>
@@ -72,12 +103,16 @@
 
 <hr>
 <div>
+    <h3>
+      Current Budget Expenses
+    </h3>
+
   <div>
     <table border="1">
       <tr>
-        <th>
+        <!--<th>
           ID
-        </th>
+        </th>-->
 
         <th>
           Expense name
@@ -95,67 +130,223 @@
           Recurring frequency
         </th>
 
-        <th>
+        <!--<th>
           User
-        </th>
+        </th>-->
 
         <th>
           First recurrence date
         </th>
 
-        <th>
+        <!--<th>
           Created at
         </th>
 
         <th>
           Updated at
+        </th>-->
+
+        <th>
+          Update Expense
         </th>
 
         <th>
+          Delete Expense
         </th>
+
+        <!--<th>
+        </th>-->
       </tr>
 
       <% @list_of_budget_expenses.each do |a_budget_expense| %>
       <tr>
-        <td>
+        <!--<td>
           <%= a_budget_expense.id %>
-        </td>
+        </td>-->
 
         <td>
           <%= a_budget_expense.expense_name %>
         </td>
 
         <td>
-          <%= a_budget_expense.expense_amount %>
+          $<%= a_budget_expense.expense_amount.round(2) %>
         </td>
 
         <td>
-          <%= a_budget_expense.expense_category_id %>
+          <!--<%= a_budget_expense.expense_category_id %>-->
+          <%= @category_reference = TransactionCategory.where({id: a_budget_expense.expense_category_id}).first
+           @category_reference.spend_category_name %>
         </td>
 
         <td>
-          <%= a_budget_expense.recurring_frequency %>
+          <%= if a_budget_expense.recurring_frequency == 1
+              "One-Time"
+              elsif a_budget_expense.recurring_frequency == 52
+              "Weekly"
+              elsif a_budget_expense.recurring_frequency == 26
+              "Biweekly"
+              elsif a_budget_expense.recurring_frequency == 12
+              "Monthly"
+              elsif a_budget_expense.recurring_frequency == 4
+              "Quarterly"
+              end %>
         </td>
 
-        <td>
+        <!--<td>
           <%= a_budget_expense.user_id %>
-        </td>
+        </td>-->
 
         <td>
           <%= a_budget_expense.first_recurrence_date %>
         </td>
 
-        <td>
+        <!--<td>
           <%= time_ago_in_words(a_budget_expense.created_at) %> ago
         </td>
         <td>
           <%= time_ago_in_words(a_budget_expense.updated_at) %> ago
-        </td>
+        </td>-->
 
         <td>
           <a href="/budget_expenses/<%= a_budget_expense.id %>">
             Show details
           </a>
+        </td>
+
+        <td>
+          <a href="/delete_budget_expense/<%= a_budget_expense.id %>">
+            Delete
+          </a>
+        </td>
+
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>
+
+<div>
+    <h3>
+      School Fees
+    </h3>
+
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <!--<th>
+          ID
+        </th>-->
+
+        <th>
+          School
+        </th>
+
+        <th>
+          Fee name
+        </th>
+
+        <th>
+          First fee date
+        </th>
+
+        <th>
+          Fee amount
+        </th>
+
+        <th>
+          Term
+        </th>
+
+        <th>
+          Year
+        </th>
+
+        <!--<th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>-->
+
+        <th>
+        Add to Budget
+        </th>
+      </tr>
+
+      <% for a_school_fee in SchoolFee.where({school: @current_user.school}) do %>
+      <tr>
+        <!--<td>
+          <%= a_school_fee.id %>
+        </td>-->
+
+        <td>
+          <%= a_school_fee.school %>
+        </td>
+
+        <td>
+          <%= a_school_fee.fee_name %>
+        </td>
+
+        <td>
+          <%= a_school_fee.first_fee_date %>
+        </td>
+
+        <td>
+          $<%= a_school_fee.fee_amount %>
+        </td>
+
+        <td>
+          <%= a_school_fee.term %>
+        </td>
+
+        <td>
+          <%= a_school_fee.year %>
+        </td>
+
+        <!--<td>
+          <%= time_ago_in_words(a_school_fee.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_school_fee.updated_at) %> ago
+        </td>-->
+
+        <td>
+
+          <form action="/insert_budget_expense" method="post">
+
+            <div>
+              <input type="hidden" name="query_expense_name" value= "<%= a_school_fee.fee_name %>">  
+            </div>
+
+            <div>
+              <input type="hidden" name="query_expense_amount" value= "<%= a_school_fee.fee_amount %>">  
+            </div>
+
+            <div>
+              <input type="hidden" name="query_expense_category_id" value="5">  
+            </div>
+
+            <div>
+              <input type="hidden" name="query_recurring_frequency" value="1">  
+            </div>
+
+            <div>
+             <input type="hidden" name="query_user_id" value="<%= @current_user.id %>">
+            </div>
+
+            <div>
+              <input type="hidden" name="query_first_recurrence_date" value="<%= a_school_fee.first_fee_date %>">
+            </div>
+
+            <button>
+              Add to My Budget
+            </button>
+          </form>
+
         </td>
       </tr>
       <% end %>
@@ -164,3 +355,137 @@
 </div>
 
 <hr>
+
+<div>
+    <h3>
+      Optional School Events
+    </h3>
+
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <!--<th>
+          ID
+        </th>-->
+
+        <th>
+          School
+        </th>
+
+        <th>
+          Event name
+        </th>
+
+        <th>
+          Host
+        </th>
+
+        <th>
+          Event Start Date
+        </th>
+
+        <th>
+          Event End Date
+        </th>
+
+        <th>
+          Estimated Cost
+        </th>
+
+        <th>
+          Number of Payments
+        </th>
+
+        <!--<th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>-->
+
+        <th>
+        Add to Budget
+        </th>
+      </tr>
+
+      <% for a_school_event in SchoolEvent.where({school: @current_user.school}) do %>
+      <tr>
+        <!--<td>
+          <%= a_school_fee.id %>
+        </td>-->
+
+        <td>
+          <%= a_school_event.school %>
+        </td>
+
+        <td>
+          <%= a_school_event.event_name %>
+        </td>
+
+        <td>
+          <%= a_school_event.host %>
+        </td>
+
+        <td>
+          <%= a_school_event.event_start_date %>
+        </td>
+
+        <td>
+          <%= a_school_event.event_end_date %>
+        </td>
+
+        <td>
+          $<%= a_school_event.estimated_cost %>
+        </td>
+
+        <td>
+          <%= a_school_event.school_event_payments_count %>
+        </td>
+
+        <!--<td>
+          <%= time_ago_in_words(a_school_fee.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_school_fee.updated_at) %> ago
+        </td>-->
+
+        <td>
+
+          <form action="/insert_budget_expense" method="post">
+
+            <div>
+              <input type="hidden" name="query_expense_name" value= "<%= a_school_event.event_name %>">  
+            </div>
+
+            <div>
+              <input type="hidden" name="query_expense_amount" value= "<%= a_school_event.estimated_cost %>">  
+            </div>
+
+            <div>
+              <input type="hidden" name="query_expense_category_id" value="6">  
+            </div>
+
+            <div>
+              <input type="hidden" name="query_recurring_frequency" value="1">  
+            </div>
+
+            <div>
+             <input type="hidden" name="query_user_id" value="<%= @current_user.id %>">
+            </div>
+
+            <div>
+              <input type="hidden" name="query_first_recurrence_date" value="<%= a_school_event.event_start_date %>">
+            </div>
+
+            <button>
+              Add to My Budget
+            </button>
+          </form>
+
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>

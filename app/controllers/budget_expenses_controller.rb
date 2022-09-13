@@ -1,8 +1,9 @@
 class BudgetExpensesController < ApplicationController
   def index
-    matching_budget_expenses = BudgetExpense.all
+    #matching_budget_expenses = BudgetExpense.all
+    matching_budget_expenses = BudgetExpense.where({user_id: @current_user.id})
 
-    @list_of_budget_expenses = matching_budget_expenses.order({ :created_at => :desc })
+    @list_of_budget_expenses = matching_budget_expenses.order({ :expense_category_id => :asc })
 
     render({ :template => "budget_expenses/index.html.erb" })
   end
@@ -40,14 +41,25 @@ class BudgetExpensesController < ApplicationController
 
     the_budget_expense.expense_name = params.fetch("query_expense_name")
     the_budget_expense.expense_amount = params.fetch("query_expense_amount")
-    the_budget_expense.expense_category_id = params.fetch("query_expense_category_id")
-    the_budget_expense.recurring_frequency = params.fetch("query_recurring_frequency")
-    the_budget_expense.user_id = params.fetch("query_user_id")
+    #the_budget_expense.expense_category_id = params.fetch("query_expense_category_id")
+    the_budget_expense.expense_category_id =
+      (if params.fetch("query_expense_category_id") == "Select One"
+        the_budget_expense.expense_category_id = the_budget_expense.expense_category_id
+      else the_budget_expense.expense_category_id = params.fetch("query_expense_category_id")
+      end)
+    #the_budget_expense.recurring_frequency = params.fetch("query_recurring_frequency")
+    the_budget_expense.recurring_frequency =
+      (if params.fetch("query_recurring_frequency") == "Select One"
+        the_budget_expense.recurring_frequency = the_budget_expense.recurring_frequency
+      else the_budget_expense.recurring_frequency = params.fetch("query_recurring_frequency")
+      end)
+    #the_budget_expense.user_id = params.fetch("query_user_id")
+    the_budget_expense.user_id = @current_user.id
     the_budget_expense.first_recurrence_date = params.fetch("query_first_recurrence_date")
 
     if the_budget_expense.valid?
       the_budget_expense.save
-      redirect_to("/budget_expenses/#{the_budget_expense.id}", { :notice => "Budget expense updated successfully."} )
+      redirect_to("/budget_expenses", { :notice => "Budget expense updated successfully."} )
     else
       redirect_to("/budget_expenses/#{the_budget_expense.id}", { :alert => the_budget_expense.errors.full_messages.to_sentence })
     end

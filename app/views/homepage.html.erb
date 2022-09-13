@@ -1,1 +1,157 @@
-Hello!
+Hello, <%= @current_user.first_name %>!
+
+<br>
+<br>
+
+Please visit the Budgeting & Planning page to begin putting together your custom budget.
+
+In the meantime, you can take a look below to see the fees and optional events for your school that you may want to factor into your budget. You will be able to add these items to your budget directly on the Budgeting & Planning page.
+
+<hr>
+
+<div>
+    <h4>
+      School Fees
+    </h4>
+
+<div>
+  <div>
+    <table border="1">
+      <tr>
+
+        <th>
+          School
+        </th>
+
+        <th>
+          Fee name
+        </th>
+
+        <th>
+          First fee date
+        </th>
+
+        <th>
+          Fee amount
+        </th>
+
+        <th>
+          Term
+        </th>
+
+        <th>
+          Year
+        </th>
+
+      </tr>
+
+      <% for a_school_fee in SchoolFee.where({school: @current_user.school}) do %>
+      <tr>
+
+        <td>
+          <%= a_school_fee.school %>
+        </td>
+
+        <td>
+          <%= a_school_fee.fee_name %>
+        </td>
+
+        <td>
+          <%= a_school_fee.first_fee_date %>
+        </td>
+
+        <td>
+          $<%= a_school_fee.fee_amount %>
+        </td>
+
+        <td>
+          <%= a_school_fee.term %>
+        </td>
+
+        <td>
+          <%= a_school_fee.year %>
+        </td>
+
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>
+
+<div>
+    <h4>
+      Optional School Events
+    </h4>
+
+<div>
+  <div>
+    <table border="1">
+      <tr>
+
+        <th>
+          School
+        </th>
+
+        <th>
+          Event name
+        </th>
+
+        <th>
+          Host
+        </th>
+
+        <th>
+          Event Start Date
+        </th>
+
+        <th>
+          Event End Date
+        </th>
+
+        <th>
+          Estimated Cost
+        </th>
+
+        <th>
+          Number of Payments
+        </th>
+
+      </tr>
+
+      <% for a_school_event in SchoolEvent.where({school: @current_user.school}) do %>
+      <tr>
+
+        <td>
+          <%= a_school_event.school %>
+        </td>
+
+        <td>
+          <%= a_school_event.event_name %>
+        </td>
+
+        <td>
+          <%= a_school_event.host %>
+        </td>
+
+        <td>
+          <%= a_school_event.event_start_date %>
+        </td>
+
+        <td>
+          <%= a_school_event.event_end_date %>
+        </td>
+
+        <td>
+          $<%= a_school_event.estimated_cost %>
+        </td>
+
+        <td>
+          <%= a_school_event.school_event_payments_count %>
+        </td>
+
+      </tr>
+      <% end %>
+    </table>
+  </div>

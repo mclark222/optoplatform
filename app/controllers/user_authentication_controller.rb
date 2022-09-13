@@ -74,13 +74,17 @@ class UserAuthenticationController < ApplicationController
 
     if save_status == true
       session[:user_id] = @user.id
-   
+      
+      UserMailer.account_activation(@user).deliver_now
+
+      #UserSetup.create_expense_categories(@user)
+
       redirect_to("/home", { :notice => "User account created successfully."})
     else
       redirect_to("/user_sign_up", { :alert => @user.errors.full_messages.to_sentence })
     end
   end
-    
+
   def edit_profile_form
     render({ :template => "user_authentication/edit_profile.html.erb" })
   end
@@ -93,7 +97,12 @@ class UserAuthenticationController < ApplicationController
     @user.first_name = params.fetch("query_first_name")
     @user.last_name = params.fetch("query_last_name")
     @user.graduation_date = params.fetch("query_graduation_date")
-    @user.school = params.fetch("query_school")
+    #@user.school = params.fetch("query_school")
+    @user.school =
+      (if params.fetch("query_school") == "Select One"
+        @user.school = @user.school
+      else @user.school = params.fetch("query_school")
+      end)
     @user.international_student_status = params.fetch("query_international_student_status", false)
     @user.premba_industry = params.fetch("query_premba_industry")
     @user.gender = params.fetch("query_gender")
