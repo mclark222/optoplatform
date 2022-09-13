@@ -5,7 +5,7 @@
 #  id             :integer          not null, primary key
 #  fee_amount     :float
 #  fee_name       :string
-#  first_fee_date :datetime
+#  first_fee_date :date
 #  school         :string
 #  term           :string
 #  year           :integer

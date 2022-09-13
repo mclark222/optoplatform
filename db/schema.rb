@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_11_060458) do
+ActiveRecord::Schema.define(version: 2022_09_13_055559) do
 
   create_table "accounts", force: :cascade do |t|
     t.string "account_type"
@@ -140,7 +140,7 @@ ActiveRecord::Schema.define(version: 2022_08_11_060458) do
     t.date "event_start_date"
     t.string "host"
     t.float "estimated_cost"
-    t.datetime "event_end_date"
+    t.date "event_end_date"
     t.integer "user_id"
     t.integer "school_event_payments_count"
     t.datetime "created_at", precision: 6, null: false
@@ -149,7 +149,7 @@ ActiveRecord::Schema.define(version: 2022_08_11_060458) do
 
   create_table "school_fees", force: :cascade do |t|
     t.string "fee_name"
-    t.datetime "first_fee_date"
+    t.date "first_fee_date"
     t.string "school"
     t.float "fee_amount"
     t.string "term"
