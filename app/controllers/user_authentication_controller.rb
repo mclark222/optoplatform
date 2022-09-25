@@ -75,9 +75,7 @@ class UserAuthenticationController < ApplicationController
     if save_status == true
       session[:user_id] = @user.id
       
-      UserMailer.account_activation(@user).deliver_now
-
-      #UserSetup.create_expense_categories(@user)
+      #UserMailer.account_activation(@user).deliver_now         #need to figure out how to get this working
 
       redirect_to("/home", { :notice => "User account created successfully."})
     else
