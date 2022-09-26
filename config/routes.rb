@@ -9,6 +9,10 @@ Rails.application.routes.draw do
 
   # Routes for the Plaid item resource:
 
+  # CREATE ACCESS TOKEN
+  get("/create_plaid_link_token", { :controller => "plaid_items", :action => "create_link_token" })
+  post("/create_plaid_access_token", { :controller => "plaid_items", :action => "create_access_token" })
+  
   # CREATE
   post("/insert_plaid_item", { :controller => "plaid_items", :action => "create" })
           
