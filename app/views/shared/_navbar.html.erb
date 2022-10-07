@@ -1,11 +1,22 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+<head>
+  <!-- Custom CSS -->
+  <link href="css/custom.css" rel="stylesheet" media="screen" />
+</head>
+
+<!--<nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">-->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+
   <div class="container">
+    
+    <!--<a href="/home" class="logo"></a>-->
     <a class="navbar-brand" href="/home">
       Opto
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsible-nav-links" aria-controls="collapsible-nav-links" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+    
     <div class="collapse navbar-collapse" id="collapsible-nav-links">
       <ul class="navbar-nav mr-auto">
         <%if session.fetch(:user_id) == nil %>

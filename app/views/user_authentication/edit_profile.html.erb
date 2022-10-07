@@ -39,6 +39,9 @@
 
     <header class="header">
         <div class="header-container">
+            <%= render "shared/navbar" %>
+
+            <!--
             <a href="home.html" class="logo"></a>
 
             <ul class="nav-main">
@@ -46,6 +49,7 @@
                 <li><a href="#">Budget</a></li>
                 <li><a href="#">Insights</a></li>
             </ul>
+            -->
 
             <a class="nav-mobile jsNavMobile">
                 <span></span>
@@ -59,11 +63,11 @@
     <aside class="left-menu">
         <div class="left-menu-container">
 
-            <ul class="nav-main">
+            <!--<ul class="nav-main">
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Budget</a></li>
                 <li><a href="#">Insigns</a></li>
-            </ul>
+            </ul>-->
 
             <ul class="nav-left-menu">
                 <li class="nav-personal-information current"><a href="#">Personal Information</a></li>
@@ -88,33 +92,88 @@
                             <h2 class="font700">Update Account Information</h2>
                             <div class="row">
                                 <div class="col-xs-12 col-sm-6">
-                                    <div class="form-group">
+                                    <!--<div class="form-group">
                                         <label class="form-label" for="firstName">First Name</label>
                                         <input type="text" class="form-control" placeholder="John" />
-                                    </div>
+                                    </div>-->
                                     <div class="form-group">
+                                        <label class="form-label" for="first_name_box">First Name</label>
+                                        <input type="text" class="form-control" id="first_name_box" name="query_first_name" value="<%= @current_user.first_name %>" />
+                                    </div>
+
+                                    <!--<div class="form-group">
                                         <label class="form-label" for="lastName">Last Name</label>
                                         <input type="text" class="form-control" placeholder="Doe" />
-                                    </div>
+                                    </div>-->
                                     <div class="form-group">
+                                        <label class="form-label" for="last_name_box">Last Name</label>
+                                        <input type="text" class="form-control" id="last_name_box" name="query_last_name" value="<%= @current_user.last_name %>" />
+                                    </div>
+
+                                    <!--<div class="form-group">
                                         <label class="form-label" for="email">Email</label>
                                         <input type="email" class="form-control" placeholder="example@example.com" />
-                                    </div>
+                                    </div>-->
                                     <div class="form-group">
+                                        <label class="form-label" for="email_box">Email</label>
+                                        <input type="email" class="form-control" id="email_box" name="query_email" value="<%= @current_user.email %>" />
+                                    </div>
+
+<!--
+ <select id="school_box"name="query_school">          
+          <option value="Select One">Select One</option>
+          <option value="Kellogg">Kellogg</option>
+          <option value="Booth">Booth</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div>
+        <label for="international_student_status_box">International Student Status</label>
+        <input id="international_student_status_box" name="query_international_student_status" type="checkbox" value="1" <%= "checked" if @current_user.international_student_status %>>
+      </div>
+      <div>
+        <label for="premba_industry_box">Pre-MBA Industry</label>
+        <input id="premba_industry_box" name="query_premba_industry" value="<%= @current_user.premba_industry %>">
+      </div>
+      
+-->
+
+
+                                    <!--<div class="form-group">
                                         <label class="form-label" for="birthDate">Birth Date</label>
                                         <input type="text" class="form-control datepicker-here" placeholder="xx/xx/xxxx" data-language="en" data-date-format="mm/dd/yyyy" data-position='bottom left' />
-                                    </div>
+                                    </div>-->
 
-
+                                    <!--<div>
+                                    <label for="birth_date_box">Birthdate</label>
+                                    <input type="date" id="birth_date_box" name="query_birth_date" value="<%= @current_user.birth_date %>">
+                                    </div>-->
 
                                     <div class="form-group">
+                                        <label class="form-label" for=for="birth_date_box"">Birthdate</label>
+                                        <input type="text" class="form-control datepicker-here" id="birth_date_box" name="query_birth_date" value="<%= @current_user.birth_date %>" data-language="en" data-date-format="mm/dd/yyyy" data-position='bottom left' />
+                                    </div>
+
+                                    <!--<div class="form-group">
                                         <label class="form-label" for="gender">Gender</label>
                                         <select class="form-control">
                                             <option>Male</option>
                                             <option>Female</option>
+                                            <option>Other</option>
+                                        </select>
+                                    </div>-->
+
+                                    <div class="form-group">
+                                        <label class="form-label" for="gender_box">Gender</label>
+                                        <select class="form-control" id="gender_box" name="query_gender">
+                                            <option>Select One</option>
+                                            <option>Male</option>
+                                            <option>Female</option>
+                                            <option>Other</option>
                                         </select>
                                     </div>
                                 </div>
+
                                 <div class="col-xs-12 col-sm-6">
                                     <div class="form-group">
                                         <label class="form-label" for="spendingIntentions">Spending Intentions</label>

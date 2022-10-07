@@ -103,7 +103,13 @@ class UserAuthenticationController < ApplicationController
       end)
     @user.international_student_status = params.fetch("query_international_student_status", false)
     @user.premba_industry = params.fetch("query_premba_industry")
-    @user.gender = params.fetch("query_gender")
+    #@user.gender = params.fetch("query_gender")
+    @user.gender =
+      (if params.fetch("query_gender") == "Select One"
+        @user.gender = @user.gender
+      else @user.gender = params.fetch("query_gender")
+      end)
+
     @user.birth_date = params.fetch("query_birth_date")
     
     #The below fields are hidden because a user shouldn't be updating them directly. But I would ensure that we still have a way to update them.
