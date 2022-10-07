@@ -192,20 +192,10 @@
               end %>
         </td>
 
-        <!--<td>
-          <%= a_budget_expense.user_id %>
-        </td>-->
-
         <td>
           <%= a_budget_expense.first_recurrence_date %>
         </td>
 
-        <!--<td>
-          <%= time_ago_in_words(a_budget_expense.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_budget_expense.updated_at) %> ago
-        </td>-->
 
         <td>
           <a href="/budget_expenses/<%= a_budget_expense.id %>">
@@ -236,9 +226,6 @@
   <div>
     <table border="1">
       <tr>
-        <!--<th>
-          ID
-        </th>-->
 
         <th>
           School
@@ -264,13 +251,6 @@
           Year
         </th>
 
-        <!--<th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
-        </th>-->
 
         <th>
         Add to Budget
@@ -279,9 +259,6 @@
 
       <% for a_school_fee in SchoolFee.where({school: @current_user.school}) do %>
       <tr>
-        <!--<td>
-          <%= a_school_fee.id %>
-        </td>-->
 
         <td>
           <%= a_school_fee.school %>
@@ -306,13 +283,6 @@
         <td>
           <%= a_school_fee.year %>
         </td>
-
-        <!--<td>
-          <%= time_ago_in_words(a_school_fee.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_school_fee.updated_at) %> ago
-        </td>-->
 
         <td>
 
@@ -365,9 +335,6 @@
   <div>
     <table border="1">
       <tr>
-        <!--<th>
-          ID
-        </th>-->
 
         <th>
           School
@@ -397,14 +364,6 @@
           Number of Payments
         </th>
 
-        <!--<th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
-        </th>-->
-
         <th>
         Add to Budget
         </th>
@@ -412,9 +371,6 @@
 
       <% for a_school_event in SchoolEvent.where({school: @current_user.school}) do %>
       <tr>
-        <!--<td>
-          <%= a_school_fee.id %>
-        </td>-->
 
         <td>
           <%= a_school_event.school %>
@@ -443,13 +399,6 @@
         <td>
           <%= a_school_event.school_event_payments_count %>
         </td>
-
-        <!--<td>
-          <%= time_ago_in_words(a_school_fee.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_school_fee.updated_at) %> ago
-        </td>-->
 
         <td>
 
