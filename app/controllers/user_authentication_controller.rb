@@ -101,8 +101,18 @@ class UserAuthenticationController < ApplicationController
         @user.school = @user.school
       else @user.school = params.fetch("query_school")
       end)
-    @user.international_student_status = params.fetch("query_international_student_status", false)
-    @user.premba_industry = params.fetch("query_premba_industry")
+    #@user.international_student_status = params.fetch("query_international_student_status", false)
+    @user.international_student_status =
+      (if params.fetch("query_international_student_status") == "Select One"
+      @user.international_student_status = @user.international_student_status
+      else @user.international_student_status = params.fetch("query_international_student_status")
+      end)
+    #@user.premba_industry = params.fetch("query_premba_industry")
+    @user.premba_industry =
+      (if params.fetch("query_premba_industry") == "Select One"
+      @user.premba_industry = @user.premba_industry
+      else @user.premba_industry = params.fetch("query_premba_industry")
+      end)
     #@user.gender = params.fetch("query_gender")
     @user.gender =
       (if params.fetch("query_gender") == "Select One"
