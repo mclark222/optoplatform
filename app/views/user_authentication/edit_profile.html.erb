@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta content='width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport' />
 
-    <title>Update Account | OPTO</title>
+    <title>OPTO | Update Account</title>
 
     <link rel="icon" href="favicon.png" sizes="64x64" type="image/png" />
     <meta name="description" content="" />
@@ -35,10 +35,9 @@
       <![endif]-->
 </head>
 
-<body>
-
-    <header class="header">
+<header class="header">
         <div class="header-container">
+        <a href="/home" class="logo"></a>
             <%= render "shared/navbar" %>
 
             <!--
@@ -50,24 +49,32 @@
                 <li><a href="#">Insights</a></li>
             </ul>
             -->
-
+            <!--
             <a class="nav-mobile jsNavMobile">
                 <span></span>
                 <span></span>
                 <span></span>
             </a>
+            -->
         </div>
-    </header>
+</header>
+
+
+<body>
+
+    
     <!-- ./header-->
 
+    
+    <!-- WILL ADD THE LEFT MENU IN LATER ONCE WE KNOW HOW TO SPLIT PASSWORD UPDATE TO A SEPARATE PAGE
     <aside class="left-menu">
         <div class="left-menu-container">
 
-            <!--<ul class="nav-main">
+            <ul class="nav-main">
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Budget</a></li>
                 <li><a href="#">Insigns</a></li>
-            </ul>-->
+            </ul>
 
             <ul class="nav-left-menu">
                 <li class="nav-personal-information current"><a href="#">Personal Information</a></li>
@@ -79,7 +86,7 @@
                 <li class="nav-logout"><a href="#">Logout</a></li>
             </ul>
         </div>
-    </aside>
+    </aside> -->
     <!-- ./left-menu-->
 
     <section class="content">
@@ -87,12 +94,11 @@
 
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-sm-offset-0 col-md-12  col-md-offset-0 col-lg-10 col-lg-offset-1 col-xl-8 col-xl-offset-2">
-                    <form role="form">
+                    <form role="form" action="/modify_user" method="post">
                         <div class="well">
                             <h2 class="font700">Update Account Information</h2>
                             <div class="row">
                             <div>
-                              <form action="/modify_user" method="post">
                                 <div class="col-xs-12 col-sm-6">
                                     <!--<div class="form-group">
                                         <label class="form-label" for="firstName">First Name</label>
@@ -174,6 +180,13 @@
                                             <option>Other</option>
                                         </select>
                                     </div>
+
+                                    <div class="form-group">
+                                      <label class="form-label" for="graduation_date_box">Graduation Date</label>
+                                      <input type="text" class="form-control datepicker-here" id="graduation_date_box" name="query_graduation_date" value="<%= @current_user.graduation_date %>">
+                                    </div>
+
+
                                 </div>
 
                                 <div class="col-xs-12 col-sm-6">
@@ -186,17 +199,10 @@
                                             <option>Item 3</option>
                                         </select>
                                     </div>-->
+                                    
                                     <div class="form-group">
-                                        <label class="form-label" for="internationalStudent">Are you an international student?</label>
-                                        <select class="form-control">
-                                            <option>Select One</option>
-                                            <option>No</option>
-                                            <option>Yes</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label" for="industry">Pre-MBA Industry</label>
-                                        <select class="form-control">
+                                        <label class="form-label" for="premba_industry_box">Pre-MBA Industry</label>
+                                        <select class="form-control" id="premba_industry_box" name="query_premba_industry">
                                             <option>Select One</option>
                                             <option>Accounting</option>
                                             <option>Advertising, Arts & Media</option>
@@ -231,14 +237,34 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label class="form-label" for="schoolAttending">School You’re attending</label>
-                                        <select class="form-control">
+                                        <label class="form-label" for="query_school">School You’re attending</label>
+                                        <select class="form-control" id="school_box" name="query_school">
                                             <option>Select One</option>
                                             <option>Kellogg</option>
                                             <option>Booth</option>
                                             <option>Other</option>
                                         </select>
                                     </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label" for="international_student_status_box">Are you an international student?</label>
+                                        <select class="form-control" id="international_student_status_box" name="query_international_student_status">
+                                            <option>Select One</option>
+                                            <option>No</option>
+                                            <option>Yes</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                      <label class="form-label" for="password_box">Password</label>
+                                      <input type="text" class="form-control" id="password_box" name="query_password" placeholder="Choose a password..." type="password">
+                                    </div>
+                                  
+                                    <div class="form-group">
+                                      <label class="form-label" for="password_confirmation_box">Password Confirmation</label>
+                                      <input type="text" class="form-control" id="password_confirmation_box" name="query_password_confirmation" placeholder="Confirm your password..." type="password">
+                                    </div>
+
                                 </div>
                             </div>
                             <!-- ./row-->
