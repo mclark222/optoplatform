@@ -71,12 +71,22 @@ class PlaidItemsController < ApplicationController
 
     response = client.item_public_token_exchange(request)
 
+    PlaidItem.create(
+    :user_id=>@current_user.id,
+    :plaid_access_token=>response.access_token,
+    :plaid_item_id=>response.item_id,
+    :plaid_institution_id=>"",
+    :status=>"",
+    :transactions_cursor=>"",
+    :accounts_count=>"")
+
     # response contains the access token and item id.
     # response.access_token
     # response.item_id
 
     render json: response
   end
+
 
   def create
     the_plaid_item = PlaidItem.new

@@ -17,6 +17,7 @@ class AccountsController < ApplicationController
     render({ :template => "accounts/show.html.erb" })
   end
 
+
   def create
     the_account = Account.new
     the_account.account_type = params.fetch("query_account_type")
