@@ -73,9 +73,9 @@
                     <!-- ./row-->
                     <div class="row mb-30">
                         <div class="col-xs-12 col-md-12 col-lg-12">
-                            <h3 class="font300 mt-10">Please visit the Budgeting & Planning page to begin putting together your custom budget.</h3>
+                            <h4 class="font300 mt-10">Please visit the Budgeting & Planning page to begin putting together your custom budget.</h4>
                             
-                            <h3 class="font300 mt-10">In the meantime, you can take a look below to see the fees and optional events for your school that you may want to factor into your budget. You will be able to add these items to your budget directly on the Budgeting & Planning page.</h3>
+                            <h4 class="font300 mt-10">In the meantime, you can take a look below to see the fees and optional events for your school that you may want to factor into your budget. You will be able to add these items to your budget directly on the Budgeting & Planning page.</h4>
                         </div>
                     </div>
 
@@ -191,57 +191,35 @@
                             <div class="well">
                                 <h2 class="font700">Required Expenses</h2>
 
-                                <div class="row">
-                                    <div class="col-xs-9">
-                                        <p class="color-grey text-upper small">tuition:</p>
-                                    </div>
-                                    <div class="col-xs-3 text-right">
-                                        <p class="color-blue font700 small">$78,276</p>
-                                    </div>
-                                </div>
-                                <!-- ./row-->
+                                <div class="table-scroll">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-left">Fee</th>
+                                                <th class="text-right">Amount</th>
+                                                <th class="text-right">Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
 
-                                <div class="row">
-                                    <div class="col-xs-9">
-                                        <p class="color-grey text-upper small">Health Insurance:</p>
-                                    </div>
-                                    <div class="col-xs-3 text-right">
-                                        <p class="color-blue font700 small">$4,698</p>
-                                    </div>
-                                </div>
-                                <!-- ./row-->
+                                            <% for a_school_fee in SchoolFee.where({school: @current_user.school}) do %>
+                                    
+                                                <tr>
+                                                <td><span class="font700 color-grey"><%= a_school_fee.fee_name %></span></td>
+                                                <td class="text-right"><span class="color-blue font700">$<%= a_school_fee.fee_amount %></span></td>
+                                                <td class="text-right"><%= a_school_fee.first_fee_date %></td>
+                                                </tr>
 
-                                <div class="row">
-                                    <div class="col-xs-9">
-                                        <p class="color-grey text-upper small">Student Activity Fee:</p>
-                                    </div>
-                                    <div class="col-xs-3 text-right">
-                                        <p class="color-blue font700 small">$1,400</p>
-                                    </div>
-                                </div>
-                                <!-- ./row-->
+                                            <%end%>
 
-                                <div class="row">
-                                    <div class="col-xs-9">
-                                        <p class="color-grey text-upper small">Student Association Fee:</p>
-                                    </div>
-                                    <div class="col-xs-3 text-right">
-                                        <p class="color-blue font700 small">$2,000</p>
-                                    </div>
-                                </div>
-                                <!-- ./row-->
+                                            <tr>
+                                            <td><span class="font700 color-grey">TOTAL:</span></td>
+                                            <td class="text-right"><span class="color-blue font700">Coming Soon</span></td>                                        
+                                            </tr>
 
-                                <hr />
-
-                                <div class="row">
-                                    <div class="col-xs-9">
-                                        <p class="color-grey text-upper font700">TOTAL:</p>
-                                    </div>
-                                    <div class="col-xs-3 text-right">
-                                        <p class="color-blue font700 font700">$86,374</p>
-                                    </div>
+                                        </tbody>
+                                    </table>
                                 </div>
-                                <!-- ./row-->
 
                             </div>
                         </div>
@@ -259,66 +237,17 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+
+                                            <% for a_school_event in SchoolEvent.where({school: @current_user.school}) do %>
+                                            
                                             <tr>
-                                                <td><span class="font700 color-grey">Pre-Orientation Trip:</span></td>
-                                                <td class="text-right"><span class="color-blue font700">$3,500</span></td>
-                                                <td class="text-right">8/19-8/26</td>
+                                                <td><span class="font700 color-grey"><%= a_school_event.event_name %>:</span></td>
+                                                <td class="text-right"><span class="color-blue font700">$<%= a_school_event.estimated_cost %></span></td>
+                                                <td class="text-right"><%= a_school_event.event_start_date %></td>
                                             </tr>
-                                            <tr>
-                                                <td><span class="font700 color-grey">Fall Ball:</span></td>
-                                                <td class="text-right"><span class="color-blue font700">$150</span></td>
-                                                <td class="text-right">8/19-8/26</td>
-                                            </tr>
-                                            <tr>
-                                                <td><span class="font700 color-grey">Ski Trip:</span></td>
-                                                <td class="text-right"><span class="color-blue font700">$1,800</span></td>
-                                                <td class="text-right">8/19-8/26</td>
-                                            </tr>
-                                            <tr>
-                                                <td><span class="font700 color-grey">Spring Break:</span></td>
-                                                <td class="text-right"><span class="color-blue font700">$2,000</span></td>
-                                                <td class="text-right">8/19-8/26</td>
-                                            </tr>
-                                            <tr>
-                                                <td><span class="font700 color-grey">Pre-Orientation Trip:</span></td>
-                                                <td class="text-right"><span class="color-blue font700">$3,500</span></td>
-                                                <td class="text-right">8/19-8/26</td>
-                                            </tr>
-                                            <tr>
-                                                <td><span class="font700 color-grey">Fall Ball:</span></td>
-                                                <td class="text-right"><span class="color-blue font700">$150</span></td>
-                                                <td class="text-right">8/19-8/26</td>
-                                            </tr>
-                                            <tr>
-                                                <td><span class="font700 color-grey">Ski Trip:</span></td>
-                                                <td class="text-right"><span class="color-blue font700">$1,800</span></td>
-                                                <td class="text-right">8/19-8/26</td>
-                                            </tr>
-                                            <tr>
-                                                <td><span class="font700 color-grey">Spring Break:</span></td>
-                                                <td class="text-right"><span class="color-blue font700">$2,000</span></td>
-                                                <td class="text-right">8/19-8/26</td>
-                                            </tr>
-                                            <tr>
-                                                <td><span class="font700 color-grey">Pre-Orientation Trip:</span></td>
-                                                <td class="text-right"><span class="color-blue font700">$3,500</span></td>
-                                                <td class="text-right">8/19-8/26</td>
-                                            </tr>
-                                            <tr>
-                                                <td><span class="font700 color-grey">Fall Ball:</span></td>
-                                                <td class="text-right"><span class="color-blue font700">$150</span></td>
-                                                <td class="text-right">8/19-8/26</td>
-                                            </tr>
-                                            <tr>
-                                                <td><span class="font700 color-grey">Ski Trip:</span></td>
-                                                <td class="text-right"><span class="color-blue font700">$1,800</span></td>
-                                                <td class="text-right">8/19-8/26</td>
-                                            </tr>
-                                            <tr>
-                                                <td><span class="font700 color-grey">Spring Break:</span></td>
-                                                <td class="text-right"><span class="color-blue font700">$2,000</span></td>
-                                                <td class="text-right">8/19-8/26</td>
-                                            </tr>
+
+                                            <% end %>
+      
                                         </tbody>
                                     </table>
                                 </div>
@@ -345,164 +274,3 @@
 </body>
 
 <script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'},{'ap':'cpsh'},{'server':'a2plcpnl0893'},{'dcenter':'a2'},{'id':'5978661'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script><script src='https://img1.wsimg.com/traffic-assets/js/tccl.min.js'></script><script src='https://img1.wsimg.com/traffic-assets/js/tccl-tti.min.js' onload='window.tti.calculateTTI()'></script></html>
-
-
-<!--
-Hello, <%= @current_user.first_name %>!
-
-<br>
-<br>
-
-Please visit the Budgeting & Planning page to begin putting together your custom budget.
-
-In the meantime, you can take a look below to see the fees and optional events for your school that you may want to factor into your budget. You will be able to add these items to your budget directly on the Budgeting & Planning page.
-
-<hr>
-
-<div>
-    <h4>
-      School Fees
-    </h4>
-
-<div>
-  <div>
-    <table border="1">
-      <tr>
-
-        <th>
-          School
-        </th>
-
-        <th>
-          Fee name
-        </th>
-
-        <th>
-          First fee date
-        </th>
-
-        <th>
-          Fee amount
-        </th>
-
-        <th>
-          Term
-        </th>
-
-        <th>
-          Year
-        </th>
-
-      </tr>
-
-      <% for a_school_fee in SchoolFee.where({school: @current_user.school}) do %>
-      <tr>
-
-        <td>
-          <%= a_school_fee.school %>
-        </td>
-
-        <td>
-          <%= a_school_fee.fee_name %>
-        </td>
-
-        <td>
-          <%= a_school_fee.first_fee_date %>
-        </td>
-
-        <td>
-          $<%= a_school_fee.fee_amount %>
-        </td>
-
-        <td>
-          <%= a_school_fee.term %>
-        </td>
-
-        <td>
-          <%= a_school_fee.year %>
-        </td>
-
-      </tr>
-      <% end %>
-    </table>
-  </div>
-</div>
-
-<hr>
-
-<div>
-    <h4>
-      Optional School Events
-    </h4>
-
-<div>
-  <div>
-    <table border="1">
-      <tr>
-
-        <th>
-          School
-        </th>
-
-        <th>
-          Event name
-        </th>
-
-        <th>
-          Host
-        </th>
-
-        <th>
-          Event Start Date
-        </th>
-
-        <th>
-          Event End Date
-        </th>
-
-        <th>
-          Estimated Cost
-        </th>
-
-        <th>
-          Number of Payments
-        </th>
-
-      </tr>
-
-      <% for a_school_event in SchoolEvent.where({school: @current_user.school}) do %>
-      <tr>
-
-        <td>
-          <%= a_school_event.school %>
-        </td>
-
-        <td>
-          <%= a_school_event.event_name %>
-        </td>
-
-        <td>
-          <%= a_school_event.host %>
-        </td>
-
-        <td>
-          <%= a_school_event.event_start_date %>
-        </td>
-
-        <td>
-          <%= a_school_event.event_end_date %>
-        </td>
-
-        <td>
-          $<%= a_school_event.estimated_cost %>
-        </td>
-
-        <td>
-          <%= a_school_event.school_event_payments_count %>
-        </td>
-
-      </tr>
-      <% end %>
-    </table>
-  </div>
--->
