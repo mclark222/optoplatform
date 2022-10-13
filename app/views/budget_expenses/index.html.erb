@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta content='width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport' />
 
-    <title>Budget | OPTO</title>
+    <title>OPTO | Budget</title>
 
     <link rel="icon" href="favicon.png" sizes="64x64" type="image/png" />
     <meta name="description" content="" />
@@ -42,6 +42,550 @@
   </div>
 </header>
 
+<body class="left-menu-hide">
+
+    <section class="content">
+        <div class="content-container">
+
+            <div class="row">
+                <div class="col-xs-12 col-md-12 col-lg-7">
+                    <div class="well well-xs mb-20">
+
+                        <div class="accordion-total">
+                            <h3 class="accordion-total-title">Total Expenses<span><!--$9,500--></span></h3>
+                        </div>
+
+                        <div class="accordion">
+                            <h3 class="accordion-title">
+                                <span class="accordion-icon"></span>
+                                Non-School Expenses
+                                <span class="accordion-no"><!--$9,500--></span>
+                            </h3>
+
+                            <div class="accordion-content">
+                                <!-- Sub Child 1-->
+                                <div class="accordion accordion-nested">
+                                    <h3 class="accordion-title">
+                                        <span class="accordion-icon"></span>
+                                        My Budgeted Items
+                                        <span class="accordion-no"><!--$9,500--></span>
+                                    </h3>
+                                    <!-- Sub Sub Child 1-->
+                                    <div class="accordion-content">
+                                        <div class="accordion accordion-nested">
+                                            <h4 class="accordion-title">
+                                                <span class="accordion-icon"></span>
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-sm-2">
+                                                        <p class="hide-xs">Expense</p>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-3">
+                                                        <p class="hide-xs">Category</p>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-2">
+                                                        <p class="hide-xs">Freq.</p>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-2">
+                                                        <p class="hide-xs">Est. Date</p>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-2">
+                                                        <p class="hide-xs">Amount</p>
+                                                    </div>
+                                                    <!--<div class="col-xs-12 col-sm-3 text-right">
+                                                        <p>$9,500</p>
+                                                    </div>-->
+                                                </div>
+                                            </h4>
+                                            <div class="accordion-content">
+                                                <h4 class="accordion-content-table">
+
+                                                    
+                                                    <% @list_of_budget_expenses.each do |a_budget_expense| %>
+                                                    
+                                                    <div class="row">
+
+                                                      <div class="col-xs-12 col-sm-2">
+                                                          <p><span class="show-xs font700"></span><%= a_budget_expense.expense_name %></p>
+                                                      </div>
+
+                                                      <div class="col-xs-12 col-sm-3">
+                                                          <p><span class="show-xs font700"></span><%= @category_reference = TransactionCategory.where({id: a_budget_expense.expense_category_id}).first
+                                                          @category_reference.spend_category_name %></p>
+                                                      </div>                                      
+
+                                                      <div class="col-xs-12 col-sm-2">
+                                                          <p><span class="show-xs font700"></span>
+                                                          <%= if a_budget_expense.recurring_frequency == 1
+                                                            "One-Time"
+                                                          elsif a_budget_expense.recurring_frequency == 52
+                                                            "Weekly"
+                                                          elsif a_budget_expense.recurring_frequency == 26
+                                                            "Biweekly"
+                                                          elsif a_budget_expense.recurring_frequency == 12
+                                                            "Monthly"
+                                                          elsif a_budget_expense.recurring_frequency == 4
+                                                            "Quarterly"
+                                                          end %>
+                                                          </p>
+                                                      </div>
+
+                                                      <div class="col-xs-12 col-sm-2">
+                                                          <p><span class="show-xs font700"></span><%= a_budget_expense.first_recurrence_date.strftime("%b. %d") %></p>
+                                                      </div>
+
+                                                      <div class="col-xs-12 col-sm-2">
+                                                          <p><span class="show-xs font700"></span>$<%= number_with_delimiter(a_budget_expense.expense_amount.truncate, :delimiter => ',')
+                                                           %></p>
+                                                      </div>
+
+                                                      <div class="col-xs-12 col-sm-1 col-actions">
+                                                            <a href="/budget_expenses/<%= a_budget_expense.id %>" class="accordion-btn-edit"></a>
+                                                        </div>
+                                                      
+                                                    </div>
+
+                                                    <% end %>
+
+                                                    
+
+                                                      <div class="row">
+
+                                                      <form action="/insert_budget_expense" method="post">
+                                                            
+                                                            <div class="col-xs-12 col-sm-2">
+                                                            <p><span class="show-xs font700"></span>
+                                                            <input type="text" id="expense_name_box" name="query_expense_name" size="5" placeholder="Item"></p>
+                                                            </div>
+
+                                                            <div class="col-xs-12 col-sm-2">
+                                                            <p><span class="show-xs font700"></span>
+                                                            <select id="expense_category_id_box"name="query_expense_category_id" style="width: 90px">
+                                                              <option value="Select One">Select One</option>
+                                                              <option value=1>Auto & Transportation</option>
+                                                              <option value=2>Bills & Utilities</option>
+                                                              <option value=3>Debt Payments</option>
+                                                              <option value=4>Dining & Drinking</option>
+                                                              <option value=5>Education</option>
+                                                              <option value=6>Entertainment</option>
+                                                              <option value=7>Fitness & Personal Care</option>
+                                                              <option value=8>Gifts & Donationse</option>
+                                                              <option value=9>Government</option>
+                                                              <option value=10>Groceries</option>
+                                                              <option value=11>Health & Insurance</option>
+                                                              <option value=12>Home</option>
+                                                              <option value=13>Pets</option>
+                                                              <option value=14>Rent & Mortgage</option>
+                                                              <option value=15>Services</option>
+                                                              <option value=16>Shopping</option>
+                                                              <option value=17>Travel</option>
+                                                              <option value=18>Other</option>
+                                                            </select></p>
+                                                            </div>
+
+
+                                                            <div class="col-xs-12 col-sm-2 col-sm-offset-1">
+                                                            
+                                                            <select id="recurring_frequency_box"name="query_recurring_frequency" style="width: 90px">
+                                                              <option value="Select One">Select One</option>
+                                                              <option value="1">One-Time</option>
+                                                              <option value="52">Weekly</option>
+                                                              <option value="26">Biweekly</option>
+                                                              <option value="12">Monthly</option>
+                                                              <option value="4">Quarterly</option>
+                                                            </select>
+                                                            </div>
+
+                                                            
+                                                            <div class="col-xs-12 col-sm-2 col-sm-offset-1"">
+                                                            <p><span class="show-xs font700"></span>
+                                                            <input type="date" id="first_recurrence_date_box" name="query_first_recurrence_date" style="width: 80px"></p>
+                                                            </div>
+
+                                                            <div class="col-xs-12 col-sm-2">
+                                                            <p><span class="show-xs font700"></span>
+                                                            <input type="text" id="expense_amount_box" name="query_expense_amount" size="5" placeholder="$"></p>
+                                                            </div>
+
+                                                          
+                                                            <input type="hidden" name="query_user_id" value="<%= @current_user.id %>">
+                                                          
+                                                          <div class="col-xs-6 col-sm-6 col-sm-offset-8 col-md-6 col-lg-6 col-xl-4 md-10">
+                                                          <input type="submit" value="Add new expense" class="btn btn-secondary btn-sm" />
+                                                          </div>
+
+                                                         <!-- <button>
+                                                            Add new expense
+                                                          </button>-->
+                                                        </form>
+
+                                                        </div>
+                                                    
+
+                                                </h4>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+                        <!-- Second full accordion grouping starts below-->
+
+                        <div class="accordion">
+                            <h3 class="accordion-title">
+                                <span class="accordion-icon"></span>
+                                School Expenses
+                                <span class="accordion-no"><!--$9,500--></span>
+                            </h3>
+
+                            <div class="accordion-content">
+                                <!-- Sub Child 1-->
+                                <div class="accordion accordion-nested">
+                                    <h3 class="accordion-title">
+                                        <span class="accordion-icon"></span>
+                                        Required
+                                        <span class="accordion-no">$9,500</span>
+                                    </h3>
+                                    <!-- Sub Sub Child 1-->
+                                    <div class="accordion-content">
+                                        <div class="accordion accordion-nested">
+                                            <h4 class="accordion-title">
+                                                <span class="accordion-icon"></span>
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-sm-3">
+                                                        <p class="hide-xs">Category</p>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-3">
+                                                        <p class="hide-xs">Frequency</p>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-3">
+                                                        <p class="hide-xs">Est. Date</p>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-3 text-right">
+                                                        <p>$9,500</p>
+                                                    </div>
+                                                </div>
+                                            </h4>
+                                            <div class="accordion-content">
+                                                <h4 class="accordion-content-table">
+                                                    <div class="row">
+                                                        <div class="col-xs-12 col-sm-3">
+                                                            <p><span class="show-xs font700">Category:</span> Rent</p>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-3">
+                                                            <p><span class="show-xs font700">Frequency:</span> Monthly</p>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-2">
+                                                            <p><span class="show-xs font700">Est. Date:</span> Sep 1</p>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-2 text-right text-left-xs">
+                                                            <p><span class="show-xs font700">Price:</span> $2,000</p>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-2 col-actions">
+                                                            <a class="accordion-btn-edit"></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-xs-12 col-sm-3">
+                                                            <p><span class="show-xs font700">Category:</span> Utilities</p>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-3">
+                                                            <p><span class="show-xs font700">Frequency:</span> Monthly</p>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-2">
+                                                            <p><span class="show-xs font700">Est. Date:</span> Sep 1</p>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-2 text-right text-left-xs">
+                                                            <p><span class="show-xs font700">Price:</span> $100</p>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-2 col-actions">
+                                                            <a class="accordion-btn-edit"></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-xs-12 col-sm-3">
+                                                            <p><span class="show-xs font700">Category:</span> Groceries</p>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-3">
+                                                            <p><span class="show-xs font700">Frequency:</span> Monthly</p>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-2">
+                                                            <p><span class="show-xs font700">Est. Date:</span> Sep 1</p>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-2 text-right text-left-xs">
+                                                            <p><span class="show-xs font700">Price:</span> $300</p>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-2 col-actions">
+                                                            <a class="accordion-btn-edit"></a>
+                                                        </div>
+                                                    </div>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Sub Child 2-->
+                                <div class="accordion accordion-nested">
+                                    <h3 class="accordion-title">
+                                        <span class="accordion-icon"></span>
+                                        Discretionary
+                                        <span class="accordion-no">$9,500</span>
+                                    </h3>
+                                    <!-- Sub Sub Child 2 -->
+                                    <div class="accordion-content">
+                                        <div class="accordion accordion-nested">
+                                            <h4 class="accordion-title">
+                                                <span class="accordion-icon"></span>
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-sm-3">
+                                                        <p class="hide-xs">Category</p>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-3">
+                                                        <p class="hide-xs">Frequency</p>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-3">
+                                                        <p class="hide-xs">Est. Date</p>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-3 text-right">
+                                                        <p>$9,500</p>
+                                                    </div>
+                                                </div>
+                                            </h4>
+                                            <div class="accordion-content">
+                                                <h4 class="accordion-content-table">
+                                                    <div class="row">
+                                                        <div class="col-xs-12 col-sm-3">
+                                                            <p><span class="show-xs font700">Category:</span> Alex & Sam’s Wedding</p>
+                                                            <input type="text" class="form-control fc-sm" value="Alex & Sam’s Wedding" />
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-3">
+                                                            <p><span class="show-xs font700">Frequency:</span> Once</p>
+                                                            <select class="form-control fc-sm">
+                                                                <option>Once</option>
+                                                                <option>Monthly</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-2">
+                                                            <p><span class="show-xs font700">Est. Date:</span> Nov 1</p>
+                                                            <input type="text" class="form-control fc-sm datepicker-here" value="Nov 1" data-language="en" data-date-format="M dd" data-position='bottom left' />
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-2 text-right text-left-xs">
+                                                            <p><span class="show-xs font700">Price:</span> $500</p>
+                                                            <input type="text" class="form-control fc-sm fc-right" value="$500" />
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-2 col-actions">
+                                                            <a class="accordion-btn-check jsAccordionSave"></a>
+                                                            <a class="accordion-btn-edit jsAccordionEdit"></a>
+                                                            <a class="accordion-btn-trash jsAccordionDelete"></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-xs-12 col-sm-3">
+                                                            <p><span class="show-xs font700">Category:</span> Weekend Trip</p>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-3">
+                                                            <p><span class="show-xs font700">Frequency:</span> Once</p>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-2">
+                                                            <p><span class="show-xs font700">Est. Date:</span> Sep 1</p>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-2 text-right text-left-xs">
+                                                            <p><span class="show-xs font700">Price:</span> $500</p>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-2 col-actions">
+                                                            <a class="accordion-btn-edit"></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-xs-12 col-sm-3">
+                                                            <p><span class="show-xs font700">Category:</span> Donations</p>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-3">
+                                                            <p><span class="show-xs font700">Frequency:</span> Monthly</p>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-2">
+                                                            <p><span class="show-xs font700">Est. Date:</span> Sep 1</p>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-2 text-right text-left-xs">
+                                                            <p><span class="show-xs font700">Price:</span> $250</p>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-2 col-actions">
+                                                            <a class="accordion-btn-edit"></a>
+                                                        </div>
+                                                    </div>
+                                                </h4>
+
+                                                <div class="text-right mt-20">
+                                                    <a class="btn btn-primary btn-sm modal-open" data-modal="optionalSchoolEvents">Add New</a>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+<!--The chart starts below-->
+
+                <div class="col-xs-12 col-md-12 col-lg-5">
+                    <div class="well well-sm mb-20">
+                        <h2 class="font700 text-upper">Total Budget</h2>
+                           <canvas id="totalBudgetChart"></canvas>
+                        
+                    </div>
+                </div>
+            </div>
+            <!-- ./row-->
+
+        </div>
+    </section>
+    <!-- ./content-->
+
+
+<!-- The pop out modal starts below-->
+
+    <div class="modal" id="optionalSchoolEvents">
+        <div class="modal-content">
+            <h2 class="font700">Optional School Events</h2>
+
+            <div class="table-scroll">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="text-left">Event</th>
+                            <th class="text-right">Avg. Cost</th>
+                            <th class="text-right">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <label class="checkbox">
+                                    <input type="checkbox" />
+                                    <span class="checkmark"></span>
+                                </label>
+                                <span class="font700 color-grey">Pre-Orientation Trip:</span>
+                            </td>
+                            <td class="text-right"><span class="color-blue font700">$3,500</span></td>
+                            <td class="text-right">8/19-8/26</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="checkbox">
+                                    <input type="checkbox" />
+                                    <span class="checkmark"></span>
+                                </label><span class="font700 color-grey">Fall Ball:</span>
+                            </td>
+                            <td class="text-right"><span class="color-blue font700">$150</span></td>
+                            <td class="text-right">8/19-8/26</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="checkbox">
+                                    <input type="checkbox" />
+                                    <span class="checkmark"></span>
+                                </label><span class="font700 color-grey">Ski Trip:</span>
+                            </td>
+                            <td class="text-right"><span class="color-blue font700">$1,800</span></td>
+                            <td class="text-right">8/19-8/26</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="checkbox">
+                                    <input type="checkbox" />
+                                    <span class="checkmark"></span>
+                                </label><span class="font700 color-grey">Spring Break:</span>
+                            </td>
+                            <td class="text-right"><span class="color-blue font700">$2,000</span></td>
+                            <td class="text-right">8/19-8/26</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="checkbox">
+                                    <input type="checkbox" />
+                                    <span class="checkmark"></span>
+                                </label>
+                                <span class="font700 color-grey">Pre-Orientation Trip:</span>
+                            </td>
+                            <td class="text-right"><span class="color-blue font700">$3,500</span></td>
+                            <td class="text-right">8/19-8/26</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="checkbox">
+                                    <input type="checkbox" />
+                                    <span class="checkmark"></span>
+                                </label><span class="font700 color-grey">Fall Ball:</span>
+                            </td>
+                            <td class="text-right"><span class="color-blue font700">$150</span></td>
+                            <td class="text-right">8/19-8/26</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="checkbox">
+                                    <input type="checkbox" />
+                                    <span class="checkmark"></span>
+                                </label><span class="font700 color-grey">Ski Trip:</span>
+                            </td>
+                            <td class="text-right"><span class="color-blue font700">$1,800</span></td>
+                            <td class="text-right">8/19-8/26</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="checkbox">
+                                    <input type="checkbox" />
+                                    <span class="checkmark"></span>
+                                </label><span class="font700 color-grey">Spring Break:</span>
+                            </td>
+                            <td class="text-right"><span class="color-blue font700">$2,000</span></td>
+                            <td class="text-right">8/19-8/26</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="text-right mt-20">
+                <input type="submit" class="btn btn-primary btn-sm" value="Add to my budget" />
+            </div>
+        </div>
+    </div>
+    <!-- ./modal-->
+
+    <!-- jQuery -->
+    <script src="js/jquery-1.11.1.min.js"></script>
+
+    <!-- Datepicker JS -->
+    <script src="datepicker/js/datepicker.min.js"></script>
+    <script src="datepicker/js/i18n/datepicker.en.js"></script>
+
+    <!-- Chart JS -->
+    <script src="chart/chart.min.js"></script>
+    <script src="chart/chart-init.js"></script>
+
+    <!-- Custom Script  -->
+    <script src="js/main.js"></script>
+
+</body>
+
+<script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'},{'ap':'cpsh'},{'server':'a2plcpnl0893'},{'dcenter':'a2'},{'id':'5978661'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script><script src='https://img1.wsimg.com/traffic-assets/js/tccl.min.js'></script><script src='https://img1.wsimg.com/traffic-assets/js/tccl-tti.min.js' onload='window.tti.calculateTTI()'></script></html>
+
+
+
+
+<!--
 <div>
   <div>
     <h2>
@@ -98,8 +642,6 @@
           <option value=18>Other</option>
         </select>
 
-
-        <!-- <input type="text" id="expense_category_id_box"name="query_expense_category_id"> -->
       </div>
 
       <div>
@@ -115,21 +657,8 @@
           <option value="12">Monthly</option>
           <option value="4">Quarterly</option>
         </select>
-          
-          
-
-        <!--<input type="text" id="recurring_frequency_box" name="query_recurring_frequency">-->
-
-
+        
         <input type="hidden" name="query_user_id" value="<%= @current_user.id %>">
-
-      <!-- <div>
-        <label for="user_id_box">
-          User
-        </label>
-
-        <input type="text" id="user_id_box" name="query_user_id">
-      </div> -->
 
         <label for="first_recurrence_date_box">
           First recurrence date
@@ -154,9 +683,6 @@
   <div>
     <table border="1">
       <tr>
-        <!--<th>
-          ID
-        </th>-->
 
         <th>
           Expense name
@@ -174,21 +700,9 @@
           Recurring frequency
         </th>
 
-        <!--<th>
-          User
-        </th>-->
-
         <th>
           First recurrence date
         </th>
-
-        <!--<th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
-        </th>-->
 
         <th>
           Update Expense
@@ -198,15 +712,10 @@
           Delete Expense
         </th>
 
-        <!--<th>
-        </th>-->
       </tr>
 
       <% @list_of_budget_expenses.each do |a_budget_expense| %>
       <tr>
-        <!--<td>
-          <%= a_budget_expense.id %>
-        </td>-->
 
         <td>
           <%= a_budget_expense.expense_name %>
@@ -217,7 +726,6 @@
         </td>
 
         <td>
-          <!--<%= a_budget_expense.expense_category_id %>-->
           <%= @category_reference = TransactionCategory.where({id: a_budget_expense.expense_category_id}).first
            @category_reference.spend_category_name %>
         </td>
@@ -482,3 +990,4 @@
       <% end %>
     </table>
   </div>
+-->

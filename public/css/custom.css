@@ -112,6 +112,10 @@ h5 {
   line-height: 20px;
 }
 
+link {
+  color: #3751FF;
+  text-decoration: underline;
+}
 
 p {
   font-family: 'Inter', sans-serif;
@@ -1154,6 +1158,21 @@ textarea {
 .btn.btn-secondary:hover,
 .btn.btn-secondary:focus,
 .btn.btn-secondary:active {
+  background-color: #ddd;
+  border-color: #ddd;
+  color: #6B6B6B;
+}
+
+/*Tertiary*/
+.btn.btn-tertiary {
+  border-color: #F2F2F2;
+  color: #6B6B6B;
+  background-color: #F2F2F2;
+}
+
+.btn.btn-tertiary:hover,
+.btn.btn-tertiary:focus,
+.btn.btn-tertiary:active {
   background-color: #ddd;
   border-color: #ddd;
   color: #6B6B6B;
