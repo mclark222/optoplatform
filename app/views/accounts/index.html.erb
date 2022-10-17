@@ -1,3 +1,12 @@
+<header class="header">
+  <div class="header-container">
+    <a href="/home" class="logo"></a>
+    <%= render "shared/navbar" %>
+  </div>
+</header>
+
+<hr>
+
 <div>
   <div>
     <h1>
@@ -14,6 +23,155 @@
       Add a new account
     </h2>
 
+
+  <script>
+    async function link_plaid_account() {
+      const response = await fetch("/create_plaid_link_token");
+      const responseJson = await response.json();
+      const linkToken = responseJson.link_token;
+
+      const handler = Plaid.create({
+        token: linkToken,
+        onSuccess: async (publicToken, metadata) => {
+          const response = await fetch("/create_plaid_access_token", {
+            method: "POST",
+            body: JSON.stringify({ public_token: publicToken }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+          console.log(response);
+        },
+        onEvent: (eventName, metadata) => {
+          console.log("Event:", eventName);
+          console.log("Metadata:", metadata);
+        },
+        onExit: (error, metadata) => {
+          console.log(error, metadata);
+        },
+      });
+
+      handler.open();
+    }
+  </script>
+  <body>
+    <button
+      type="button"
+      onclick="link_plaid_account()"
+      id="link-account"
+      class="btn btn-primary btn-dark btn-lg"
+      style="
+        border: 1px solid black;
+        border-radius: 5px;
+        background: black;
+        height: 48px;
+        width: 205px;
+        margin-top: 5; 
+        margin-left: 10;
+        color: white;
+        font-size: 18px;
+      "
+    >
+      <strong>Link account</strong>
+    </button>
+  </body>
+
+
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          User ID
+        </th>
+
+        <th>
+          Plaid Access Token
+        </th>
+
+        <th>
+          Plaid Item ID
+        </th>
+
+        <th>
+          Plaid Institution ID
+        </th>
+
+        <th>
+          Status
+        </th>
+
+        <th>
+          Transactions Cursor
+        </th>
+
+        <th>
+          Created At
+        </th>
+
+        <th>
+          Updated At
+        </th>
+
+      </tr>
+
+
+      <% for an_item in PlaidItem.where({user_id: @current_user.id}) do %>
+      <tr>
+        <td>
+          <%= an_item.id %>
+        </td>
+
+        <td>
+          <%= an_item.user_id %>
+        </td>
+
+        <td>
+          <%= an_item.plaid_access_token %>
+        </td>
+
+        <td>
+          <%= an_item.plaid_item_id %>
+        </td>
+
+        <td>
+          <%= an_item.plaid_institution_id %>
+        </td>
+
+        <td>
+          <%= an_item.status %>
+        </td>
+
+        <td>
+          <%= an_item.transactions_cursor %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(an_item.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(an_item.updated_at) %> ago
+        </td>
+
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!--
     <form action="/insert_account" method="post">
       <div>
         <label for="account_type_box">
@@ -125,6 +283,7 @@
     </form>
   </div>
 </div>
+-->
 
 <hr>
 <div>

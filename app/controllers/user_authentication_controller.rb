@@ -19,7 +19,8 @@ class UserAuthenticationController < ApplicationController
       else
         session[:user_id] = user.id
       
-        redirect_to("/", { :notice => "Signed in successfully." })
+        redirect_to("/")
+        #{ :notice => "Signed in successfully." })
       end
     else
       redirect_to("/user_sign_in", { :alert => "No user with that email address." })
@@ -29,7 +30,8 @@ class UserAuthenticationController < ApplicationController
   def destroy_cookies
     reset_session
 
-    redirect_to("/", { :notice => "Signed out successfully." })
+    redirect_to("/")
+    #, { :notice => "Signed out successfully." })
   end
 
   def sign_up_form
@@ -69,17 +71,18 @@ class UserAuthenticationController < ApplicationController
     @user.transaction_categories_count = "0"
     @user.school_events_count = "0"
     @user.plaid_items_count = "0"
+    @user.user_budgets_count = "0"
+    @user.cash_flows_count = "0"
 
     save_status = @user.save
 
     if save_status == true
       session[:user_id] = @user.id
       
-      UserMailer.account_activation(@user).deliver_now
+      #UserMailer.account_activation(@user).deliver_now         #need to figure out how to get this working
 
-      #UserSetup.create_expense_categories(@user)
-
-      redirect_to("/home", { :notice => "User account created successfully."})
+      redirect_to("/home")
+      #, { :notice => "User account created successfully."})
     else
       redirect_to("/user_sign_up", { :alert => @user.errors.full_messages.to_sentence })
     end
@@ -103,9 +106,25 @@ class UserAuthenticationController < ApplicationController
         @user.school = @user.school
       else @user.school = params.fetch("query_school")
       end)
-    @user.international_student_status = params.fetch("query_international_student_status", false)
-    @user.premba_industry = params.fetch("query_premba_industry")
-    @user.gender = params.fetch("query_gender")
+    #@user.international_student_status = params.fetch("query_international_student_status", false)
+    @user.international_student_status =
+      (if params.fetch("query_international_student_status") == "Select One"
+      @user.international_student_status = @user.international_student_status
+      else @user.international_student_status = params.fetch("query_international_student_status")
+      end)
+    #@user.premba_industry = params.fetch("query_premba_industry")
+    @user.premba_industry =
+      (if params.fetch("query_premba_industry") == "Select One"
+      @user.premba_industry = @user.premba_industry
+      else @user.premba_industry = params.fetch("query_premba_industry")
+      end)
+    #@user.gender = params.fetch("query_gender")
+    @user.gender =
+      (if params.fetch("query_gender") == "Select One"
+        @user.gender = @user.gender
+      else @user.gender = params.fetch("query_gender")
+      end)
+
     @user.birth_date = params.fetch("query_birth_date")
     
     #The below fields are hidden because a user shouldn't be updating them directly. But I would ensure that we still have a way to update them.
@@ -119,6 +138,8 @@ class UserAuthenticationController < ApplicationController
     @user.transaction_categories_count = @current_user.transaction_categories_count
     @user.school_events_count = @current_user.school_events_count
     @user.plaid_items_count = @current_user.plaid_items_count
+    @user.user_budgets_count = @current_user.user_budgets_count
+    @user.cash_flows_count = @current_user.cash_flows_count
 
     # @user.loan_comparisons_count = params.fetch("query_loan_comparisons_count")
     # @user.spend_intentions_count = params.fetch("query_spend_intentions_count")
@@ -133,7 +154,8 @@ class UserAuthenticationController < ApplicationController
     if @user.valid?
       @user.save
 
-      redirect_to("/home", { :notice => "User account updated successfully."})
+      redirect_to("/home")
+      #, { :notice => "User account updated successfully."})
     else
       render({ :template => "user_authentication/edit_profile_with_errors.html.erb" , :alert => @user.errors.full_messages.to_sentence })
     end
@@ -143,7 +165,8 @@ class UserAuthenticationController < ApplicationController
     @current_user.destroy
     reset_session
     
-    redirect_to("/home", { :notice => "User account cancelled" })
+    redirect_to("/home")
+    #,{ :notice => "User account cancelled" })
   end
  
 end

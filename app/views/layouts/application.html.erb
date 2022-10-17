@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>
+  <!--<title>
     Opto
-  </title>
+  </title>-->
 
   <!-- Expand the number of characters we can use in the document beyond basic ASCII 🎉 -->
   <meta charset="utf-8">
@@ -21,6 +21,9 @@
   <!-- Rendering a partial that has all the <link>s and <script>s for assets we are pulling from content-delivery networks. -->
   <%= render "shared/cdn_assets" %>
 
+  <!-- The script that initializes Plaid Link. It is probably not necessary to initialize this on every page, but this works for now. -->
+  <script src="https://cdn.plaid.com/link/v2/stable/link-initialize.js"></script>
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <style>
@@ -28,8 +31,9 @@
   </style>
 </head>
 
+
+
 <body>
-  <%= render "shared/navbar" %>
 
   <div class="container">
     <%= render "shared/flashes" %>

@@ -1,157 +1,298 @@
-Hello, <%= @current_user.first_name %>!
+<!DOCTYPE HTML>
+<html>
 
-<br>
-<br>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content='width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport' />
 
-Please visit the Budgeting & Planning page to begin putting together your custom budget.
+    <title>OPTO | Home</title>
 
-In the meantime, you can take a look below to see the fees and optional events for your school that you may want to factor into your budget. You will be able to add these items to your budget directly on the Budgeting & Planning page.
+    <link rel="icon" href="favicon.png" sizes="64x64" type="image/png" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
 
-<hr>
+    <!-- Reset CSS -->
+    <link rel="stylesheet" href="css/reset.css" />
 
-<div>
-    <h4>
-      School Fees
-    </h4>
+    <!-- Font CSS -->
+    <link rel="stylesheet" href="fonts/mulish/style.css" />
+    <link rel="stylesheet" href="fonts/inter/style.css" />
 
-<div>
-  <div>
-    <table border="1">
-      <tr>
+    <!-- Grid CSS -->
+    <link href="css/grid.css" rel="stylesheet" media="screen" />
 
-        <th>
-          School
-        </th>
+    <!-- Custom CSS -->
+    <link href="css/custom.css" rel="stylesheet" media="screen" />
 
-        <th>
-          Fee name
-        </th>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+</head>
 
-        <th>
-          First fee date
-        </th>
-
-        <th>
-          Fee amount
-        </th>
-
-        <th>
-          Term
-        </th>
-
-        <th>
-          Year
-        </th>
-
-      </tr>
-
-      <% for a_school_fee in SchoolFee.where({school: @current_user.school}) do %>
-      <tr>
-
-        <td>
-          <%= a_school_fee.school %>
-        </td>
-
-        <td>
-          <%= a_school_fee.fee_name %>
-        </td>
-
-        <td>
-          <%= a_school_fee.first_fee_date %>
-        </td>
-
-        <td>
-          $<%= a_school_fee.fee_amount %>
-        </td>
-
-        <td>
-          <%= a_school_fee.term %>
-        </td>
-
-        <td>
-          <%= a_school_fee.year %>
-        </td>
-
-      </tr>
-      <% end %>
-    </table>
+<header class="header">
+  <div class="header-container">
+    <a href="/home" class="logo"></a>
+    <%= render "shared/navbar" %>
   </div>
-</div>
+</header>
 
-<hr>
 
-<div>
-    <h4>
-      Optional School Events
-    </h4>
+<body class="left-menu-hide">
 
-<div>
-  <div>
-    <table border="1">
-      <tr>
+    <section class="content">
+        <div class="content-container">
 
-        <th>
-          School
-        </th>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-sm-offset-0 col-md-12  col-md-offset-0 col-lg-12 col-lg-offset-0 col-xl-10 col-xl-offset-1">
 
-        <th>
-          Event name
-        </th>
+                    <div class="row mb-30">
+                        <div class="col-xs-12 col-md-6 col-lg-6">
+                            <h1 class="font300 mt-10"> Hello, <span class="font700"><%= @current_user.first_name %></span></h1>
+                            
+                            <!--<h1 class="font300 mt-10 user-avatar"><img src="images/avatar.png" /> Hello, <span class="font700"><%= @current_user.first_name %></span></h1>-->
+                        </div>
+                        <div class="col-xs-12 col-md-6 col-lg-6">
+                            <div class="row">
+                                <!--<div class="col-xs-12 col-sm-6 col-md-12 col-lg-6">
+                                    <h1 class="font300 mt-10">Today’s Date: <span class="font700">
+                                    TBD
+                                    </span></h1>
+                                </div>-->
+                                <!--<div class="col-xs-12 col-sm-7 col-sm-offset-3 col-md-12 col-md-offset-3 col-lg-7 col-lg-offset-0 col-xl-4 col-xl-offset-0">-->
+                                <div class="col-xs-12 col-sm-7 col-md-12 col-md-offset-5 col-lg-7 col-lg-offset-5">
+                                    <a href="#" class="btn btn-primary btn-block">See My Cash Flow</a>
+                                </div>
+                            </div>
+                            <!-- ./row-->
+                        </div>
+                    </div>
 
-        <th>
-          Host
-        </th>
 
-        <th>
-          Event Start Date
-        </th>
+                    <!-- ./row-->
+                    <div class="row mb-30">
+                        <div class="col-xs-12 col-md-12 col-lg-12">
+                            <h4 class="font300 mt-10">Please visit the Budgeting & Planning page to begin putting together your custom budget.</h4>
+                            
+                            <h4 class="font300 mt-10">In the meantime, you can take a look below to see the fees and optional events for your school that you may want to factor into your budget. You will be able to add these items to your budget directly on the Budgeting & Planning page.</h4>
+                        </div>
+                    </div>
 
-        <th>
-          Event End Date
-        </th>
+                    <!-- ./row-->
 
-        <th>
-          Estimated Cost
-        </th>
+                    <div class="row mb-30">
+                        <div class="col-xs-12 col-md-12 col-lg-6 mb-20">
+                            <div class="well">
+                                <h2 class="font700">Account Overview</h2>
 
-        <th>
-          Number of Payments
-        </th>
+                                <div class="row">
+                                    <div class="col-xs-9">
+                                        <p class="color-grey text-upper small">Total Checking Account Balances:</p>
+                                    </div>
+                                    <div class="col-xs-3 text-right">
+                                        <p class="color-blue font700 small">Coming Soon</p>
+                                    </div>
+                                </div>
+                                <!-- ./row-->
 
-      </tr>
+                                <div class="row">
+                                    <div class="col-xs-9">
+                                        <p class="color-grey text-upper small">Total Savings Account Balances:</p>
+                                    </div>
+                                    <div class="col-xs-3 text-right">
+                                        <p class="color-blue font700 small">Coming Soon</p>
+                                    </div>
+                                </div>
+                                <!-- ./row-->
 
-      <% for a_school_event in SchoolEvent.where({school: @current_user.school}) do %>
-      <tr>
+                                <div class="row">
+                                    <div class="col-xs-9">
+                                        <p class="color-grey text-upper small">Total Credit Card Balances:</p>
+                                    </div>
+                                    <div class="col-xs-3 text-right">
+                                        <p class="color-blue font700 small">Coming Soon</p>
+                                    </div>
+                                </div>
+                                <!-- ./row-->
 
-        <td>
-          <%= a_school_event.school %>
-        </td>
+                                <div class="row">
+                                    <div class="col-xs-9">
+                                        <p class="color-grey text-upper small">Total Student Loan Balances:</p>
+                                    </div>
+                                    <div class="col-xs-3 text-right">
+                                        <p class="color-blue font700 small">Coming Soon</p>
+                                    </div>
+                                </div>
+                                <!-- ./row-->
 
-        <td>
-          <%= a_school_event.event_name %>
-        </td>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-12 col-lg-6 mb-20">
+                            <div class="well">
+                                <h2 class="font700">This Month’s Budget</h2>
+                                <div class="row">
+                                    <div class="col-xs-9">
+                                        <p class="color-grey text-upper small">Spent to-date:</p>
+                                    </div>
+                                    <div class="col-xs-3 text-right">
+                                        <p class="color-blue font700 small">Coming Soon</p>
+                                    </div>
+                                </div>
+                                <!-- ./row-->
 
-        <td>
-          <%= a_school_event.host %>
-        </td>
+                                <div class="row">
+                                    <div class="col-xs-9">
+                                        <p class="color-grey text-upper small">Remaining expenses budget:</p>
+                                    </div>
+                                    <div class="col-xs-3 text-right">
+                                        <p class="color-blue font700 small">Coming Soon</p>
+                                    </div>
+                                </div>
 
-        <td>
-          <%= a_school_event.event_start_date %>
-        </td>
+                                <div class="row">
+                                    <div class="col-xs-9">
+                                        <p class="color-grey text-upper small">Monthly cash burn rate:</p>
+                                    </div>
+                                    <div class="col-xs-3 text-right">
+                                        <p class="color-blue font700 small">Coming Soon</p>
+                                    </div>
+                                </div>
 
-        <td>
-          <%= a_school_event.event_end_date %>
-        </td>
+                                <div class="row">
+                                    <div class="col-xs-9">
+                                        <p class="color-grey text-upper small">Expected date money runs out:</p>
+                                    </div>
+                                    <div class="col-xs-3 text-right">
+                                        <p class="color-blue font700 small">Coming Soon</p>
+                                    </div>
+                                </div>
 
-        <td>
-          $<%= a_school_event.estimated_cost %>
-        </td>
+                                <!-- ./row-->
 
-        <td>
-          <%= a_school_event.school_event_payments_count %>
-        </td>
+                                <div class="text-right mt-20">
+                                    <a href="/budget_expenses" class="btn btn-secondary btn-sm">Update My Budget</a>
+                                </div>
 
-      </tr>
-      <% end %>
-    </table>
-  </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ./row-->
+
+                    <h1 class="text-center font700 mb-0">Data for Your School</h1>
+                    <h2 class="text-center text-underline"><%= @current_user.school %></h2>
+
+                    <div class="row mb-30">
+                        <div class="col-xs-12 col-md-12 col-lg-12">
+                            <h4 class="text-center font300 mt-10">While the exact numbers or dates might vary year to year, here are some data to get you started with your budget so you can anticipate required and optional costs that are likely to come up (and add up!). When you’re ready, head over to the budget page to add them to your own budget.</h4>
+                        </div>
+                    </div>
+
+                    
+
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12 col-lg-6 mb-20">
+
+
+                            <div class="well">
+                                <h2 class="font700">Required Expenses</h2>
+
+                                <div class="table-scroll">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-left">Fee</th>
+                                                <th class="text-right">Amount</th>
+                                                <th class="text-right">Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <% for a_school_fee in SchoolFee.where({school: @current_user.school}) do %>
+                                    
+                                                <tr>
+                                                <td><span class="font700 color-grey"><%= a_school_fee.fee_name %></span></td>
+                                                <td class="text-right"><span class="color-blue font700">$<%= number_with_delimiter(a_school_fee.fee_amount.truncate, :delimiter => ',') %></span></td>
+                                                <td class="text-right"><%= a_school_fee.first_fee_date.strftime("%b. %d") %></td>
+                                                </tr>
+
+                                            <%end%>
+
+                                            <!--<tr>
+                                            <td><span class="font700 color-grey">TOTAL:</span></td>
+                                            <td class="text-right"><span class="color-blue font700">Coming Soon</span></td>                                        
+                                            </tr>-->
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-12 col-lg-6 mb-20">
+                            <div class="well">
+                                <h2 class="font700">Optional School Events</h2>
+
+                                <div class="table-scroll">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-left">Event</th>
+                                                <th class="text-right">Avg. Cost</th>
+                                                <th class="text-right">Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <% for a_school_event in SchoolEvent.where({school: @current_user.school}) do %>
+                                            
+                                            <tr>
+                                                <td><span class="font700 color-grey"><%= a_school_event.event_name %>:</span></td>
+                                                <td class="text-right"><span class="color-blue font700">$<%= number_with_delimiter(a_school_event.estimated_cost.truncate, :delimiter => ',')
+                                                 %></span></td>
+                                                <td class="text-right"><%= a_school_event.event_start_date.strftime("%b. %d") %></td>
+                                            </tr>
+
+                                            <% end %>
+      
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ./row-->
+
+
+                <div class="row mb-30">
+                        <div class="col-xs-12 col-md-12 col-lg-12">
+                        <!--<h1 class="text-center font700 mb-0">Data for Your School</h1>
+                        
+                                <div class="col-xs-12 col-sm-7 col-md-12 col-md-offset-5 col-lg-7 col-lg-offset-5">-->
+                                    <a href="/budget_expenses" class="btn btn-primary btn-block">Update My Budget</a>
+                                </div>
+                    
+                        <!--</div>-->
+                </div>
+
+                </div>
+            </div>
+            <!-- ./row-->
+        </div>
+
+    </section>
+    <!-- ./content-->
+
+    <!-- jQuery -->
+    <script src="js/jquery-1.11.1.min.js"></script>
+
+    <!-- Custom Script  -->
+    <script src="js/main.js"></script>
+
+</body>
+
+<script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'},{'ap':'cpsh'},{'server':'a2plcpnl0893'},{'dcenter':'a2'},{'id':'5978661'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script><script src='https://img1.wsimg.com/traffic-assets/js/tccl.min.js'></script><script src='https://img1.wsimg.com/traffic-assets/js/tccl-tti.min.js' onload='window.tti.calculateTTI()'></script></html>

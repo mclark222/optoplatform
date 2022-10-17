@@ -1,3 +1,182 @@
+<!DOCTYPE HTML>
+<html class="h-full">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content='width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport' />
+
+    <title>OPTO | Sign Up</title>
+
+    <link rel="icon" href="favicon.png" sizes="64x64" type="image/png" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Reset CSS -->
+    <link rel="stylesheet" href="css/reset.css" />
+
+    <!-- Font CSS -->
+    <link rel="stylesheet" href="fonts/mulish/style.css" />
+    <link rel="stylesheet" href="fonts/inter/style.css" />
+
+    <!-- Grid CSS -->
+    <link href="css/grid.css" rel="stylesheet" media="screen" />
+
+    <!-- Custom CSS -->
+    <link href="css/custom.css" rel="stylesheet" media="screen" />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+</head>
+
+<body>
+
+    <section class="content-account">
+
+        <div class="content-account-container">
+
+            <div class="logo-lg"></div>
+
+            <form role="form" action="/insert_user" method="post">
+                <div class="well well-sm">
+                    <h2 class="font700 text-center">Create an Opto account</h2>
+                    <div class="form-group">
+                        <label class="form-label" for="first_name_box">First Name</label>
+                        <input type="text" class="form-control" id="first_name_box" name="query_first_name" placeholder="" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="last_name_box">Last Name</label>
+                        <input type="text" class="form-control" id="last_name_box" name="query_last_name" 
+                            placeholder="" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for=for="birth_date_box"">Birthdate</label>
+                        <input type="date" class="form-control datepicker-here" id="birth_date_box" name="query_birth_date" data-language="en" data-date-format="mm/dd/yyyy" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="gender_box">Gender</label>
+                        <select class="form-control" id="gender_box" name="query_gender">
+                          <option>Select One</option>
+                          <option>Male</option>
+                          <option>Female</option>
+                          <option>Other</option>
+                          <option>Prefer Not to Say</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="premba_industry_box">Pre-MBA Industry</label>
+                        <select class="form-control" id="premba_industry_box" name="query_premba_industry">
+                            <option>Select One</option>
+                            <option>Accounting</option>
+                            <option>Advertising, Arts, & Media</option>
+                            <option>Banking & Financial Services</option>
+                            <option>Call Center & Customer Service</option>
+                            <option>Community Services & Development</option>
+                            <option>Construction</option>
+                            <option>Consulting & Strategy</option>
+                            <option>Design & Architechture</option>
+                            <option>Education & Training</option>
+                            <option>Engineering</option>
+                            <option>Farming, Animals, & Conservation</option>
+                            <option>Government & Defense</option>
+                            <option>Healthcare & Medical</option>
+                            <option>Hospitality & Tourism</option>
+                            <option>Human Resources & Recruitment</option>
+                            <option>Information & Communication Technology</option>
+                            <option>Insurance</option>
+                            <option>Legal</option>
+                            <option>Manufacturing, Transport, & Logistics</option>
+                            <option>Marketing & Communications</option>
+                            <option>Mining, Resources, & Energy</option>
+                            <option>Nonprofit - Other</option>
+                            <option>Real Estate & Property</option>
+                            <option>Retail & Consumer Products</option>
+                            <option>Sales</option>
+                            <option>Science</option>
+                            <option>Technology - Hardware</option>
+                            <option>Technology - Software</option>
+                            <option>Sports & Recreation</option>
+                            <option>Trades & Services</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                          <label class="form-label" for="query_school">School You’re attending</label>
+                          <select class="form-control" id="school_box" name="query_school">
+                              <option>Select One</option>
+                              <option>Kellogg</option>
+                              <option>Booth</option>
+                              <option>Other</option>
+                          </select>
+                    </div>
+
+                    <!--<div class="form-group">
+                        <label class="form-label" for="last_name_box">If Other, List School</label>
+                        <input type="text" class="form-control" id="last_name_box" name="query_last_name" 
+                            placeholder="" />
+                    </div>-->
+
+
+                    <div class="form-group">
+                          <label class="form-label" for="international_student_status_box">Are you an international student?</label>
+                          <select class="form-control" id="international_student_status_box" name="query_international_student_status">
+                              <option>Select One</option>
+                              <option>Yes</option>
+                              <option>No</option>
+                          </select>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="form-label" for="graduation_date_box">Graduation Date</label>
+                        <input type="date" class="form-control datepicker-here" id="graduation_date_box" name="query_graduation_date">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="form-label" for="email_box">Email</label>
+                        <input type="email" class="form-control" id="email_box" name="query_email" placeholder="Enter your email..." />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for=password_box">Password</label>
+                        <input type="password" class="form-control" id="password_box" name="query_password" placeholder="Choose a password..."  />
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="password_confirmation_box" name="query_password_confirmation" placeholder="Confirm your password..." />
+                    </div>
+
+
+
+                    <input type="submit" class="btn btn-primary btn-block mb-40" value="Create Account" />
+
+                    <p class="color-grey text-center small">Already have an account? <a href="/user_sign_in">Log in</a></p>
+                    <p class="color-grey text-center small mb-0">By selcting "Create Account," you consent to receive emails from Opto Financial related to your account.</p>
+
+                    <!--<p class="color-grey text-center small mb-0">By selcting Create account, you agree to our <a href="#">Terms</a> and have read and acknowledge our <a href="#">Global Privacy Statement</a>.</p>-->
+                </div>
+            </form>
+
+        </div>
+
+    </section>
+    <!-- ./content-account-->
+
+
+</body>
+
+
+<script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'},{'ap':'cpsh'},{'server':'a2plcpnl0893'},{'dcenter':'a2'},{'id':'5978661'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script><script src='https://img1.wsimg.com/traffic-assets/js/tccl.min.js'></script><script src='https://img1.wsimg.com/traffic-assets/js/tccl-tti.min.js' onload='window.tti.calculateTTI()'></script></html>
+
+
+<!--
 <h1>Sign up</h1>
 
 <form action="/insert_user" method="post">
@@ -30,7 +209,9 @@
   </div>
 
   <br>
-  <!--(Note: The items below will be split onto a second page to simplify things)-->
+  
+  #(Note: The items below will be split onto a second page to simplify things)
+  
   Additional Profile Information
   <br>
   <br>
@@ -44,7 +225,6 @@
   <div>
     <label for="school_box">School</label>
       
-    <!--<input type="text" id="school_box" name="query_school">-->
     <select id="school_box"name="query_school">          
           <option value="Kellogg">Kellogg</option>
           <option value="Booth">Booth</option>
@@ -53,20 +233,59 @@
   </div>
          
   <div>
-    <label for="international_student_status_box">International Student Status</label>
-    <input id="international_student_status_box" name="query_international_student_status" type="checkbox">
+    <label for="international_student_status_box">Are You an International Student?</label>
+    <select id="international_student_status_box" name="query_international_student_status"> 
+          <option value="No">No</option>
+          <option value="Yes">Yes</option>
+    </select>
   </div>
          
   <div>
     <label for="premba_industry_box">Pre-MBA Industry</label>
       
-    <input type="text" id="premba_industry_box" name="query_premba_industry">
+    <select id="premba_industry_box" name="query_premba_industry">
+     <option>Select One</option>
+      <option>Accounting</option>
+      <option>Advertising, Arts & Media</option>
+      <option>Banking & Financial Services</option>
+      <option>Call Centre & Customer Service</option>
+      <option>Community Services & Development</option>
+      <option>Construction</option>
+      <option>Consulting & Strategy</option>
+      <option>Design & Architechture</option>
+      <option>Education & Training</option>
+      <option>Engineering</option>
+      <option>Farming, Animals & Conservation</option>
+      <option>Government & Defence</option>
+      <option>Healthcare & Medical</option>
+      <option>Hospitality & Tourism</option>
+      <option>Human Resources & Recruitment</option>
+      <option>Information & Communication Technology</option>
+      <option>Insurance & Superannuation</option>
+      <option>Legal</option>
+      <option>Manufacturing, Transport & Logistics</option>
+      <option>Marketing & Communications</option>
+      <option>Mining, Resources & Energy</option>
+      <option>Real Estate & Property</option>
+      <option>Retail & Consumer Products</option>
+      <option>Sales</option>
+      <option>Science</option>
+      <option>Technology - Hardware</option>
+      <option>Technology - Software</option>
+      <option>Sport & Recreation</option>
+      <option>Trades & Services</option>
+      <option>Other</option>
+    </select>
   </div>
          
   <div>
     <label for="gender_box">Gender</label>
       
-    <input type="text" id="gender_box" name="query_gender">
+    <select id="gender_box" name="query_gender"> 
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+    </select>
   </div>
          
   <div>
@@ -75,9 +294,13 @@
     <input type="date" id="birth_date_box" name="query_birth_date">
   </div>
 
-<!-- Need to figure out how to comment these out -->
 
-<!--
+
+
+
+
+#Commented out the below fields
+
   <div>
     <label for="loan_comparisons_count_box">Loan comparisons count</label>
       
@@ -131,10 +354,9 @@
       
     <input type="text" id="plaid_items_count_box" name="query_plaid_items_count">
   </div>
--->
 
 
-<!--
+
 <option value="Auto & Transportation">Auto & Transportation</option>
           <option value="Bills & Utilities">Bills & Utilities</option>
           <option value="Debt Payments">Debt Payments</option>
@@ -159,8 +381,6 @@
           <option value="Unemployment">Unemployment</option>
           <option value="Wages">Wages</option>
           <option value="Other">Other</option>
-          -->
-
 
   <button>
     Sign up
@@ -178,3 +398,4 @@ Note: By creating an account, you consent to receive emails from Opto Financial 
 <p>
   Or, <a href="/user_sign_in">Sign in</a> instead.
 </p>
+-->

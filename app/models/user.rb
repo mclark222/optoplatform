@@ -7,6 +7,7 @@
 #  birth_date                   :date
 #  budget_expenses_count        :integer
 #  budget_incomes_count         :integer
+#  cash_flows_count             :integer
 #  current_loans_count          :integer
 #  email                        :string
 #  first_name                   :string
@@ -22,6 +23,7 @@
 #  school_events_count          :integer
 #  spend_intentions_count       :integer
 #  transaction_categories_count :integer
+#  user_budgets_count           :integer
 #  created_at                   :datetime         not null
 #  updated_at                   :datetime         not null
 #
@@ -39,6 +41,8 @@ class User < ApplicationRecord
   has_many(:transaction_categories, { :class_name => "TransactionCategory", :foreign_key => "user_id", :dependent => :destroy })
   has_many(:school_events, { :class_name => "SchoolEvent", :foreign_key => "user_id", :dependent => :destroy })
   has_many(:plaid_items, { :class_name => "PlaidItem", :foreign_key => "user_id", :dependent => :destroy })
+  has_many(:user_budgets, { :class_name => "UserBudget", :foreign_key => "user_id", :dependent => :destroy })
+  has_many(:cash_flows, { :class_name => "CashFlow", :foreign_key => "user_id", :dependent => :destroy })
 
   after_create :set_defaults
 
@@ -133,6 +137,32 @@ class User < ApplicationRecord
     TransactionCategory.create(:spend_category_name=>'Income',:user_id=>self.id,:spend_sub_category=>'Unemployment',:spend_sub_category_details=>'Unemployment')
     TransactionCategory.create(:spend_category_name=>'Income',:user_id=>self.id,:spend_sub_category=>'Wages',:spend_sub_category_details=>'Wages')
     TransactionCategory.create(:spend_category_name=>'Income',:user_id=>self.id,:spend_sub_category=>'Other',:spend_sub_category_details=>'Other')
+
+    #Below is a manual way to create a budget table for each user
+    UserBudget.create(:user_id=>self.id,:first_day_of_month=>'2022-10-01',:last_day_of_month=>'2022-10-31',:non_school_expenses=>0,:required_school_expenses=>0,:optional_school_expenses=>0,:total_expenses=>0,:total_income=>0)
+    UserBudget.create(:user_id=>self.id,:first_day_of_month=>'2022-11-01',:last_day_of_month=>'2022-11-30',:non_school_expenses=>0,:required_school_expenses=>0,:optional_school_expenses=>0,:total_expenses=>0,:total_income=>0)
+    UserBudget.create(:user_id=>self.id,:first_day_of_month=>'2022-12-01',:last_day_of_month=>'2022-12-31',:non_school_expenses=>0,:required_school_expenses=>0,:optional_school_expenses=>0,:total_expenses=>0,:total_income=>0)
+    UserBudget.create(:user_id=>self.id,:first_day_of_month=>'2023-01-01',:last_day_of_month=>'2023-01-31',:non_school_expenses=>0,:required_school_expenses=>0,:optional_school_expenses=>0,:total_expenses=>0,:total_income=>0)
+    UserBudget.create(:user_id=>self.id,:first_day_of_month=>'2023-02-01',:last_day_of_month=>'2023-02-28',:non_school_expenses=>0,:required_school_expenses=>0,:optional_school_expenses=>0,:total_expenses=>0,:total_income=>0)
+    UserBudget.create(:user_id=>self.id,:first_day_of_month=>'2023-03-01',:last_day_of_month=>'2023-03-31',:non_school_expenses=>0,:required_school_expenses=>0,:optional_school_expenses=>0,:total_expenses=>0,:total_income=>0)
+    UserBudget.create(:user_id=>self.id,:first_day_of_month=>'2023-04-01',:last_day_of_month=>'2023-04-30',:non_school_expenses=>0,:required_school_expenses=>0,:optional_school_expenses=>0,:total_expenses=>0,:total_income=>0)
+    UserBudget.create(:user_id=>self.id,:first_day_of_month=>'2023-05-01',:last_day_of_month=>'2023-05-31',:non_school_expenses=>0,:required_school_expenses=>0,:optional_school_expenses=>0,:total_expenses=>0,:total_income=>0)
+    UserBudget.create(:user_id=>self.id,:first_day_of_month=>'2023-06-01',:last_day_of_month=>'2023-06-30',:non_school_expenses=>0,:required_school_expenses=>0,:optional_school_expenses=>0,:total_expenses=>0,:total_income=>0)
+
+    #Below is a manual way to create a cash flow table for each user
+    CashFlow.create(:user_id=>self.id,:first_day_of_week=>'2022-10-02',:last_day_of_week=>'2022-10-08',:remaining_cash=>0)
+    CashFlow.create(:user_id=>self.id,:first_day_of_week=>'2022-10-09',:last_day_of_week=>'2022-10-15',:remaining_cash=>0)
+    CashFlow.create(:user_id=>self.id,:first_day_of_week=>'2022-10-16',:last_day_of_week=>'2022-10-22',:remaining_cash=>0)
+    CashFlow.create(:user_id=>self.id,:first_day_of_week=>'2022-10-23',:last_day_of_week=>'2022-10-29',:remaining_cash=>0)
+    CashFlow.create(:user_id=>self.id,:first_day_of_week=>'2022-10-30',:last_day_of_week=>'2022-11-05',:remaining_cash=>0)
+    CashFlow.create(:user_id=>self.id,:first_day_of_week=>'2022-11-06',:last_day_of_week=>'2022-11-12',:remaining_cash=>0)
+    CashFlow.create(:user_id=>self.id,:first_day_of_week=>'2022-11-13',:last_day_of_week=>'2022-11-19',:remaining_cash=>0)
+    CashFlow.create(:user_id=>self.id,:first_day_of_week=>'2022-11-20',:last_day_of_week=>'2022-11-26',:remaining_cash=>0)
+    CashFlow.create(:user_id=>self.id,:first_day_of_week=>'2022-11-27',:last_day_of_week=>'2022-12-03',:remaining_cash=>0)
+    CashFlow.create(:user_id=>self.id,:first_day_of_week=>'2022-12-04',:last_day_of_week=>'2022-12-10',:remaining_cash=>0)
+    CashFlow.create(:user_id=>self.id,:first_day_of_week=>'2022-12-11',:last_day_of_week=>'2022-12-17',:remaining_cash=>0)
+    CashFlow.create(:user_id=>self.id,:first_day_of_week=>'2022-12-18',:last_day_of_week=>'2022-12-24',:remaining_cash=>0)
+    CashFlow.create(:user_id=>self.id,:first_day_of_week=>'2022-12-25',:last_day_of_week=>'2022-12-31',:remaining_cash=>0)
   
   end
 
