@@ -29,7 +29,8 @@ class BudgetExpensesController < ApplicationController
 
     if the_budget_expense.valid?
       the_budget_expense.save
-      redirect_to("/budget_expenses", { :notice => "Budget expense created successfully." })
+      redirect_to("/budget_expenses")
+      #, { :notice => "Budget expense created successfully." })
     else
       redirect_to("/budget_expenses", { :alert => the_budget_expense.errors.full_messages.to_sentence })
     end
@@ -59,7 +60,8 @@ class BudgetExpensesController < ApplicationController
 
     if the_budget_expense.valid?
       the_budget_expense.save
-      redirect_to("/budget_expenses", { :notice => "Budget expense updated successfully."} )
+      redirect_to("/budget_expenses")
+      #, { :notice => "Budget expense updated successfully."} )
     else
       redirect_to("/budget_expenses/#{the_budget_expense.id}", { :alert => the_budget_expense.errors.full_messages.to_sentence })
     end
@@ -73,4 +75,5 @@ class BudgetExpensesController < ApplicationController
 
     redirect_to("/budget_expenses", { :notice => "Budget expense deleted successfully."} )
   end
+
 end

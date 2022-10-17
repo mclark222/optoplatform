@@ -258,6 +258,42 @@ Rails.application.routes.draw do
 
   #------------------------------
 
+  # Routes for the User Budget resource:
+
+  # CREATE
+  post("/insert_user_budget", { :controller => "user_budgets", :action => "create" })
+          
+  # READ
+  get("/user_budgets", { :controller => "user_budgets", :action => "index" })
+  
+  get("/user_budgets/:path_id", { :controller => "user_budgets", :action => "show" })
+  
+  # UPDATE
+  post("/modify_user_budget/:path_id", { :controller => "user_budgets", :action => "update" })
+  
+  # DELETE
+  get("/delete_user_budget/:path_id", { :controller => "user_budgets", :action => "destroy" })
+
+#------------------------------
+
+  # Routes for the Cash Flow resource:
+
+  # CREATE
+  post("/insert_cash_flow", { :controller => "cash_flows", :action => "create" })
+          
+  # READ
+  get("/cash_flows", { :controller => "cash_flows", :action => "index" })
+  
+  get("/cash_flows/:path_id", { :controller => "cash_flows", :action => "show" })
+  
+  # UPDATE
+  post("/modify_cash_flow/:path_id", { :controller => "cash_flows", :action => "update" })
+  
+  # DELETE
+  get("/delete_cash_flows/:path_id", { :controller => "cash_flows", :action => "destroy" })
+
+  #------------------------------
+
   # Routes for the Transaction resource:
 
   # CREATE

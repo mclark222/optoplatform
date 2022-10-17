@@ -71,6 +71,8 @@ class UserAuthenticationController < ApplicationController
     @user.transaction_categories_count = "0"
     @user.school_events_count = "0"
     @user.plaid_items_count = "0"
+    @user.user_budgets_count = "0"
+    @user.cash_flows_count = "0"
 
     save_status = @user.save
 
@@ -136,6 +138,8 @@ class UserAuthenticationController < ApplicationController
     @user.transaction_categories_count = @current_user.transaction_categories_count
     @user.school_events_count = @current_user.school_events_count
     @user.plaid_items_count = @current_user.plaid_items_count
+    @user.user_budgets_count = @current_user.user_budgets_count
+    @user.cash_flows_count = @current_user.cash_flows_count
 
     # @user.loan_comparisons_count = params.fetch("query_loan_comparisons_count")
     # @user.spend_intentions_count = params.fetch("query_spend_intentions_count")

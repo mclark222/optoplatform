@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_13_055559) do
+ActiveRecord::Schema.define(version: 2022_10_17_084307) do
 
   create_table "accounts", force: :cascade do |t|
     t.string "account_type"
@@ -58,6 +58,15 @@ ActiveRecord::Schema.define(version: 2022_09_13_055559) do
     t.date "first_recurrence_date"
     t.integer "recurring_frequency"
     t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "cash_flows", force: :cascade do |t|
+    t.integer "user_id"
+    t.date "first_day_of_week"
+    t.date "last_day_of_week"
+    t.float "remaining_cash"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -199,6 +208,19 @@ ActiveRecord::Schema.define(version: 2022_09_13_055559) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "user_budgets", force: :cascade do |t|
+    t.integer "user_id"
+    t.date "first_day_of_month"
+    t.date "last_day_of_month"
+    t.float "non_school_expenses"
+    t.float "required_school_expenses"
+    t.float "optional_school_expenses"
+    t.float "total_expenses"
+    t.float "total_income"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "password_digest"
@@ -221,6 +243,8 @@ ActiveRecord::Schema.define(version: 2022_09_13_055559) do
     t.integer "plaid_items_count"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_budgets_count"
+    t.integer "cash_flows_count"
   end
 
 end

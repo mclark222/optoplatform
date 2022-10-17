@@ -16,5 +16,11 @@ class BudgetExpense < ApplicationRecord
   belongs_to(:user, { :required => true, :class_name => "User", :foreign_key => "user_id", :counter_cache => true })
   belongs_to(:expense_category, { :required => true, :class_name => "TransactionCategory", :foreign_key => "expense_category_id" })
 
+  scope :by_month, -> (year, month_name = '') {
+      month              = Date::MONTHNAMES.index(month_name.capitalize)
+      first_day_of_month = Date.new(year, month, 1)
+      last_day_of_month  = Date.new(year, month, -1) # Gives you the last day of month
+      where("first_recurrence_date between ? and ?", first_day_of_month, last_day_of_month)
+    }
 
 end
