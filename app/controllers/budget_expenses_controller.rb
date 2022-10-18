@@ -29,6 +29,9 @@ class BudgetExpensesController < ApplicationController
 
     if the_budget_expense.valid?
       the_budget_expense.save
+
+      UserBudget.where({user_id: @current_user.id}).where("first_day_of_month < ?", the_budget_expense.first_recurrence_date).where("last_day_of_month > ?", the_budget_expense.first_recurrence_date).first.update(:total_expenses=> BudgetExpense.where({user_id: @current_user.id}).by_month(the_budget_expense.first_recurrence_date.year, the_budget_expense.first_recurrence_date.strftime("%B")).sum(:expense_amount))
+
       redirect_to("/budget_expenses")
       #, { :notice => "Budget expense created successfully." })
     else
@@ -60,6 +63,9 @@ class BudgetExpensesController < ApplicationController
 
     if the_budget_expense.valid?
       the_budget_expense.save
+
+      UserBudget.where({user_id: @current_user.id}).where("first_day_of_month < ?", the_budget_expense.first_recurrence_date).where("last_day_of_month > ?", the_budget_expense.first_recurrence_date).first.update(:total_expenses=> BudgetExpense.where({user_id: @current_user.id}).by_month(the_budget_expense.first_recurrence_date.year, the_budget_expense.first_recurrence_date.strftime("%B")).sum(:expense_amount))
+
       redirect_to("/budget_expenses")
       #, { :notice => "Budget expense updated successfully."} )
     else
@@ -70,6 +76,8 @@ class BudgetExpensesController < ApplicationController
   def destroy
     the_id = params.fetch("path_id")
     the_budget_expense = BudgetExpense.where({ :id => the_id }).at(0)
+
+    UserBudget.where({user_id: @current_user.id}).where("first_day_of_month < ?", the_budget_expense.first_recurrence_date).where("last_day_of_month > ?", the_budget_expense.first_recurrence_date).first.update(:total_expenses=> BudgetExpense.where({user_id: @current_user.id}).by_month(the_budget_expense.first_recurrence_date.year, the_budget_expense.first_recurrence_date.strftime("%B")).sum(:expense_amount))
 
     the_budget_expense.destroy
 
