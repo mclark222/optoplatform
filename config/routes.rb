@@ -335,7 +335,11 @@ Rails.application.routes.draw do
   # Routes for the User account:
 
   # SIGN UP FORM
-  get("/user_sign_up", { :controller => "user_authentication", :action => "sign_up_form" })        
+  get("/user_sign_up", { :controller => "user_authentication", :action => "sign_up_form" }) 
+
+  # FORGOT PASSWORD
+  get("/user_forgot_password", { :controller => "user_authentication", :action => "forgot_password" })     
+
   # CREATE RECORD
   post("/insert_user", { :controller => "user_authentication", :action => "create"  })
       

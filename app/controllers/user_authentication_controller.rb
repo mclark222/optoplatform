@@ -38,6 +38,10 @@ class UserAuthenticationController < ApplicationController
     render({ :template => "user_authentication/sign_up.html.erb" })
   end
 
+  def forgot_password
+    render({ :template => "user_mailer/password_reset.html.erb" )
+  end
+
   def create
     @user = User.new
     @user.email = params.fetch("query_email")
