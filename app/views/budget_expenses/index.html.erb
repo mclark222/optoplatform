@@ -764,11 +764,20 @@
 
               <!--Instructions-->
               <div class="col-xs-12 col-md-12 col-lg-5">
+                <h1 id="test" onclick="changeColor()">Hello, World!</h1>
                 <h4 class="font300 mt-10">Take a look at the tips below to get started!</h4>
                 
                 <div class="text-left mt-20">
                   <a class="btn btn-primary modal-open" data-modal="getStartedInstructions">Instructions</a>
                 </div>
+                
+                <div class="text-left mt-20">
+                 <%=  UserBudget.where({user_id: @current_user.id}).all.map {|p| p.first_day_of_month.strftime("%b")} %>
+
+                 <%= UserBudget.where({user_id: @current_user.id}).all.map {|p| p.total_expenses}%>
+                </div>
+                
+
 
                 <!--<div class= "text-right">
                   <%= BudgetExpense.where({user_id: @current_user.id}).by_month(2022, 'October').sum(:expense_amount) %>
