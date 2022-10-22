@@ -71,18 +71,22 @@
       }
   });
 
-  function updateConfigByMutating(totalBudgetChart) {
-    totalBudgetChart.data.labels = UserBudget.where({user_id: @current_user.id}).all.map {|p| p.first_day_of_month.strftime("%b")};
-    totalBudgetChart.data.datasets = //regenerate datasets array using data from db;
-    totalBudgetChart.update();
+
+  
+  function updateConfigByMutating(chart,label_entry,data_entry) {
+    chart.data.labels = label_entry;
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data = data_entry;
+    });
+    chart.update();
   }
 
-  function changeColor() {
-    var hello = document.getElementById('test');
-    if (hello.style.color == 'blue') {
-        hello.style.color = 'black';
-    }
-    else {
-        document.getElementById('test').style.color = 'blue';
-    } 
-  }
+//   function changeColor() {
+//     var hello = document.getElementById('test');
+//     if (hello.style.color == 'blue') {
+//         hello.style.color = 'black';
+//     }
+//     else {
+//         document.getElementById('test').style.color = 'blue';
+//     } 
+//   }

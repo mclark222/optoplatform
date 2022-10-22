@@ -1,4 +1,5 @@
 class BudgetExpensesController < ApplicationController
+
   def index
     #matching_budget_expenses = BudgetExpense.all
     matching_budget_expenses = BudgetExpense.where({user_id: @current_user.id})
