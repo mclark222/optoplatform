@@ -33,6 +33,9 @@ class BudgetExpensesController < ApplicationController
 
       UserBudget.where({user_id: @current_user.id}).where("first_day_of_month <= ?", the_budget_expense.first_recurrence_date).where("last_day_of_month > ?", the_budget_expense.first_recurrence_date).first.update(:total_expenses=> BudgetExpense.where({user_id: @current_user.id}).by_month(the_budget_expense.first_recurrence_date.year, the_budget_expense.first_recurrence_date.strftime("%B")).sum(:expense_amount))
 
+      CashFlow.where({user_id: @current_user.id}).where("first_day_of_week <= ?", the_budget_expense.first_recurrence_date).where("last_day_of_week > ?", the_budget_expense.first_recurrence_date).first.update(:remaining_cash => (
+      (CashFlow.where({user_id: @current_user.id}).where("first_day_of_week <= ?", the_budget_expense.first_recurrence_date).where("last_day_of_week > ?", the_budget_expense.first_recurrence_date).pluck(:remaining_cash).first).to_f - (the_budget_expense.expense_amount).to_f))
+
       redirect_to("/budget_expenses")
       #, { :notice => "Budget expense created successfully." })
     else
@@ -67,6 +70,16 @@ class BudgetExpensesController < ApplicationController
 
       UserBudget.where({user_id: @current_user.id}).where("first_day_of_month <= ?", the_budget_expense.first_recurrence_date).where("last_day_of_month > ?", the_budget_expense.first_recurrence_date).first.update(:total_expenses=> BudgetExpense.where({user_id: @current_user.id}).by_month(the_budget_expense.first_recurrence_date.year, the_budget_expense.first_recurrence_date.strftime("%B")).sum(:expense_amount))
 
+      @min_date = CashFlow.where({user_id: @current_user.id}).where("first_day_of_week <= ?", the_budget_expense.first_recurrence_date).where("last_day_of_week >= ?", the_budget_expense.first_recurrence_date).pluck(:first_day_of_week).first
+
+      @max_date = CashFlow.where({user_id: @current_user.id}).where("first_day_of_week <= ?", the_budget_expense.first_recurrence_date).where("last_day_of_week >= ?", the_budget_expense.first_recurrence_date).pluck(:last_day_of_week).first
+
+      CashFlow.where({user_id: @current_user.id}).where("first_day_of_week <= ?", the_budget_expense.first_recurrence_date).where("last_day_of_week >= ?", the_budget_expense.first_recurrence_date).first.update(:remaining_cash => (
+            CashFlow.where({user_id: @current_user.id}).where("first_day_of_week <= ?", the_budget_expense.first_recurrence_date - 7).where("last_day_of_week >= ?", the_budget_expense.first_recurrence_date - 7).pluck(:remaining_cash).first - 
+            BudgetExpense.where({user_id: @current_user.id}).where("first_recurrence_date <= ?", @max_date).where("first_recurrence_date >= ?", @min_date).sum(:expense_amount)
+                  )
+              )
+
       redirect_to("/budget_expenses")
       #, { :notice => "Budget expense updated successfully."} )
     else
@@ -81,6 +94,9 @@ class BudgetExpensesController < ApplicationController
     UserBudget.where({user_id: @current_user.id}).where("first_day_of_month <= ?", the_budget_expense.first_recurrence_date).where("last_day_of_month > ?", the_budget_expense.first_recurrence_date).first.update(:total_expenses=> 
     ((BudgetExpense.where({user_id: @current_user.id}).by_month(the_budget_expense.first_recurrence_date.year, the_budget_expense.first_recurrence_date.strftime("%B")).sum(:expense_amount) ) - the_budget_expense.expense_amount)
     )
+
+    CashFlow.where({user_id: @current_user.id}).where("first_day_of_week <= ?", the_budget_expense.first_recurrence_date).where("last_day_of_week > ?", the_budget_expense.first_recurrence_date).first.update(:remaining_cash => (
+      (CashFlow.where({user_id: @current_user.id}).where("first_day_of_week <= ?", the_budget_expense.first_recurrence_date).where("last_day_of_week > ?", the_budget_expense.first_recurrence_date).pluck(:remaining_cash).first).to_f + (the_budget_expense.expense_amount).to_f))
 
     the_budget_expense.destroy
 
