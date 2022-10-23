@@ -590,6 +590,12 @@
                     <div class="well well-sm mb-20">
                         <h2 class="font700 text-upper">Total Budget</h2>
                            <canvas id="totalBudgetChart"></canvas>
+
+                           <!--<h1 id="test" onclick="changeColor()">Hello, World!</h1>-->
+
+                          <!--
+                           <a class="btn btn-primary" onclick="updateConfigByMutating(totalBudgetChart,<%= UserBudget.where({user_id: @current_user.id}).all.map {|p| p.first_day_of_month.strftime('%b')}.first(7) %>,<%= UserBudget.where({user_id: @current_user.id}).all.map {|p| p.total_expenses}.first(7)%>)">Update Chart</a>
+                           -->
                         
                     </div>
                 </div>
@@ -765,7 +771,7 @@
               <!--Instructions-->
               <div class="col-xs-12 col-md-12 col-lg-5">
 
-                <h1 id="test" onclick="changeColor()">Hello, World!</h1>
+                <!--<h1 id="test" onclick="changeColor()">Hello, World!</h1>-->
 
                 <h4 class="font300 mt-10">Take a look at the tips below to get started!</h4>
                 
@@ -774,12 +780,46 @@
                 </div>
 
                 <div class="text-left mt-20">
-                  <a class="btn btn-primary" onclick="updateConfigByMutating(totalBudgetChart,<%= UserBudget.where({user_id: @current_user.id}).all.map {|p| p.first_day_of_month.strftime('%b')}.first(7) %>,<%= UserBudget.where({user_id: @current_user.id}).all.map {|p| p.total_expenses}.first(7)%>)">Update Chart</a>
+                  <a class="btn btn-primary" onclick="updateConfigByMutating(totalBudgetChart3,<%= UserBudget.where({user_id: @current_user.id}).all.map {|p| p.first_day_of_month.strftime('%b')}.first(7) %>,<%= UserBudget.where({user_id: @current_user.id}).all.map {|p| p.total_expenses}.first(7)%>)">Update Chart</a>
                 </div>
 
               </div>
 
             </div>
+                <!-- ./row-->
+
+
+      <div class="row">
+
+            <div class="col-xs-12 col-md-12 col-lg-5">
+                    <div class="well well-sm mb-20">
+                        <!--<h2 class="font700 text-upper">Total Budget</h2>
+                           <canvas id="totalBudgetChart3"></canvas>-->
+
+                           <!--<h1 id="test" onclick="changeColor()">Hello, World!</h1>-->
+
+                          <!--
+                           <a class="btn btn-primary" onclick="updateConfigByMutating(totalBudgetChart,<%= UserBudget.where({user_id: @current_user.id}).all.map {|p| p.first_day_of_month.strftime('%b')}.first(7) %>,<%= UserBudget.where({user_id: @current_user.id}).all.map {|p| p.total_expenses}.first(7)%>)">Update Chart</a>
+                           -->
+                        
+                    </div>
+            </div>
+
+            <div class="col-xs-12 col-md-12 col-lg-5">
+                    <div class="well well-sm mb-20">
+                        <!--<h2 class="font700 text-upper">Total Budget</h2>
+                           <canvas id="totalBudgetChart4"></canvas>-->
+
+                           <!--<h1 id="test" onclick="changeColor()">Hello, World!</h1>-->
+
+                          <!--
+                           <a class="btn btn-primary" onclick="updateConfigByMutating(totalBudgetChart,<%= UserBudget.where({user_id: @current_user.id}).all.map {|p| p.first_day_of_month.strftime('%b')}.first(7) %>,<%= UserBudget.where({user_id: @current_user.id}).all.map {|p| p.total_expenses}.first(7)%>)">Update Chart</a>
+                           -->
+                        
+                    </div>
+            </div>
+
+        </div>
                 <!-- ./row-->
 
 
