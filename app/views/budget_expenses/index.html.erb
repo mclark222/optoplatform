@@ -92,7 +92,7 @@
                                             <div class="accordion-content">
                                                 <h4 class="accordion-content-table">
 
-                                                    <% for a_budget_expense in BudgetExpense.where({user_id: @current_user.id}).where.not({expense_category_id: "5"}).where.not({expense_category_id: "6"}) do %>
+                                                    <% for a_budget_expense in BudgetExpense.where({user_id: @current_user.id}).where.not({expense_category_id: "5"}).where.not({expense_category_id: "6"}).where.not(expense_amount: nil) do %>
 
                                                     <div class="row">
 
@@ -259,7 +259,7 @@
                                             <div class="accordion-content">
                                                 <h4 class="accordion-content-table">
                                                     
-                                                    <% for a_budget_expense in BudgetExpense.where({user_id: @current_user.id}).where({expense_category_id: "5"}) do %>
+                                                    <% for a_budget_expense in BudgetExpense.where({user_id: @current_user.id}).where({expense_category_id: "5"}).where.not(expense_amount: nil) do %>
 
                                                     <div class="row">
 
@@ -435,7 +435,7 @@
                                             <div class="accordion-content">
                                                 <h4 class="accordion-content-table">
                                                     
-                                                    <% for a_budget_expense in BudgetExpense.where({user_id: @current_user.id}).where({expense_category_id: "6"}) do %>
+                                                    <% for a_budget_expense in BudgetExpense.where({user_id: @current_user.id}).where({expense_category_id: "6"}).where.not(expense_amount: nil) do %>
 
                                                     <div class="row">
 
@@ -645,7 +645,7 @@
                                             <div class="accordion-content">
                                                 <h4 class="accordion-content-table">
 
-                                                  <% for a_budget_income in BudgetIncome.where({user_id: @current_user.id}) do %>
+                                                  <% for a_budget_income in BudgetIncome.where({user_id: @current_user.id}).where.not(income_amount: nil) do %>
                                                     
                                                     <div class="row">
 
@@ -770,18 +770,67 @@
 
                 <h4 class="font300 mt-10">Take a look at the tips below to get started!</h4>
                 
-                <div class="text-left mt-20">
+                <div class="text-left mt-20 col-xs-12 col-md-4 col-lg-4">
                   <a class="btn btn-primary modal-open" data-modal="getStartedInstructions">Instructions</a>
                 </div>
 
-                <div class="text-left mt-20">
-                  <a class="btn btn-primary" onclick="updateConfigByMutating(totalBudgetChart,<%= UserBudget.where({user_id: @current_user.id}).all.map {|p| p.first_day_of_month.strftime('%b')}.first(7) %>,<%= UserBudget.where({user_id: @current_user.id}).all.map {|p| p.total_expenses}.first(7)%>)">Update Chart</a>
+                <div class="text-left mt-20 col-xs-12 col-md-6 col-lg-6 col-md-offset-2 col-lg-offset-2">
+                  <% matching_user_budgets = UserBudget.where({user_id: @current_user.id})
+                  @list_of_user_budgets = matching_user_budgets.order({ :first_day_of_month => :asc })%>
+
+                  <a class="btn btn-primary" onclick="updateConfigByMutating(totalBudgetChart,<%= UserBudget.where({user_id: @current_user.id}).all.map {|p| p.first_day_of_month.strftime('%b')}.first(7) %>,<%= @list_of_user_budgets.all.map {|p| p.total_expenses}.first(7)%>)">Update Chart</a>
                 </div>
 
               </div>
 
             </div>
                 <!-- ./row-->
+
+
+          <div row>
+
+            <div class="col-xs-12 col-md-12 col-lg-12 mb-20">
+                            <div class="well">
+                                <h2 class="font700">Monthly Budget Table</h2>
+                               
+                               <div class="table-scroll">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-left">Budget Month</th>
+                                                <th class="text-right">Total Expenses</th>
+                                                <th class="text-right">Total Income</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+
+                                            <% 
+                                            matching_user_budgets = UserBudget.where({user_id: @current_user.id})
+
+                                            @list_of_user_budgets = matching_user_budgets.order({ :first_day_of_month => :asc })
+
+                                            for a_user_budget in @list_of_user_budgets.where.not(total_expenses: nil) do %>
+                                    
+                                                <tr>
+                                                <td class="text-left"><%= a_user_budget.first_day_of_month.strftime("%B %Y") %></td>
+                                                <td class="text-right"><span class="color-blue font700">$<%= number_with_delimiter(a_user_budget.total_expenses.truncate, :delimiter => ',') %></span></td>
+                                                <td class="text-right"><span class="color-blue font700">$<%= number_with_delimiter(a_user_budget.total_income.truncate, :delimiter => ',') %></span></td>
+                                                </tr>
+
+                                            <%end%>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!-- ./row-->
+
+
+                            </div>
+                        </div>
+            </div>
+            <!-- end row-->
 
 
 
