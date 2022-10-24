@@ -92,7 +92,12 @@
                                             <div class="accordion-content">
                                                 <h4 class="accordion-content-table">
 
-                                                    <% for a_budget_expense in BudgetExpense.where({user_id: @current_user.id}).where.not({expense_category_id: "5"}).where.not({expense_category_id: "6"}).where.not(expense_amount: nil) do %>
+                                                    <% 
+                                                    general_budget_expenses = BudgetExpense.where({user_id: @current_user.id})
+
+                                                    @list_of_gen_expenses = general_budget_expenses.order({ :first_recurrence_date => :asc })
+
+                                                    for a_budget_expense in @list_of_gen_expenses.where.not({expense_category_id: "5"}).where.not({expense_category_id: "6"}).where.not(expense_amount: nil) do %>
 
                                                     <div class="row">
 
@@ -259,7 +264,12 @@
                                             <div class="accordion-content">
                                                 <h4 class="accordion-content-table">
                                                     
-                                                    <% for a_budget_expense in BudgetExpense.where({user_id: @current_user.id}).where({expense_category_id: "5"}).where.not(expense_amount: nil) do %>
+                                                    <%
+                                                    budget_school_fees = BudgetExpense.where({user_id: @current_user.id})
+
+                                                    @list_of_school_fees = budget_school_fees.order({ :first_recurrence_date => :asc })
+
+                                                    for a_budget_expense in @list_of_school_fees.where({expense_category_id: "5"}).where.not(expense_amount: nil) do %>
 
                                                     <div class="row">
 
@@ -373,9 +383,6 @@
                                                           <input type="submit" value="Add Custom Fee" class="btn btn-secondary btn-sm" />
                                                           </div>
 
-                                                         <!-- <button>
-                                                            Add new expense
-                                                          </button>-->
                                                         </form>
 
                                                         </div>
@@ -435,7 +442,12 @@
                                             <div class="accordion-content">
                                                 <h4 class="accordion-content-table">
                                                     
-                                                    <% for a_budget_expense in BudgetExpense.where({user_id: @current_user.id}).where({expense_category_id: "6"}).where.not(expense_amount: nil) do %>
+                                                    <%
+                                                    budget_school_events = BudgetExpense.where({user_id: @current_user.id})
+
+                                                    @list_of_school_events = budget_school_events.order({ :first_recurrence_date => :asc })
+
+                                                    for a_budget_expense in @list_of_school_events.where({expense_category_id: "6"}).where.not(expense_amount: nil) do %>
 
                                                     <div class="row">
 
@@ -549,9 +561,6 @@
                                                           <input type="submit" value="Add Custom Item" class="btn btn-secondary btn-sm" />
                                                           </div>
 
-                                                         <!-- <button>
-                                                            Add new expense
-                                                          </button>-->
                                                         </form>
 
                                                         </div>
@@ -578,19 +587,12 @@
 
 
 
-
 <!--The chart starts below-->
 
                 <div class="col-xs-12 col-md-12 col-lg-5">
                     <div class="well well-sm mb-20">
                         <h2 class="font700 text-upper">Total Budget</h2>
                            <canvas id="totalBudgetChart"></canvas>
-
-                           <!--<h1 id="test" onclick="changeColor()">Hello, World!</h1>-->
-
-                          <!--
-                           <a class="btn btn-primary" onclick="updateConfigByMutating(totalBudgetChart,<%= UserBudget.where({user_id: @current_user.id}).all.map {|p| p.first_day_of_month.strftime('%b')}.first(7) %>,<%= UserBudget.where({user_id: @current_user.id}).all.map {|p| p.total_expenses}.first(7)%>)">Update Chart</a>
-                           -->
                         
                     </div>
                 </div>
@@ -645,7 +647,12 @@
                                             <div class="accordion-content">
                                                 <h4 class="accordion-content-table">
 
-                                                  <% for a_budget_income in BudgetIncome.where({user_id: @current_user.id}).where.not(income_amount: nil) do %>
+                                                  <% 
+                                                  budget_income_items = BudgetIncome.where({user_id: @current_user.id})
+
+                                                  @list_of_income_items = budget_income_items.order({ :first_recurrence_date => :asc })
+
+                                                  for a_budget_income in @list_of_income_items.where.not(income_amount: nil) do %>
                                                     
                                                     <div class="row">
 
@@ -740,9 +747,6 @@
                                                           <input type="submit" value="Add New Income" class="btn btn-secondary btn-sm" />
                                                           </div>
 
-                                                         <!-- <button>
-                                                            Add new expense
-                                                          </button>-->
                                                         </form>
 
                                                         </div>
@@ -863,7 +867,12 @@
 
                     <tbody>
 
-                      <% for a_school_fee in SchoolFee.where({school: @current_user.school}) do %>
+                      <% 
+                      budget_school_fees_modal = SchoolFee.where({school: @current_user.school})
+
+                      @list_of_school_fees_modal = budget_school_fees_modal.order({ :first_recurrence_date => :asc })
+
+                      for a_school_fee in @list_of_school_fees_modal do %>
 
                         <tr>
                             <!--<td>
@@ -901,9 +910,6 @@
                                   <div>
                                     <input type="hidden" name="query_first_recurrence_date" value="<%= a_school_fee.first_fee_date %>">
                                   </div>
-                                  <!--<button>
-                                    +
-                                  </button>-->
 
                                   <div class="text-right mt-20">
                                     <input type="submit" class="btn btn-primary btn-sm" value="Add" />
@@ -919,9 +925,7 @@
                 </table>
             </div>
 
-            <!--<div class="text-right mt-20">
-                <input type="submit" class="btn btn-primary btn-sm" value="Add to my budget" />
-            </div>-->
+
         </div>
     </div>
     <!-- ./modal-->
@@ -948,7 +952,12 @@
 
                     <tbody>
 
-                      <% for a_school_event in SchoolEvent.where({school: @current_user.school}) do %>
+                      <%
+                      budget_school_events_modal = SchoolEvent.where({school: @current_user.school})
+
+                      @list_of_school_events_modal = budget_school_events_modal.order({ :first_recurrence_date => :asc })
+
+                      for a_school_event in @list_of_school_events_modal do %>
 
                         <tr>
                             <!--<td>
@@ -1001,9 +1010,7 @@
                 </table>
             </div>
 
-            <!--<div class="text-right mt-20">
-                <input type="submit" class="btn btn-primary btn-sm" value="Add to my budget" />
-            </div>-->
+
         </div>
     </div>
     <!-- ./modal-->
@@ -1059,624 +1066,3 @@
 </body>
 
 <script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'},{'ap':'cpsh'},{'server':'a2plcpnl0893'},{'dcenter':'a2'},{'id':'5978661'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script><script src='https://img1.wsimg.com/traffic-assets/js/tccl.min.js'></script><script src='https://img1.wsimg.com/traffic-assets/js/tccl-tti.min.js' onload='window.tti.calculateTTI()'></script></html>
-
-
-
-
-<!-- The accordion grouping below has extra functionality that we should explore bringing into the sections above-->
-
-<!--
-                        <div class="accordion">
-                            <h3 class="accordion-title">
-                                <span class="accordion-icon"></span>
-                                School Expenses
-                                <span class="accordion-no">$9,500</span>
-                            </h3>
-
-                            <div class="accordion-content">
-                                
-                                <div class="accordion accordion-nested">
-                                    <h3 class="accordion-title">
-                                        <span class="accordion-icon"></span>
-                                        Required
-                                        <span class="accordion-no">$9,500</span>
-                                    </h3>
-                                    
-                                    <div class="accordion-content">
-                                        <div class="accordion accordion-nested">
-                                            <h4 class="accordion-title">
-                                                <span class="accordion-icon"></span>
-                                                <div class="row">
-                                                    <div class="col-xs-12 col-sm-3">
-                                                        <p class="hide-xs">Category</p>
-                                                    </div>
-                                                    <div class="col-xs-12 col-sm-3">
-                                                        <p class="hide-xs">Frequency</p>
-                                                    </div>
-                                                    <div class="col-xs-12 col-sm-3">
-                                                        <p class="hide-xs">Est. Date</p>
-                                                    </div>
-                                                    <div class="col-xs-12 col-sm-3 text-right">
-                                                        <p>$9,500</p>
-                                                    </div>
-                                                </div>
-                                            </h4>
-                                            <div class="accordion-content">
-                                                <h4 class="accordion-content-table">
-                                                    <div class="row">
-                                                        <div class="col-xs-12 col-sm-3">
-                                                            <p><span class="show-xs font700">Category:</span> Rent</p>
-                                                        </div>
-                                                        <div class="col-xs-12 col-sm-3">
-                                                            <p><span class="show-xs font700">Frequency:</span> Monthly</p>
-                                                        </div>
-                                                        <div class="col-xs-12 col-sm-2">
-                                                            <p><span class="show-xs font700">Est. Date:</span> Sep 1</p>
-                                                        </div>
-                                                        <div class="col-xs-12 col-sm-2 text-right text-left-xs">
-                                                            <p><span class="show-xs font700">Price:</span> $2,000</p>
-                                                        </div>
-                                                        <div class="col-xs-12 col-sm-2 col-actions">
-                                                            <a class="accordion-btn-edit"></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-xs-12 col-sm-3">
-                                                            <p><span class="show-xs font700">Category:</span> Utilities</p>
-                                                        </div>
-                                                        <div class="col-xs-12 col-sm-3">
-                                                            <p><span class="show-xs font700">Frequency:</span> Monthly</p>
-                                                        </div>
-                                                        <div class="col-xs-12 col-sm-2">
-                                                            <p><span class="show-xs font700">Est. Date:</span> Sep 1</p>
-                                                        </div>
-                                                        <div class="col-xs-12 col-sm-2 text-right text-left-xs">
-                                                            <p><span class="show-xs font700">Price:</span> $100</p>
-                                                        </div>
-                                                        <div class="col-xs-12 col-sm-2 col-actions">
-                                                            <a class="accordion-btn-edit"></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-xs-12 col-sm-3">
-                                                            <p><span class="show-xs font700">Category:</span> Groceries</p>
-                                                        </div>
-                                                        <div class="col-xs-12 col-sm-3">
-                                                            <p><span class="show-xs font700">Frequency:</span> Monthly</p>
-                                                        </div>
-                                                        <div class="col-xs-12 col-sm-2">
-                                                            <p><span class="show-xs font700">Est. Date:</span> Sep 1</p>
-                                                        </div>
-                                                        <div class="col-xs-12 col-sm-2 text-right text-left-xs">
-                                                            <p><span class="show-xs font700">Price:</span> $300</p>
-                                                        </div>
-                                                        <div class="col-xs-12 col-sm-2 col-actions">
-                                                            <a class="accordion-btn-edit"></a>
-                                                        </div>
-                                                    </div>
-                                                </h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                
-                                <div class="accordion accordion-nested">
-                                    <h3 class="accordion-title">
-                                        <span class="accordion-icon"></span>
-                                        Discretionary
-                                        <span class="accordion-no">$9,500</span>
-                                    </h3>
-                                    
-                                    <div class="accordion-content">
-                                        <div class="accordion accordion-nested">
-                                            <h4 class="accordion-title">
-                                                <span class="accordion-icon"></span>
-                                                <div class="row">
-                                                    <div class="col-xs-12 col-sm-3">
-                                                        <p class="hide-xs">Category</p>
-                                                    </div>
-                                                    <div class="col-xs-12 col-sm-3">
-                                                        <p class="hide-xs">Frequency</p>
-                                                    </div>
-                                                    <div class="col-xs-12 col-sm-3">
-                                                        <p class="hide-xs">Est. Date</p>
-                                                    </div>
-                                                    <div class="col-xs-12 col-sm-3 text-right">
-                                                        <p>$9,500</p>
-                                                    </div>
-                                                </div>
-                                            </h4>
-                                            <div class="accordion-content">
-                                                <h4 class="accordion-content-table">
-                                                    <div class="row">
-                                                        <div class="col-xs-12 col-sm-3">
-                                                            <p><span class="show-xs font700">Category:</span> Alex & Sam’s Wedding</p>
-                                                            <input type="text" class="form-control fc-sm" value="Alex & Sam’s Wedding" />
-                                                        </div>
-                                                        <div class="col-xs-12 col-sm-3">
-                                                            <p><span class="show-xs font700">Frequency:</span> Once</p>
-                                                            <select class="form-control fc-sm">
-                                                                <option>Once</option>
-                                                                <option>Monthly</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-xs-12 col-sm-2">
-                                                            <p><span class="show-xs font700">Est. Date:</span> Nov 1</p>
-                                                            <input type="text" class="form-control fc-sm datepicker-here" value="Nov 1" data-language="en" data-date-format="M dd" data-position='bottom left' />
-                                                        </div>
-                                                        <div class="col-xs-12 col-sm-2 text-right text-left-xs">
-                                                            <p><span class="show-xs font700">Price:</span> $500</p>
-                                                            <input type="text" class="form-control fc-sm fc-right" value="$500" />
-                                                        </div>
-                                                        <div class="col-xs-12 col-sm-2 col-actions">
-                                                            <a class="accordion-btn-check jsAccordionSave"></a>
-                                                            <a class="accordion-btn-edit jsAccordionEdit"></a>
-                                                            <a class="accordion-btn-trash jsAccordionDelete"></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-xs-12 col-sm-3">
-                                                            <p><span class="show-xs font700">Category:</span> Weekend Trip</p>
-                                                        </div>
-                                                        <div class="col-xs-12 col-sm-3">
-                                                            <p><span class="show-xs font700">Frequency:</span> Once</p>
-                                                        </div>
-                                                        <div class="col-xs-12 col-sm-2">
-                                                            <p><span class="show-xs font700">Est. Date:</span> Sep 1</p>
-                                                        </div>
-                                                        <div class="col-xs-12 col-sm-2 text-right text-left-xs">
-                                                            <p><span class="show-xs font700">Price:</span> $500</p>
-                                                        </div>
-                                                        <div class="col-xs-12 col-sm-2 col-actions">
-                                                            <a class="accordion-btn-edit"></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-xs-12 col-sm-3">
-                                                            <p><span class="show-xs font700">Category:</span> Donations</p>
-                                                        </div>
-                                                        <div class="col-xs-12 col-sm-3">
-                                                            <p><span class="show-xs font700">Frequency:</span> Monthly</p>
-                                                        </div>
-                                                        <div class="col-xs-12 col-sm-2">
-                                                            <p><span class="show-xs font700">Est. Date:</span> Sep 1</p>
-                                                        </div>
-                                                        <div class="col-xs-12 col-sm-2 text-right text-left-xs">
-                                                            <p><span class="show-xs font700">Price:</span> $250</p>
-                                                        </div>
-                                                        <div class="col-xs-12 col-sm-2 col-actions">
-                                                            <a class="accordion-btn-edit"></a>
-                                                        </div>
-                                                    </div>
-                                                </h4>
-
-                                                <div class="text-right mt-20">
-                                                    <a class="btn btn-primary btn-sm modal-open" data-modal="optionalSchoolEvents">Add New</a>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </div>
-
--->
-
-
-
-
-
-
-
-
-
-<!--
-<div>
-  <div>
-    <h2>
-      List of all budget expenses
-    </h2>
-  </div>
-</div>
-
-<hr>
-
-<div>
-  <div>
-    <h3>
-      Add a new budget expense
-    </h3>
-
-    <form action="/insert_budget_expense" method="post">
-      <div>
-        <label for="expense_name_box">
-          Expense name
-        </label>
-
-        <input type="text" id="expense_name_box" name="query_expense_name">
- 
-        <label for="expense_amount_box">
-          Expense amount
-        </label>
-
-        <input type="text" id="expense_amount_box" name="query_expense_amount">
- 
-        <label for="expense_category_id_box">
-          Expense category
-        </label>
-
-        <select id="expense_category_id_box"name="query_expense_category_id">
-          <option value="Select One">Select One</option>
-          <option value=1>Auto & Transportation</option>
-          <option value=2>Bills & Utilities</option>
-          <option value=3>Debt Payments</option>
-          <option value=4>Dining & Drinking</option>
-          <option value=5>Education</option>
-          <option value=6>Entertainment</option>
-          <option value=7>Fitness & Personal Care</option>
-          <option value=8>Gifts & Donationse</option>
-          <option value=9>Government</option>
-          <option value=10>Groceries</option>
-          <option value=11>Health & Insurance</option>
-          <option value=12>Home</option>
-          <option value=13>Pets</option>
-          <option value=14>Rent & Mortgage</option>
-          <option value=15>Services</option>
-          <option value=16>Shopping</option>
-          <option value=17>Travel</option>
-          <option value=18>Other</option>
-        </select>
-
-      </div>
-
-      <div>
-        <label for="recurring_frequency_box">
-          Recurring frequency
-        </label>
-
-        <select id="recurring_frequency_box"name="query_recurring_frequency">
-          <option value="Select One">Select One</option>
-          <option value="1">One-Time</option>
-          <option value="52">Weekly</option>
-          <option value="26">Biweekly</option>
-          <option value="12">Monthly</option>
-          <option value="4">Quarterly</option>
-        </select>
-        
-        <input type="hidden" name="query_user_id" value="<%= @current_user.id %>">
-
-        <label for="first_recurrence_date_box">
-          First recurrence date
-        </label>
-
-        <input type="date" id="first_recurrence_date_box" name="query_first_recurrence_date">
-      </div>
-
-      <button>
-        Create budget expense
-      </button>
-    </form>
-  </div>
-</div>
-
-<hr>
-<div>
-    <h3>
-      Current Budget Expenses
-    </h3>
-
-  <div>
-    <table border="1">
-      <tr>
-
-        <th>
-          Expense name
-        </th>
-
-        <th>
-          Expense amount
-        </th>
-
-        <th>
-          Expense category
-        </th>
-
-        <th>
-          Recurring frequency
-        </th>
-
-        <th>
-          First recurrence date
-        </th>
-
-        <th>
-          Update Expense
-        </th>
-
-        <th>
-          Delete Expense
-        </th>
-
-      </tr>
-
-      <% @list_of_budget_expenses.each do |a_budget_expense| %>
-      <tr>
-
-        <td>
-          <%= a_budget_expense.expense_name %>
-        </td>
-
-        <td>
-          $<%= a_budget_expense.expense_amount.round(2) %>
-        </td>
-
-        <td>
-          <%= @category_reference = TransactionCategory.where({id: a_budget_expense.expense_category_id}).first
-           @category_reference.spend_category_name %>
-        </td>
-
-        <td>
-          <%= if a_budget_expense.recurring_frequency == 1
-              "One-Time"
-              elsif a_budget_expense.recurring_frequency == 52
-              "Weekly"
-              elsif a_budget_expense.recurring_frequency == 26
-              "Biweekly"
-              elsif a_budget_expense.recurring_frequency == 12
-              "Monthly"
-              elsif a_budget_expense.recurring_frequency == 4
-              "Quarterly"
-              end %>
-        </td>
-
-        <td>
-          <%= a_budget_expense.first_recurrence_date %>
-        </td>
-
-
-        <td>
-          <a href="/budget_expenses/<%= a_budget_expense.id %>">
-            Show details
-          </a>
-        </td>
-
-        <td>
-          <a href="/delete_budget_expense/<%= a_budget_expense.id %>">
-            Delete
-          </a>
-        </td>
-
-      </tr>
-      <% end %>
-    </table>
-  </div>
-</div>
-
-<hr>
-
-<div>
-    <h3>
-      School Fees
-    </h3>
-
-<div>
-  <div>
-    <table border="1">
-      <tr>
-
-        <th>
-          School
-        </th>
-
-        <th>
-          Fee name
-        </th>
-
-        <th>
-          First fee date
-        </th>
-
-        <th>
-          Fee amount
-        </th>
-
-        <th>
-          Term
-        </th>
-
-        <th>
-          Year
-        </th>
-
-
-        <th>
-        Add to Budget
-        </th>
-      </tr>
-
-      <% for a_school_fee in SchoolFee.where({school: @current_user.school}) do %>
-      <tr>
-
-        <td>
-          <%= a_school_fee.school %>
-        </td>
-
-        <td>
-          <%= a_school_fee.fee_name %>
-        </td>
-
-        <td>
-          <%= a_school_fee.first_fee_date %>
-        </td>
-
-        <td>
-          $<%= a_school_fee.fee_amount %>
-        </td>
-
-        <td>
-          <%= a_school_fee.term %>
-        </td>
-
-        <td>
-          <%= a_school_fee.year %>
-        </td>
-
-        <td>
-
-          <form action="/insert_budget_expense" method="post">
-
-            <div>
-              <input type="hidden" name="query_expense_name" value= "<%= a_school_fee.fee_name %>">  
-            </div>
-
-            <div>
-              <input type="hidden" name="query_expense_amount" value= "<%= a_school_fee.fee_amount %>">  
-            </div>
-
-            <div>
-              <input type="hidden" name="query_expense_category_id" value="5">  
-            </div>
-
-            <div>
-              <input type="hidden" name="query_recurring_frequency" value="1">  
-            </div>
-
-            <div>
-             <input type="hidden" name="query_user_id" value="<%= @current_user.id %>">
-            </div>
-
-            <div>
-              <input type="hidden" name="query_first_recurrence_date" value="<%= a_school_fee.first_fee_date %>">
-            </div>
-
-            <button>
-              Add to My Budget
-            </button>
-          </form>
-
-        </td>
-      </tr>
-      <% end %>
-    </table>
-  </div>
-</div>
-
-<hr>
-
-<div>
-    <h3>
-      Optional School Events
-    </h3>
-
-<div>
-  <div>
-    <table border="1">
-      <tr>
-
-        <th>
-          School
-        </th>
-
-        <th>
-          Event name
-        </th>
-
-        <th>
-          Host
-        </th>
-
-        <th>
-          Event Start Date
-        </th>
-
-        <th>
-          Event End Date
-        </th>
-
-        <th>
-          Estimated Cost
-        </th>
-
-        <th>
-          Number of Payments
-        </th>
-
-        <th>
-        Add to Budget
-        </th>
-      </tr>
-
-      <% for a_school_event in SchoolEvent.where({school: @current_user.school}) do %>
-      <tr>
-
-        <td>
-          <%= a_school_event.school %>
-        </td>
-
-        <td>
-          <%= a_school_event.event_name %>
-        </td>
-
-        <td>
-          <%= a_school_event.host %>
-        </td>
-
-        <td>
-          <%= a_school_event.event_start_date %>
-        </td>
-
-        <td>
-          <%= a_school_event.event_end_date %>
-        </td>
-
-        <td>
-          $<%= a_school_event.estimated_cost %>
-        </td>
-
-        <td>
-          <%= a_school_event.school_event_payments_count %>
-        </td>
-
-        <td>
-
-          <form action="/insert_budget_expense" method="post">
-
-            <div>
-              <input type="hidden" name="query_expense_name" value= "<%= a_school_event.event_name %>">  
-            </div>
-
-            <div>
-              <input type="hidden" name="query_expense_amount" value= "<%= a_school_event.estimated_cost %>">  
-            </div>
-
-            <div>
-              <input type="hidden" name="query_expense_category_id" value="6">  
-            </div>
-
-            <div>
-              <input type="hidden" name="query_recurring_frequency" value="1">  
-            </div>
-
-            <div>
-             <input type="hidden" name="query_user_id" value="<%= @current_user.id %>">
-            </div>
-
-            <div>
-              <input type="hidden" name="query_first_recurrence_date" value="<%= a_school_event.event_start_date %>">
-            </div>
-
-            <button>
-              Add to My Budget
-            </button>
-          </form>
-
-        </td>
-      </tr>
-      <% end %>
-    </table>
-  </div>
--->
