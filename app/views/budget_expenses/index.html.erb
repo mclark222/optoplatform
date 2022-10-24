@@ -776,9 +776,9 @@
 
                 <div class="text-left mt-20 col-xs-12 col-md-6 col-lg-6 col-md-offset-2 col-lg-offset-2">
                   <% matching_user_budgets = UserBudget.where({user_id: @current_user.id})
-                  @list_of_user_budgets = matching_user_budgets.order({ :first_day_of_month => :asc })%>
+                  @list_of_user_budgets = matching_user_budgets.order({ :created_at => :asc })%>
 
-                  <a class="btn btn-primary" onclick="updateConfigByMutating(totalBudgetChart,<%= UserBudget.where({user_id: @current_user.id}).all.map {|p| p.first_day_of_month.strftime('%b')}.first(7) %>,<%= @list_of_user_budgets.all.map {|p| p.total_expenses}.first(7)%>)">Update Chart</a>
+                  <a class="btn btn-primary" onclick="updateConfigByMutating(totalBudgetChart,<%= @list_of_user_budgets.all.map {|p| p.first_day_of_month.strftime('%b')}.first(7) %>,<%= @list_of_user_budgets.all.map {|p| p.total_expenses}.first(7)%>)">Update Chart</a>
                 </div>
 
               </div>
