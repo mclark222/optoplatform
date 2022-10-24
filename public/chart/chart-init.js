@@ -39,10 +39,12 @@
   const totalBudgetChart = new Chart(totalBudget, {
       type: 'bar',
       data: {
-          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels: [],
+        //   labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
           datasets: [{
               label: 'Total Budget',
-              data: [20, 14, 32, 14, 7, 22],
+              data: [],
+            //   data: [20, 14, 32, 14, 7, 22],
               backgroundColor: [
                         'rgba(55, 81, 255, 1)',
                         'rgba(55, 81, 255, 1)',
@@ -67,6 +69,29 @@
               y: {
                   beginAtZero: true
               }
+          },
+          legend: {
+            display: false
           }
       }
   });
+
+
+  
+  function updateConfigByMutating(chart,label_entry,data_entry) {
+    chart.data.labels = label_entry;
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data = data_entry;
+    });
+    chart.update();
+  }
+
+//   function changeColor() {
+//     var hello = document.getElementById('test');
+//     if (hello.style.color == 'blue') {
+//         hello.style.color = 'black';
+//     }
+//     else {
+//         document.getElementById('test').style.color = 'blue';
+//     } 
+//   }

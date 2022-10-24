@@ -139,6 +139,7 @@ class User < ApplicationRecord
     TransactionCategory.create(:spend_category_name=>'Income',:user_id=>self.id,:spend_sub_category=>'Other',:spend_sub_category_details=>'Other')
 
     #Below is a manual way to create a budget table for each user
+    UserBudget.create(:user_id=>self.id,:first_day_of_month=>'2022-09-01',:last_day_of_month=>'2022-09-30',:non_school_expenses=>0,:required_school_expenses=>0,:optional_school_expenses=>0,:total_expenses=>0,:total_income=>0)
     UserBudget.create(:user_id=>self.id,:first_day_of_month=>'2022-10-01',:last_day_of_month=>'2022-10-31',:non_school_expenses=>0,:required_school_expenses=>0,:optional_school_expenses=>0,:total_expenses=>0,:total_income=>0)
     UserBudget.create(:user_id=>self.id,:first_day_of_month=>'2022-11-01',:last_day_of_month=>'2022-11-30',:non_school_expenses=>0,:required_school_expenses=>0,:optional_school_expenses=>0,:total_expenses=>0,:total_income=>0)
     UserBudget.create(:user_id=>self.id,:first_day_of_month=>'2022-12-01',:last_day_of_month=>'2022-12-31',:non_school_expenses=>0,:required_school_expenses=>0,:optional_school_expenses=>0,:total_expenses=>0,:total_income=>0)

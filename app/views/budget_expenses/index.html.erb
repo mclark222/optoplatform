@@ -204,9 +204,6 @@
                                                           <input type="submit" value="Add new expense" class="btn btn-secondary btn-sm" />
                                                           </div>
 
-                                                         <!-- <button>
-                                                            Add new expense
-                                                          </button>-->
                                                         </form>
 
                                                         </div>
@@ -263,8 +260,6 @@
                                                 <h4 class="accordion-content-table">
                                                     
                                                     <% for a_budget_expense in BudgetExpense.where({user_id: @current_user.id}).where({expense_category_id: "5"}) do %>
-
-                                                    
 
                                                     <div class="row">
 
@@ -590,6 +585,12 @@
                     <div class="well well-sm mb-20">
                         <h2 class="font700 text-upper">Total Budget</h2>
                            <canvas id="totalBudgetChart"></canvas>
+
+                           <!--<h1 id="test" onclick="changeColor()">Hello, World!</h1>-->
+
+                          <!--
+                           <a class="btn btn-primary" onclick="updateConfigByMutating(totalBudgetChart,<%= UserBudget.where({user_id: @current_user.id}).all.map {|p| p.first_day_of_month.strftime('%b')}.first(7) %>,<%= UserBudget.where({user_id: @current_user.id}).all.map {|p| p.total_expenses}.first(7)%>)">Update Chart</a>
+                           -->
                         
                     </div>
                 </div>
@@ -764,20 +765,24 @@
 
               <!--Instructions-->
               <div class="col-xs-12 col-md-12 col-lg-5">
+
+                <!--<h1 id="test" onclick="changeColor()">Hello, World!</h1>-->
+
                 <h4 class="font300 mt-10">Take a look at the tips below to get started!</h4>
                 
                 <div class="text-left mt-20">
                   <a class="btn btn-primary modal-open" data-modal="getStartedInstructions">Instructions</a>
                 </div>
 
-                <!--<div class= "text-right">
-                  <%= BudgetExpense.where({user_id: @current_user.id}).by_month(2022, 'October').sum(:expense_amount) %>
-                  
-                </div>-->
+                <div class="text-left mt-20">
+                  <a class="btn btn-primary" onclick="updateConfigByMutating(totalBudgetChart,<%= UserBudget.where({user_id: @current_user.id}).all.map {|p| p.first_day_of_month.strftime('%b')}.first(7) %>,<%= UserBudget.where({user_id: @current_user.id}).all.map {|p| p.total_expenses}.first(7)%>)">Update Chart</a>
+                </div>
+
               </div>
 
             </div>
                 <!-- ./row-->
+
 
 
 
@@ -877,7 +882,7 @@
 
     <div class="modal" id="optionalSchoolEvents">
         <div class="modal-content">
-            <h2 class="font700">Required School Fees</h2>
+            <h2 class="font700">Optional School Events</h2>
 
             <div class="table-scroll">
                 <table class="table">
