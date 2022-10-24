@@ -29,8 +29,10 @@ class BudgetIncomesController < ApplicationController
     if the_budget_income.valid?
       the_budget_income.save
 
-      CashFlow.where({user_id: @current_user.id}).where("first_day_of_week <= ?", the_budget_income.first_recurrence_date).where("last_day_of_week > ?", the_budget_income.first_recurrence_date).first.update(:remaining_cash => (
-      (CashFlow.where({user_id: @current_user.id}).where("first_day_of_week <= ?", the_budget_income.first_recurrence_date).where("last_day_of_week > ?", the_budget_income.first_recurrence_date).pluck(:remaining_cash).first).to_f + (the_budget_income.income_amount).to_f))
+      UserBudget.where({user_id: @current_user.id}).where("first_day_of_month <= ?", the_budget_income.first_recurrence_date).where("last_day_of_month >= ?", the_budget_income.first_recurrence_date).first.update(:total_income=> BudgetIncome.where({user_id: @current_user.id}).by_month(the_budget_income.first_recurrence_date.year, the_budget_income.first_recurrence_date.strftime("%B")).sum(:income_amount))
+
+      CashFlow.where({user_id: @current_user.id}).where("first_day_of_week <= ?", the_budget_income.first_recurrence_date).where("last_day_of_week >= ?", the_budget_income.first_recurrence_date).first.update(:remaining_cash => (
+      (CashFlow.where({user_id: @current_user.id}).where("first_day_of_week <= ?", the_budget_income.first_recurrence_date).where("last_day_of_week >= ?", the_budget_income.first_recurrence_date).pluck(:remaining_cash).first).to_f + (the_budget_income.income_amount).to_f))
 
       for a_cash_flow in CashFlow.where({user_id: @current_user.id}).where("first_day_of_week > ?", the_budget_income.first_recurrence_date) do
 
@@ -77,6 +79,8 @@ class BudgetIncomesController < ApplicationController
 
     if the_budget_income.valid?
       the_budget_income.save
+
+      UserBudget.where({user_id: @current_user.id}).where("first_day_of_month <= ?", the_budget_income.first_recurrence_date).where("last_day_of_month >= ?", the_budget_income.first_recurrence_date).first.update(:total_income=> BudgetIncome.where({user_id: @current_user.id}).by_month(the_budget_income.first_recurrence_date.year, the_budget_income.first_recurrence_date.strftime("%B")).sum(:income_amount))
 
       @min_date = CashFlow.where({user_id: @current_user.id}).where("first_day_of_week <= ?", the_budget_income.first_recurrence_date).where("last_day_of_week >= ?", the_budget_income.first_recurrence_date).pluck(:first_day_of_week).first
 
