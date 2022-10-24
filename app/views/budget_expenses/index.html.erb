@@ -870,7 +870,7 @@
                       <% 
                       budget_school_fees_modal = SchoolFee.where({school: @current_user.school})
 
-                      @list_of_school_fees_modal = budget_school_fees_modal.order({ :first_recurrence_date => :asc })
+                      @list_of_school_fees_modal = budget_school_fees_modal.order({ :first_fee_date => :asc })
 
                       for a_school_fee in @list_of_school_fees_modal do %>
 
@@ -955,7 +955,7 @@
                       <%
                       budget_school_events_modal = SchoolEvent.where({school: @current_user.school})
 
-                      @list_of_school_events_modal = budget_school_events_modal.order({ :first_recurrence_date => :asc })
+                      @list_of_school_events_modal = budget_school_events_modal.order({ :event_start_date => :asc })
 
                       for a_school_event in @list_of_school_events_modal do %>
 
