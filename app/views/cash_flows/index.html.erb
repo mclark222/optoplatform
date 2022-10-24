@@ -168,6 +168,83 @@
                 </div>
             </div>
             <!-- ./row-->
+        
+        <div row>
+
+        <h2 class="font300 mt-10">Please note that nothing above this text works yet. You can play around with the cash flow table below, and we will make that into a chart soon. The table below should update dynamically with updates you make on the budgeting page as well.</h2>
+
+        </div>
+        
+        <div row>
+
+            <div class="col-xs-12 col-md-12 col-lg-12 mb-20">
+                            <div class="well">
+                                <h2 class="font700">Cash Flow Table</h2>
+                               
+                               <div class="table-scroll">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-left">First Day of Week</th>
+                                                <th class="text-right">Last Day of Week</th>
+                                                <th class="text-right">Remaining Amount</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+
+                                            <% for a_cash_flow in CashFlow.where({user_id: @current_user.id}).where("first_day_of_week >= ?", "2022-10-23") do %>
+                                    
+                                                <tr>
+                                                <td class="text-left"><%= a_cash_flow.first_day_of_week.strftime("%b. %d") %></td>
+                                                <td class="text-right"><%= a_cash_flow.last_day_of_week.strftime("%b. %d") %></td>
+                                                <td class="text-right"><span class="color-blue font700">$<%= number_with_delimiter(a_cash_flow.remaining_cash.truncate, :delimiter => ',') %></span></td>
+                                                </tr>
+
+                                            <%end%>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!-- ./row-->
+
+                                <div class="row">
+
+                                    <div class="row">
+
+                                        <div class="text-right mt-20">
+                                        
+                                        <form action="/modify_cash_flow/<%=CashFlow.where({user_id: @current_user.id}).where("first_day_of_week = ?", "2022-10-23").pluck(:id).first%>" method="post">
+
+                                            <input type="hidden" name="query_first_day_of_week" value="2022-10-23">
+
+                                            <input type="hidden" name="query_last_day_of_week" value="2022-10-29">
+                                                                                        
+                                            <div class="col-xs-12 col-sm-2">
+                                            <p><span class="show-xs font700"></span>
+                                                <input type="text" id="remaining_cash_box" name="query_remaining_cash" size="20" placeholder="New Starting Amount"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-4 md-10 col-md-offset-4 col-lg-offset-4 mt-20">
+                                            <input type="submit" value="Update Starting Balance" class="btn btn-primary btn-sm" />
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                    </div>
+
+                                </div>
+                                        <!-- ./row-->
+
+
+                            </div>
+                        </div>
+            </div>
+            <!-- end row-->
+        
         </div>
 
     </section>

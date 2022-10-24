@@ -46,15 +46,19 @@ class CashFlowsController < ApplicationController
     if the_cash_flow.valid?
       the_cash_flow.save
 
-      @min_date = CashFlow.where({user_id: @current_user.id}).where("first_day_of_week <= ?", the_cash_flow.first_day_of_week + 7).where("last_day_of_week >= ?", the_cash_flow.last_day_of_week + 7).pluck(:first_day_of_week).first
+      for a_cash_flow in CashFlow.where({user_id: @current_user.id}).where("first_day_of_week > ?", the_cash_flow.first_day_of_week) do
 
-      @max_date = CashFlow.where({user_id: @current_user.id}).where("first_day_of_week <= ?", the_cash_flow.first_day_of_week + 7).where("last_day_of_week >= ?", the_cash_flow.last_day_of_week + 7).pluck(:last_day_of_week).first
-
-      CashFlow.where({user_id: @current_user.id}).where("first_day_of_week = ?", the_cash_flow.first_day_of_week + 7).where("last_day_of_week = ?", the_cash_flow.last_day_of_week + 7).first.update(:remaining_cash => (
-          CashFlow.where({user_id: @current_user.id}).where("first_day_of_week = ?", the_cash_flow.first_day_of_week).where("last_day_of_week = ?", the_cash_flow.last_day_of_week).pluck(:remaining_cash).first.to_f - 
-          BudgetExpense.where({user_id: @current_user.id}).where("first_recurrence_date <= ?", @max_date).where("first_recurrence_date >= ?", @min_date).sum(:expense_amount)
-                )
-            )
+              @new_min_date = a_cash_flow.first_day_of_week
+    
+              @new_max_date = a_cash_flow.last_day_of_week
+    
+              a_cash_flow.update(:remaining_cash =>
+                (CashFlow.where({user_id: @current_user.id}).where("first_day_of_week = ?", a_cash_flow.first_day_of_week - 7).where("last_day_of_week = ?", a_cash_flow.last_day_of_week - 7).pluck(:remaining_cash).first.to_f - 
+                  BudgetExpense.where({user_id: @current_user.id}).where("first_recurrence_date <= ?", @new_max_date).where("first_recurrence_date >= ?", @new_min_date).sum(:expense_amount) +
+                  BudgetIncome.where({user_id: @current_user.id}).where("first_recurrence_date <= ?", @new_max_date).where("first_recurrence_date >= ?", @new_min_date).sum(:income_amount)
+                    )
+              )
+      end
 
       redirect_to("/cash_flows", { :notice => "Cash flow updated successfully."} )
     else
