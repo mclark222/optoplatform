@@ -2,10 +2,12 @@
   const cashBurnRateChart = new Chart(cashBurnRate, {
       type: 'line',
       data: {
-          labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+          labels: [],
+        //   labels: ['January', 'February', 'March', 'April', 'May', 'June'],
           datasets: [{
               label: 'Actual spend',
-              data: [65, 59, 48, 56, 57, 40],
+              data: [],
+            //   data: [65, 59, 48, 56, 57, 40],
               backgroundColor: [
                         'rgba(55, 81, 255, 1)',
                         'rgba(55, 81, 255, 1)',

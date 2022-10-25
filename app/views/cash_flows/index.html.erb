@@ -56,7 +56,16 @@
                         <div class="col-xs-12 col-md-6 col-lg-8">
                             <p class="mt-5">Welcome to the Insights page! This page draws from your budget and provides a projection for when you are expected to run out of money based on your projected expenses.</p>
                         </div>
-                        <div class="col-xs-12 col-md-6 col-lg-4">
+
+                        <div class="col-xs-12 col-md-6 col-lg-4 mt-5 text-right">
+                        <!--<div class="text-left mt-20 col-xs-12 col-md-6 col-lg-6 col-md-offset-2 col-lg-offset-2">-->
+                            <% matching_cash_flows = CashFlow.where({user_id: @current_user.id}).where("first_day_of_week >= ?", "2022-10-23").where.not(remaining_cash: nil)
+                            @list_of_cash_flows = matching_cash_flows.order({ :created_at => :asc })%>
+
+                            <a class="btn btn-primary" onclick="updateConfigByMutating(cashBurnRateChart,<%= @list_of_cash_flows.all.map {|p| p.first_day_of_week.strftime('%b. %d')}.first(10) %>,<%= @list_of_cash_flows.all.map {|p| p.remaining_cash}.first(10)%>)">Update Chart</a>
+                        </div>
+
+                        <!--<div class="col-xs-12 col-md-6 col-lg-4">
                             <div class="row">
                                 <div class="col-xs-12 col-sm-6 col-md-5">
                                     <h2 class="font700 mt-5">Period:</h2>
@@ -70,8 +79,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <!-- ./row-->
-                        </div>
+                        </div>-->
                     </div>
                     <!-- ./row-->
 
@@ -87,6 +95,32 @@
                                 <h2 class="font700">Inputs</h2>
 
                                 <div class="row mb-10">
+
+                                        <div class="text-right mt-20">
+                                        
+                                        <form action="/modify_cash_flow/<%=CashFlow.where({user_id: @current_user.id}).where("first_day_of_week = ?", "2022-10-23").pluck(:id).first%>" method="post">
+
+                                            <input type="hidden" name="query_first_day_of_week" value="2022-10-23">
+
+                                            <input type="hidden" name="query_last_day_of_week" value="2022-10-29">
+                                                                                        
+                                            <div class="col-xs-12 col-sm-2">
+                                            <p><span class="show-xs font700"></span>
+                                                <input type="text" id="remaining_cash_box" name="query_remaining_cash" size="20" placeholder="New Starting Amount"></p>
+                                            </div>
+                                        </div>
+
+                                       <div class="row mb-10">
+                                            <div class="text-right mt-20">
+
+                                            <input type="submit" value="Update Starting Balance" class="btn btn-primary btn-sm" />
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                    </div>
+
+                                <!--<div class="row mb-10">
                                     <div class="col-xs-12 col-sm-6">
                                         <p class="text-upper color-grey small mt-10">Starting date:</p>
                                     </div>
@@ -97,7 +131,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- ./row-->
 
                                 <div class="row mb-20">
                                     <div class="col-xs-12 col-sm-6">
@@ -109,15 +142,14 @@
                                             <span class="icn icn-calendar"></span>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- ./row-->
+                                </div>-->
 
                                 <div class="row mb-10">
                                     <div class="col-xs-7 col-sm-6">
                                         <p class="text-upper color-grey small">Starting budget:</p>
                                     </div>
                                     <div class="col-xs-5 col-sm-6">
-                                        <p class="color-blue font700 text-right small">$13,000</p>
+                                        <p class="color-blue font700 text-right small"><%=CashFlow.where({user_id: @current_user.id}).where("first_day_of_week = ?", "2022-10-23").pluck(:remaining_cash).first%></p>
                                     </div>
                                 </div>
                                 <!-- ./row-->
@@ -131,6 +163,8 @@
                         </div>
                     </div>
                     <!-- ./row-->
+
+
 
                     <!--<div class="row mb-10">
                         <div class="col-xs-12">
