@@ -48,8 +48,44 @@ class BudgetExpensesController < ApplicationController
             BudgetIncome.where({user_id: @current_user.id}).where("first_recurrence_date <= ?", @new_max_date).where("first_recurrence_date >= ?", @new_min_date).sum(:income_amount)
               )
         )
+
+      end
+
+
+      # if the_budget_expense.recurring_frequency == 12
+
+      #   @max_recurring_date = DateTime.new(2023,06,30)
+
+      #   @count_of_months = ((@max_recurring_date.year * 12 + @max_recurring_date.month) - (the_budget_expense.first_recurrence_date.year * 12 + the_budget_expense.first_recurrence_date.month))
+
+      #   @starting_date = the_budget_expense.first_recurrence_date
+
+      #   @count_of_months.times do
+
+      #     BudgetExpense.create(:expense_name => the_budget_expense.expense_name,:expense_amount =>the_budget_expense.expense_amount,:expense_category_id => the_budget_expense.expense_category_id, :recurring_frequency => the_budget_expense.recurring_frequency, :user_id => the_budget_expense.user_id, :first_recurrence_date => (@starting_date + 1.months))
+
+      #     @starting_date = (@starting_date + 1.months)
+
+      #   end
+
+      # end
+
+    #    <div class="col-xs-12 col-sm-2">
+    #     <p><span class="show-xs font700"></span>
+    #     <%= if a_budget_income.recurring_frequency == 1
+    #       "One-Time"
+    #     elsif a_budget_income.recurring_frequency == 52
+    #       "Weekly"
+    #     elsif a_budget_income.recurring_frequency == 26
+    #       "Biweekly"
+    #     elsif a_budget_income.recurring_frequency == 12
+    #       "Monthly"
+    #     elsif a_budget_income.recurring_frequency == 4
+    #       "Quarterly"
+    #     end %>
+    #     </p>
+    # </div>
       
-    end
 
       redirect_to("/budget_expenses")
       #, { :notice => "Budget expense created successfully." })
