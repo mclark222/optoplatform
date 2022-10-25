@@ -46,7 +46,11 @@ class CashFlowsController < ApplicationController
     if the_cash_flow.valid?
       the_cash_flow.save
 
-      for a_cash_flow in CashFlow.where({user_id: @current_user.id}).where("first_day_of_week > ?", the_cash_flow.first_day_of_week) do
+      cash_flow_order_1 = CashFlow.where({user_id: @current_user.id}).where("first_day_of_week > ?", "2022-10-23")
+
+      @cash_flow_order_2 = cash_flow_order_1.order({ :first_day_of_week => :asc })
+        
+      for a_cash_flow in @cash_flow_order_2 do
 
               @new_min_date = a_cash_flow.first_day_of_week
     
