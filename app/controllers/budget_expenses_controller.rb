@@ -205,7 +205,8 @@ class BudgetExpensesController < ApplicationController
 
     the_budget_expense.destroy
 
-    redirect_to("/budget_expenses", { :notice => "Budget expense deleted successfully."} )
+    redirect_to("/budget_expenses")
+    #, { :notice => "Budget expense deleted successfully."} )
   end
 
 end

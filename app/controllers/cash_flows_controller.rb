@@ -28,7 +28,8 @@ class CashFlowsController < ApplicationController
 
     if the_cash_flow.valid?
       the_cash_flow.save
-      redirect_to("/cash_flows", { :notice => "Cash flow created successfully." })
+      redirect_to("/cash_flows")
+      # , { :notice => "Cash flow created successfully." })
     else
       redirect_to("/cash_flows", { :alert => the_cash_flow.errors.full_messages.to_sentence })
     end
@@ -64,7 +65,8 @@ class CashFlowsController < ApplicationController
               )
       end
 
-      redirect_to("/cash_flows", { :notice => "Cash flow updated successfully."} )
+      redirect_to("/cash_flows")
+      # , { :notice => "Cash flow updated successfully."} )
     else
       redirect_to("/cash_flows/", { :alert => the_cash_flow.errors.full_messages.to_sentence })
     end
@@ -76,7 +78,8 @@ class CashFlowsController < ApplicationController
 
     the_cash_flow.destroy
 
-    redirect_to("/cash_flows", { :notice => "Cash flow deleted successfully."} )
+    redirect_to("/cash_flows")
+    # , { :notice => "Cash flow deleted successfully."} )
   end
 
 end

@@ -53,7 +53,8 @@ class BudgetIncomesController < ApplicationController
 
       end
 
-      redirect_to("/budget_expenses", { :notice => "Budget income created successfully." })
+      redirect_to("/budget_expenses")
+      # , { :notice => "Budget income created successfully." })
     else
       redirect_to("/budget_expenses", { :alert => the_budget_income.errors.full_messages.to_sentence })
     end
