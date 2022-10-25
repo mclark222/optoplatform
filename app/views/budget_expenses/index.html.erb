@@ -150,12 +150,12 @@
                                                             
                                                             <div class="col-xs-12 col-sm-2">
                                                             <p><span class="show-xs font700"></span>
-                                                            <input type="text" id="expense_name_box" name="query_expense_name" size="5" placeholder="Item"></p>
+                                                            <input type="text" id="expense_name_box" name="query_expense_name" size="5" placeholder="Item" required="True"></p>
                                                             </div>
 
                                                             <div class="col-xs-12 col-sm-2">
                                                             <p><span class="show-xs font700"></span>
-                                                            <select id="expense_category_id_box"name="query_expense_category_id" style="width: 90px">
+                                                            <select id="expense_category_id_box"name="query_expense_category_id" required="True" style="width: 90px">
                                                               <option value="Select One">Select One</option>
                                                               <option value=1>Auto & Transportation</option>
                                                               <option value=2>Bills & Utilities</option>
@@ -181,7 +181,7 @@
 
                                                             <div class="col-xs-12 col-sm-2 col-sm-offset-1">
                                                             
-                                                            <select id="recurring_frequency_box"name="query_recurring_frequency" style="width: 90px">
+                                                            <select id="recurring_frequency_box"name="query_recurring_frequency" required="True" style="width: 90px">
                                                               <option value="Select One">Select One</option>
                                                               <option value="1">One-Time</option>
                                                               <option value="52">Weekly</option>
@@ -194,12 +194,12 @@
                                                             
                                                             <div class="col-xs-12 col-sm-2 col-sm-offset-1"">
                                                             <p><span class="show-xs font700"></span>
-                                                            <input type="date" id="first_recurrence_date_box" name="query_first_recurrence_date" style="width: 80px"></p>
+                                                            <input type="date" id="first_recurrence_date_box" name="query_first_recurrence_date" required="True" style="width: 80px"></p>
                                                             </div>
 
                                                             <div class="col-xs-12 col-sm-2">
                                                             <p><span class="show-xs font700"></span>
-                                                            <input type="text" id="expense_amount_box" name="query_expense_amount" size="5" placeholder="$"></p>
+                                                            <input type="text" id="expense_amount_box" required="True" name="query_expense_amount" size="5" placeholder="$"></p>
                                                             </div>
 
                                                           
@@ -324,7 +324,7 @@
                                                             
                                                             <div class="col-xs-12 col-sm-2">
                                                             <p><span class="show-xs font700"></span>
-                                                            <input type="text" id="expense_name_box" name="query_expense_name" size="5" placeholder="Item"></p>
+                                                            <input type="text" id="expense_name_box" name="query_expense_name" size="5" placeholder="Item" required="True"></p>
                                                             </div>
 
                                                             <div class="col-xs-12 col-sm-2">
@@ -368,12 +368,12 @@
                                                             
                                                             <div class="col-xs-12 col-sm-2 col-sm-offset-1"">
                                                             <p><span class="show-xs font700"></span>
-                                                            <input type="date" id="first_recurrence_date_box" name="query_first_recurrence_date" style="width: 80px"></p>
+                                                            <input type="date" id="first_recurrence_date_box" name="query_first_recurrence_date" required="True" style="width: 80px"></p>
                                                             </div>
 
                                                             <div class="col-xs-12 col-sm-2">
                                                             <p><span class="show-xs font700"></span>
-                                                            <input type="text" id="expense_amount_box" name="query_expense_amount" size="5" placeholder="$"></p>
+                                                            <input type="text" id="expense_amount_box" name="query_expense_amount" required="True" size="5" placeholder="$"></p>
                                                             </div>
 
                                                           
@@ -502,7 +502,7 @@
                                                             
                                                             <div class="col-xs-12 col-sm-2">
                                                             <p><span class="show-xs font700"></span>
-                                                            <input type="text" id="expense_name_box" name="query_expense_name" size="5" placeholder="Item"></p>
+                                                            <input type="text" id="expense_name_box" name="query_expense_name" size="5" placeholder="Item" required="True"></p>
                                                             </div>
 
                                                             <div class="col-xs-12 col-sm-2">
@@ -546,12 +546,12 @@
                                                             
                                                             <div class="col-xs-12 col-sm-2 col-sm-offset-1"">
                                                             <p><span class="show-xs font700"></span>
-                                                            <input type="date" id="first_recurrence_date_box" name="query_first_recurrence_date" style="width: 80px"></p>
+                                                            <input type="date" id="first_recurrence_date_box" name="query_first_recurrence_date" required="True" style="width: 80px"></p>
                                                             </div>
 
                                                             <div class="col-xs-12 col-sm-2">
                                                             <p><span class="show-xs font700"></span>
-                                                            <input type="text" id="expense_amount_box" name="query_expense_amount" size="5" placeholder="$"></p>
+                                                            <input type="text" id="expense_amount_box" name="query_expense_amount" required="True" size="5" placeholder="$"></p>
                                                             </div>
 
                                                           
@@ -591,8 +591,16 @@
 
                 <div class="col-xs-12 col-md-12 col-lg-5">
                     <div class="well well-sm mb-20">
-                        <h2 class="font700 text-upper">Total Budget</h2>
-                           <canvas id="totalBudgetChart"></canvas>
+                        <row>
+                        <h2 class="font700 text-upper col-xs-12 col-md-5 col-lg-5">Total Budget</h2>
+                        <div class="text-left mt-10 col-xs-12 col-md-6 col-lg-6 col-md-offset-1 col-lg-offset-1">
+                          <% matching_user_budgets = UserBudget.where({user_id: @current_user.id})
+                          @list_of_user_budgets = matching_user_budgets.order({ :created_at => :asc })%>
+
+                          <a class="btn btn-primary" onclick="updateConfigByMutating(totalBudgetChart,<%= @list_of_user_budgets.all.map {|p| p.first_day_of_month.strftime('%b')}.first(7) %>,<%= @list_of_user_budgets.all.map {|p| p.total_expenses}.first(7)%>)">Load Chart</a>
+                        </div>
+                        </row>
+                        <canvas id="totalBudgetChart"></canvas>
                         
                     </div>
                 </div>
@@ -704,7 +712,7 @@
                                                             
                                                             <div class="col-xs-12 col-sm-2">
                                                             <p><span class="show-xs font700"></span>
-                                                            <input type="text" id="income_name_box" name="query_income_name" size="5" placeholder="Item"></p>
+                                                            <input type="text" id="income_name_box" name="query_income_name" size="5" placeholder="Item" required="True"></p>
                                                             </div>
 
                                                             <div class="col-xs-12 col-sm-2">
@@ -733,12 +741,12 @@
                                                             
                                                             <div class="col-xs-12 col-sm-2 col-sm-offset-1"">
                                                             <p><span class="show-xs font700"></span>
-                                                            <input type="date" id="first_recurrence_date_box" name="query_first_recurrence_date" style="width: 80px"></p>
+                                                            <input type="date" id="first_recurrence_date_box" required="True" name="query_first_recurrence_date" style="width: 80px"></p>
                                                             </div>
 
                                                             <div class="col-xs-12 col-sm-2">
                                                             <p><span class="show-xs font700"></span>
-                                                            <input type="text" id="income_amount_box" name="query_income_amount" size="5" placeholder="$"></p>
+                                                            <input type="text" id="income_amount_box" name="query_income_amount" required="True" size="5" placeholder="$"></p>
                                                             </div>
 
                                                             <input type="hidden" name="query_user_id" value="<%= @current_user.id %>">
@@ -804,6 +812,7 @@
                                                 <th class="text-left">Budget Month</th>
                                                 <th class="text-right">Total Expenses</th>
                                                 <th class="text-right">Total Income</th>
+                                                <th class="text-right">Net Cash Flow</th>
                                             </tr>
                                         </thead>
 
@@ -820,6 +829,7 @@
                                                 <td class="text-left"><%= a_user_budget.first_day_of_month.strftime("%B %Y") %></td>
                                                 <td class="text-right"><span class="color-blue font700">$<%= number_with_delimiter(a_user_budget.total_expenses.truncate, :delimiter => ',') %></span></td>
                                                 <td class="text-right"><span class="color-blue font700">$<%= number_with_delimiter(a_user_budget.total_income.truncate, :delimiter => ',') %></span></td>
+                                                <td class="text-right"><span class="color-blue font700">$<%= number_with_delimiter((a_user_budget.total_income - a_user_budget.total_expenses).truncate, :delimiter => ',') %></span></td>
                                                 </tr>
 
                                             <%end%>
@@ -835,6 +845,13 @@
                         </div>
             </div>
             <!-- end row-->
+
+
+            <div class="row mb-30">
+                        <div class="col-xs-12 col-md-12 col-lg-12">
+                            <a href="/cash_flows" class="btn btn-primary btn-block">View My Cash Flow</a>
+                        </div>
+                </div>
 
 
 
