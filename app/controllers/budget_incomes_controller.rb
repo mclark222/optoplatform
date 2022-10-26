@@ -34,7 +34,95 @@ class BudgetIncomesController < ApplicationController
       CashFlow.where({user_id: @current_user.id}).where("first_day_of_week <= ?", the_budget_income.first_recurrence_date).where("last_day_of_week >= ?", the_budget_income.first_recurrence_date).first.update(:remaining_cash => (
       (CashFlow.where({user_id: @current_user.id}).where("first_day_of_week <= ?", the_budget_income.first_recurrence_date).where("last_day_of_week >= ?", the_budget_income.first_recurrence_date).pluck(:remaining_cash).first).to_f + (the_budget_income.income_amount).to_f))
 
-      cash_flow_order_1 = CashFlow.where({user_id: @current_user.id}).where("first_day_of_week > ?", the_budget_income.first_recurrence_date)
+      if the_budget_income.recurring_frequency == 52
+
+        @max_recurring_date = DateTime.new(2023,06,30)
+
+        @count_of_weeks = ((@max_recurring_date - the_budget_income.first_recurrence_date) / 7)
+
+        @starting_date = the_budget_income.first_recurrence_date
+
+        @count_of_weeks.floor.times do
+
+          BudgetIncome.create(:income_name => the_budget_income.income_name,:income_amount =>the_budget_income.income_amount,:income_category_id => the_budget_income.income_category_id, :recurring_frequency => the_budget_income.recurring_frequency, :user_id => the_budget_income.user_id, :first_recurrence_date => (@starting_date + 1.weeks))
+
+          UserBudget.where({user_id: @current_user.id}).where("first_day_of_month <= ?", (@starting_date + 1.weeks)).where("last_day_of_month >= ?", (@starting_date + 1.weeks)).first.update(:total_income=> BudgetIncome.where({user_id: @current_user.id}).by_month((@starting_date + 1.weeks).year, (@starting_date + 1.weeks).strftime("%B")).sum(:income_amount))
+
+          CashFlow.where({user_id: @current_user.id}).where("first_day_of_week <= ?", (@starting_date + 1.weeks)).where("last_day_of_week >= ?", (@starting_date + 1.weeks)).first.update(:remaining_cash => (
+            (CashFlow.where({user_id: @current_user.id}).where("first_day_of_week <= ?", (@starting_date + 1.weeks)).where("last_day_of_week >= ?", (@starting_date + 1.weeks)).pluck(:remaining_cash).first).to_f + (the_budget_income.income_amount).to_f))
+
+          @starting_date = (@starting_date + 1.weeks)
+
+        end
+      
+      elsif the_budget_income.recurring_frequency == 26
+
+        @max_recurring_date = DateTime.new(2023,06,30)
+
+        @count_of_biweeklies = (((@max_recurring_date - the_budget_income.first_recurrence_date) / 7) / 2)
+
+        @starting_date = the_budget_income.first_recurrence_date
+
+        @count_of_biweeklies.floor.times do
+
+          BudgetIncome.create(:income_name => the_budget_income.income_name,:income_amount =>the_budget_income.income_amount,:income_category_id => the_budget_income.income_category_id, :recurring_frequency => the_budget_income.recurring_frequency, :user_id => the_budget_income.user_id, :first_recurrence_date => (@starting_date + 2.weeks))
+
+          UserBudget.where({user_id: @current_user.id}).where("first_day_of_month <= ?", (@starting_date + 2.weeks)).where("last_day_of_month >= ?", (@starting_date + 2.weeks)).first.update(:total_income=> BudgetIncome.where({user_id: @current_user.id}).by_month((@starting_date + 2.weeks).year, (@starting_date + 2.weeks).strftime("%B")).sum(:income_amount))
+
+          CashFlow.where({user_id: @current_user.id}).where("first_day_of_week <= ?", (@starting_date + 2.weeks)).where("last_day_of_week >= ?", (@starting_date + 2.weeks)).first.update(:remaining_cash => (
+            (CashFlow.where({user_id: @current_user.id}).where("first_day_of_week <= ?", (@starting_date + 2.weeks)).where("last_day_of_week >= ?", (@starting_date + 2.weeks)).pluck(:remaining_cash).first).to_f + (the_budget_income.income_amount).to_f))
+
+          @starting_date = (@starting_date + 2.weeks)
+
+        end
+
+      elsif the_budget_income.recurring_frequency == 12
+
+          @max_recurring_date = DateTime.new(2023,06,30)
+
+          @count_of_months = ((@max_recurring_date.year * 12 + @max_recurring_date.month) - (the_budget_income.first_recurrence_date.year * 12 + the_budget_income.first_recurrence_date.month))
+
+          @starting_date = the_budget_income.first_recurrence_date
+
+          @count_of_months.times do
+
+            BudgetIncome.create(:income_name => the_budget_income.income_name,:income_amount =>the_budget_income.income_amount,:income_category_id => the_budget_income.income_category_id, :recurring_frequency => the_budget_income.recurring_frequency, :user_id => the_budget_income.user_id, :first_recurrence_date => (@starting_date + 1.months))
+
+            UserBudget.where({user_id: @current_user.id}).where("first_day_of_month <= ?", (@starting_date + 1.months)).where("last_day_of_month >= ?", (@starting_date + 1.months)).first.update(:total_income=> BudgetIncome.where({user_id: @current_user.id}).by_month((@starting_date + 1.months).year, (@starting_date + 1.months).strftime("%B")).sum(:income_amount))
+
+            CashFlow.where({user_id: @current_user.id}).where("first_day_of_week <= ?", (@starting_date + 1.months)).where("last_day_of_week >= ?", (@starting_date + 1.months)).first.update(:remaining_cash => (
+              (CashFlow.where({user_id: @current_user.id}).where("first_day_of_week <= ?", (@starting_date + 1.months)).where("last_day_of_week >= ?", (@starting_date + 1.months)).pluck(:remaining_cash).first).to_f + (the_budget_income.income_amount).to_f))
+
+            @starting_date = (@starting_date + 1.months)
+
+          end
+        
+      elsif the_budget_income.recurring_frequency == 4
+
+          @max_recurring_date = DateTime.new(2023,06,30)
+
+          @count_of_quarters = (((@max_recurring_date.year * 12 + @max_recurring_date.month) - (the_budget_income.first_recurrence_date.year * 12 + the_budget_income.first_recurrence_date.month)) / 3)
+
+          @starting_date = the_budget_income.first_recurrence_date
+
+          @count_of_quarters.floor.times do
+
+            BudgetIncome.create(:income_name => the_budget_income.income_name,:income_amount =>the_budget_income.income_amount,:income_category_id => the_budget_income.income_category_id, :recurring_frequency => the_budget_income.recurring_frequency, :user_id => the_budget_income.user_id, :first_recurrence_date => (@starting_date + 3.months))
+
+            UserBudget.where({user_id: @current_user.id}).where("first_day_of_month <= ?", (@starting_date + 3.months)).where("last_day_of_month >= ?", (@starting_date + 3.months)).first.update(:total_income=> BudgetIncome.where({user_id: @current_user.id}).by_month((@starting_date + 3.months).year, (@starting_date + 3.months).strftime("%B")).sum(:income_amount))
+
+            CashFlow.where({user_id: @current_user.id}).where("first_day_of_week <= ?", (@starting_date + 3.months)).where("last_day_of_week >= ?", (@starting_date + 3.months)).first.update(:remaining_cash => (
+              (CashFlow.where({user_id: @current_user.id}).where("first_day_of_week <= ?", (@starting_date + 3.months)).where("last_day_of_week >= ?", (@starting_date + 3.months)).pluck(:remaining_cash).first).to_f + (the_budget_income.income_amount).to_f))
+
+            @starting_date = (@starting_date + 3.months)
+
+          end
+        
+      elsif the_budget_income.recurring_frequency == 1
+
+      end
+
+      cash_flow_order_1 = CashFlow.where({user_id: @current_user.id}).where("first_day_of_week > ?", "2022-10-23")
 
       @cash_flow_order_2 = cash_flow_order_1.order({ :first_day_of_week => :asc })
 

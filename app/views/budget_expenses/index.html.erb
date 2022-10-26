@@ -52,14 +52,14 @@
                     <div class="well well-xs mb-20">
 
                         <div class="accordion-total">
-                            <h3 class="accordion-total-title">Expenses<span><!--$9,500--></span></h3>
+                            <h3 class="accordion-total-title">Expenses<span>$<%= number_with_delimiter(BudgetExpense.where({user_id: @current_user.id}).where.not(expense_amount: nil).sum(:expense_amount).truncate, :delimiter => ',') %></span></h3>
                         </div>
 
                         <div class="accordion">
                             <h3 class="accordion-title">
                                 <span class="accordion-icon"></span>
                                 Non-School Expenses
-                                <span class="accordion-no"><!--$9,500--></span>
+                                <span class="accordion-no">$<%= number_with_delimiter(BudgetExpense.where({user_id: @current_user.id}).where.not({expense_category_id: "5"}).where.not({expense_category_id: "6"}).where.not(expense_amount: nil).sum(:expense_amount).truncate, :delimiter => ',') %></span>
                             </h3>
 
                             <div class="accordion-content">
@@ -231,7 +231,7 @@
                             <h3 class="accordion-title">
                                 <span class="accordion-icon"></span>
                                 Required School Fees
-                                <span class="accordion-no"><!--$9,500--></span>
+                                <span class="accordion-no">$<%= number_with_delimiter(BudgetExpense.where({user_id: @current_user.id}).where({expense_category_id: "5"}).where.not(expense_amount: nil).sum(:expense_amount).truncate, :delimiter => ',') %></span>
                             </h3>
 
                             <div class="accordion-content">
@@ -409,7 +409,7 @@
                             <h3 class="accordion-title">
                                 <span class="accordion-icon"></span>
                                 Optional School Expenses
-                                <span class="accordion-no"><!--$9,500--></span>
+                                <span class="accordion-no">$<%= number_with_delimiter(BudgetExpense.where({user_id: @current_user.id}).where({expense_category_id: "6"}).where.not(expense_amount: nil).sum(:expense_amount).truncate, :delimiter => ',') %></span>
                             </h3>
 
                             <div class="accordion-content">
@@ -615,14 +615,14 @@
                     <div class="well well-xs mb-20">
 
                         <div class="accordion-total">
-                            <h3 class="accordion-total-title">Income<span><!--$9,500--></span></h3>
+                            <h3 class="accordion-total-title">Income<span>$<%= number_with_delimiter(BudgetIncome.where({user_id: @current_user.id}).where.not(income_amount: nil).sum(:income_amount).truncate, :delimiter => ',') %></span></h3>
                         </div>
 
                         <div class="accordion">
                             <h3 class="accordion-title">
                                 <span class="accordion-icon"></span>
                                 All Income
-                                <span class="accordion-no"><!--$9,500--></span>
+                                <span class="accordion-no">$<%= number_with_delimiter(BudgetIncome.where({user_id: @current_user.id}).where.not(income_amount: nil).sum(:income_amount).truncate, :delimiter => ',') %></span>
                             </h3>
 
                             <div class="accordion-content">
