@@ -32,7 +32,8 @@ class UserBudgetsController < ApplicationController
 
     if the_user_budget.valid?
       the_user_budget.save
-      redirect_to("/budget_expenses", { :notice => "User budget created successfully." })
+      redirect_to("/budget_expenses")
+      # , { :notice => "User budget created successfully." })
     else
       redirect_to("/budget_expenses", { :alert => the_user_budget.errors.full_messages.to_sentence })
     end
@@ -53,7 +54,8 @@ class UserBudgetsController < ApplicationController
 
     if the_user_budget.valid?
       the_user_budget.save
-      redirect_to("/budget_expenses", { :notice => "User budget updated successfully."} )
+      redirect_to("/budget_expenses")
+      # , { :notice => "User budget updated successfully."} )
     else
       redirect_to("/budget_expenses/", { :alert => the_user_budget.errors.full_messages.to_sentence })
     end
@@ -65,7 +67,8 @@ class UserBudgetsController < ApplicationController
 
     the_user_budget.destroy
 
-    redirect_to("/budget_expenses", { :notice => "User budget deleted successfully."} )
+    redirect_to("/budget_expenses")
+    # , { :notice => "User budget deleted successfully."} )
   end
 
 end
