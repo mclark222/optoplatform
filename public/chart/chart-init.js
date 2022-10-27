@@ -5,7 +5,7 @@
           labels: [],
         //   labels: ['January', 'February', 'March', 'April', 'May', 'June'],
           datasets: [{
-              label: 'Actual spend',
+              label: 'Remaining Amount',
               data: [],
             //   data: [65, 59, 48, 56, 57, 40],
               backgroundColor: [

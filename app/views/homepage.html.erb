@@ -211,7 +211,12 @@
                                         </thead>
                                         <tbody>
 
-                                            <% for a_school_fee in SchoolFee.where({school: @current_user.school}) do %>
+                                            <%
+                                            school_fees_sort = SchoolFee.where({school: @current_user.school})
+
+                                            @list_of_school_fees = school_fees_sort.order({ :first_fee_date => :asc })
+
+                                            for a_school_fee in @list_of_school_fees do %>
                                     
                                                 <tr>
                                                 <td><span class="font700 color-grey"><%= a_school_fee.fee_name %></span></td>
@@ -247,7 +252,12 @@
                                         </thead>
                                         <tbody>
 
-                                            <% for a_school_event in SchoolEvent.where({school: @current_user.school}) do %>
+                                            <% 
+                                            school_events_sort = SchoolEvent.where({school: @current_user.school})
+
+                                            @list_of_school_events = school_events_sort.order({ :event_start_date => :asc })
+
+                                            for a_school_event in @list_of_school_events do %>
                                             
                                             <tr>
                                                 <td><span class="font700 color-grey"><%= a_school_event.event_name %>:</span></td>
