@@ -339,9 +339,6 @@ Rails.application.routes.draw do
 
   # CREATE RECORD
   post("/insert_user", { :controller => "user_authentication", :action => "create"  })
-  
-  # FORGOT PASSWORD
-  get("/user_forgot_password", { :controller => "user_authentication", :action => "forgot_password" }) 
     
   # EDIT PROFILE FORM        
   get("/edit_user_profile", { :controller => "user_authentication", :action => "edit_profile_form" })       
@@ -360,5 +357,17 @@ Rails.application.routes.draw do
 
   # SIGN OUT        
   get("/user_sign_out", { :controller => "user_authentication", :action => "destroy_cookies" })
+
+  # ------------------------------
+
+  # FORGOT PASSWORD
+
+  get("password/reset", to: "password_resets#new")
+  get("password/reset", to: "password_resets#create")
+  #get("password/reset", to: "password_resets#new")
+  #get("password/reset", to: "password_resets#new")
+
+
+
 
 end
