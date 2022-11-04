@@ -1,7 +1,6 @@
 class UserAuthenticationController < ApplicationController
   # Uncomment line 3 in this file and line 5 in ApplicationController if you want to force users to sign in before any other actions.
-  skip_before_action(:force_user_sign_in, { :only => [:sign_up_form, :create, :sign_in_form, :create_cookie, :forgot_password] })
-
+  skip_before_action(:force_user_sign_in, { :only => [:sign_up_form, :create, :sign_in_form, :create_cookie, :forgot_password, :forgot_password_create] })
 
   def sign_in_form
     render({ :template => "user_authentication/sign_in.html.erb" })
@@ -9,17 +8,17 @@ class UserAuthenticationController < ApplicationController
 
   def create_cookie
     user = User.where({ :email => params.fetch("query_email") }).first
-    
+
     the_supplied_password = params.fetch("query_password")
-    
+
     if user != nil
       are_they_legit = user.authenticate(the_supplied_password)
-    
+
       if are_they_legit == false
         redirect_to("/user_sign_in", { :alert => "Incorrect password." })
       else
         session[:user_id] = user.id
-      
+
         redirect_to("/")
         #{ :notice => "Signed in successfully." })
       end
@@ -39,10 +38,6 @@ class UserAuthenticationController < ApplicationController
     render({ :template => "user_authentication/sign_up.html.erb" })
   end
 
-  def forgot_password
-    render({ :template => "user_mailer/password_reset.html.erb" })
-  end
-  
   def create
     @user = User.new
     @user.email = params.fetch("query_email")
@@ -83,7 +78,7 @@ class UserAuthenticationController < ApplicationController
 
     if save_status == true
       session[:user_id] = @user.id
-      
+
       #UserMailer.account_activation(@user).deliver_now         #need to figure out how to get this working
 
       redirect_to("/home")
@@ -109,29 +104,25 @@ class UserAuthenticationController < ApplicationController
     @user.school =
       (if params.fetch("query_school") == "Select One"
         @user.school = @user.school
-      else @user.school = params.fetch("query_school")
-      end)
+      else @user.school = params.fetch("query_school")       end)
     #@user.international_student_status = params.fetch("query_international_student_status", false)
     @user.international_student_status =
       (if params.fetch("query_international_student_status") == "Select One"
-      @user.international_student_status = @user.international_student_status
-      else @user.international_student_status = params.fetch("query_international_student_status")
-      end)
+        @user.international_student_status = @user.international_student_status
+      else @user.international_student_status = params.fetch("query_international_student_status")       end)
     #@user.premba_industry = params.fetch("query_premba_industry")
     @user.premba_industry =
       (if params.fetch("query_premba_industry") == "Select One"
-      @user.premba_industry = @user.premba_industry
-      else @user.premba_industry = params.fetch("query_premba_industry")
-      end)
+        @user.premba_industry = @user.premba_industry
+      else @user.premba_industry = params.fetch("query_premba_industry")       end)
     #@user.gender = params.fetch("query_gender")
     @user.gender =
       (if params.fetch("query_gender") == "Select One"
         @user.gender = @user.gender
-      else @user.gender = params.fetch("query_gender")
-      end)
+      else @user.gender = params.fetch("query_gender")       end)
 
     @user.birth_date = params.fetch("query_birth_date")
-    
+
     #The below fields are hidden because a user shouldn't be updating them directly. But I would ensure that we still have a way to update them.
 
     @user.loan_comparisons_count = @current_user.loan_comparisons_count
@@ -155,23 +146,54 @@ class UserAuthenticationController < ApplicationController
     # @user.transaction_categories_count = params.fetch("query_transaction_categories_count")
     # @user.school_events_count = params.fetch("query_school_events_count")
     # @user.plaid_items_count = params.fetch("query_plaid_items_count")
-    
+
     if @user.valid?
       @user.save
 
       redirect_to("/home")
       #, { :notice => "User account updated successfully."})
     else
-      render({ :template => "user_authentication/edit_profile_with_errors.html.erb" , :alert => @user.errors.full_messages.to_sentence })
+      render({ :template => "user_authentication/edit_profile_with_errors.html.erb", :alert => @user.errors.full_messages.to_sentence })
     end
   end
 
   def destroy
     @current_user.destroy
     reset_session
-    
+
     redirect_to("/home")
     #,{ :notice => "User account cancelled" })
   end
- 
+
+  def forgot_password
+  end
+
+  def forgot_password_create
+    @user = User.find_by(email: params[email])
+    if @user.present?
+      PasswordMailer.with(user: @user).reset.deliver_now
+    end
+    redirect_to root_path, notice: "If your email exists in the system, we have sent a password reset email to you."
+  end
+
+  def forgot_password_edit
+    @user = User.find_signed(params[:token], purpose: "password_reset")
+  rescue ActiveSupport::MessageVerifier::InvalidSignature
+    redirect_to sign_in_path, alert: "Your link has expired. Please try again."
+  end
+end
+
+def forgot_password_update
+  @user = User.find_signed(params[:token], purpose: "password_reset")
+  if @user.update(password_params)
+    redirect_to sign_in_path, notice: "Your password was successfully reset. Please sign in."
+  else
+    render :edit
+  end
+
+  private
+
+  def forgot_password_password_params
+    params.require(:user).permit(:password, :password_confirmation)
+  end
 end

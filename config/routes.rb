@@ -362,10 +362,10 @@ Rails.application.routes.draw do
 
   # FORGOT PASSWORD
 
-  get("password/reset", { :controller => "password_resets", :action => "new" })
-  post("password/reset", { :controller => "password_resets", :action => "create"})
-  get("password/reset/edit", { :controller => "password_resets", :action => "edit"})
-  patch("password/reset/edit", { :controller => "password_resets", :action => "update"})
+  get("password/reset", { :controller => "user_authentication", :action => "forgot_password" })
+  post("password/reset", { :controller => "user_authentication", :action => "forgot_password_create"})
+  get("password/reset/edit", { :controller => "user_authentication", :action => "forgot_password_edit"})
+  patch("password/reset/edit", { :controller => "user_authentication", :action => "forgot_password_update"})
 
 
 
