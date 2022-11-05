@@ -174,7 +174,7 @@ class UserAuthenticationController < ApplicationController
     if @user.present?
       PasswordMailer.with(user: @user).reset.deliver_now
     end
-    redirect_to root_path, notice: "If your email exists in the system, we have sent a password reset email to you."
+    redirect_to("/user_sign_in", { :notice =>  "If your email exists in the system, we have sent a password reset email to you." })
   end
 
   def forgot_password_edit
