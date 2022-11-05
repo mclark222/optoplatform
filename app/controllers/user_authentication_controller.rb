@@ -169,7 +169,8 @@ class UserAuthenticationController < ApplicationController
   end
 
   def forgot_password_create
-    @user = User.find_by(email: params[email])
+    @user = User.where({ :email => params.fetch("query_email") }).first
+
     if @user.present?
       PasswordMailer.with(user: @user).reset.deliver_now
     end
