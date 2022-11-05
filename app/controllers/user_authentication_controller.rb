@@ -1,6 +1,6 @@
 class UserAuthenticationController < ApplicationController
   # Uncomment line 3 in this file and line 5 in ApplicationController if you want to force users to sign in before any other actions.
-  skip_before_action(:force_user_sign_in, { :only => [:sign_up_form, :create, :sign_in_form, :create_cookie, :forgot_password, :forgot_password_create] })
+  skip_before_action(:force_user_sign_in, { :only => [:sign_up_form, :create, :sign_in_form, :create_cookie, :forgot_password, :forgot_password_create, :forgot_password_edit, :forgot_password_update] })
 
   def sign_in_form
     render({ :template => "user_authentication/sign_in.html.erb" })
@@ -174,20 +174,20 @@ class UserAuthenticationController < ApplicationController
     if @user.present?
       PasswordMailer.with(user: @user).reset.deliver_now
     end
-    redirect_to("/user_sign_in", { :notice =>  "If your email exists in the system, we have sent a password reset email to you." })
+    redirect_to user_sign_in_url, notice: "If your email exists in the system, we have sent a password reset email to you."
   end
 
   def forgot_password_edit
     @user = User.find_signed(params[:token], purpose: "password_reset")
   rescue ActiveSupport::MessageVerifier::InvalidSignature
-    redirect_to sign_in_path, alert: "Your link has expired. Please try again."
+    redirect_to user_sign_in_url, alert: "Your link has expired. Please try again."
   end
 end
 
 def forgot_password_update
   @user = User.find_signed(params[:token], purpose: "password_reset")
   if @user.update(password_params)
-    redirect_to sign_in_path, notice: "Your password was successfully reset. Please sign in."
+    redirect_to user_sign_in_url, notice: "Your password was successfully reset. Please sign in."
   else
     render :edit
   end
