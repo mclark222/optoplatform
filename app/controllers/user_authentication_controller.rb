@@ -178,23 +178,23 @@ class UserAuthenticationController < ApplicationController
   end
 
   def forgot_password_edit
-    @user = User.find_signed(params[:token], purpose: "password_reset")
-  rescue ActiveSupport::MessageVerifier::InvalidSignature
-    redirect_to user_sign_in_url, alert: "Your link has expired. Please try again."
+    @user = User.find_signed!(params[:token], purpose: "password_reset")
+    rescue ActiveSupport::MessageVerifier::InvalidSignature
+      redirect_to user_sign_in_url, alert: "Your link has expired. Please request another token."
   end
-end
-
-def forgot_password_update
-  @user = User.find_signed(params[:token], purpose: "password_reset")
-  if @user.update(password_params)
-    redirect_to user_sign_in_url, notice: "Your password was successfully reset. Please sign in."
-  else
-    render :edit
+  
+  def forgot_password_update
+    @user = User.find_signed(params[:token], purpose: "password_reset")
+    if @user.update(password_params)
+      redirect_to user_sign_in_url, notice: "Your password was successfully reset. Please sign in."
+    else
+      render :forgot_password_edit
+    end
   end
 
   private
 
-  def forgot_password_password_params
+  def password_params
     params.require(:user).permit(:password, :password_confirmation)
   end
 end
