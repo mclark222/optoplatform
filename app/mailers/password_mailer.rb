@@ -10,4 +10,10 @@ class PasswordMailer < ApplicationMailer
 
     mail to: params[:user].email
   end
+
+  def send_reset_email
+    mail( :to => params[:user].email,
+    :subject => 'Thanks for signing up for our amazing app' )
+  end
+
 end

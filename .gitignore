@@ -49,3 +49,6 @@ core.chrome*
 .theia/.ltici_apitoken.yml
 vendor/bundle/*
 !vendor/bundle/.keep
+sendgrid.env
+sendgrid.env
+sendgrid.env

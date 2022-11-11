@@ -171,10 +171,25 @@ class UserAuthenticationController < ApplicationController
   def forgot_password_create
     @user = User.where({ :email => params.fetch("query_email") }).first
 
+    from = SendGrid::Email.new(email: 'contact@optofinancial.com')
+    to = SendGrid::Email.new(email: 'mattchang9@gmail.com')
+    subject = 'Sending with Twilio SendGrid is Fun'
+    content = SendGrid::Content.new(type: 'text/plain', value: 'and easy to do anywhere, even with Ruby')
+    mail = SendGrid::Mail.new(from, subject, to, content)
+
+    sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'])
+    response = sg.client.mail._('send').post(request_body: mail.to_json)
+    puts response.status_code
+    puts response.body
+    puts response.headers
+    
     if @user.present?
       PasswordMailer.with(user: @user).reset.deliver_now
+      PasswordMailer.with(user: @user).send_reset_email.deliver_now
     end
+    
     redirect_to user_sign_in_url, notice: "If your email exists in the system, we have sent a password reset email to you."
+    
   end
 
   def forgot_password_edit

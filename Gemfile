@@ -14,6 +14,7 @@ gem 'sprockets', '< 4'
 gem 'sassc-rails'
 gem 'faker'
 gem 'plaid'
+gem 'sendgrid-ruby'
 
 group :development do
   gem 'htmlbeautifier'
