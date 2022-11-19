@@ -2,7 +2,7 @@
 #
 # Table name: school_events
 #
-#  id                          :integer          not null, primary key
+#  id                          :bigint           not null, primary key
 #  estimated_cost              :float
 #  event_end_date              :date
 #  event_name                  :string

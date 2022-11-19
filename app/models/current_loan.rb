@@ -2,7 +2,7 @@
 #
 # Table name: current_loans
 #
-#  id                            :integer          not null, primary key
+#  id                            :bigint           not null, primary key
 #  amount_borrowed               :float
 #  amount_remaining              :float
 #  apr                           :float

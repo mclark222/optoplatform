@@ -2,7 +2,7 @@
 #
 # Table name: school_fees
 #
-#  id             :integer          not null, primary key
+#  id             :bigint           not null, primary key
 #  fee_amount     :float
 #  fee_name       :string
 #  first_fee_date :date

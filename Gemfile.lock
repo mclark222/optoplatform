@@ -68,6 +68,9 @@ GEM
     activejob (6.0.5)
       activesupport (= 6.0.5)
       globalid (>= 0.3.6)
+    activejob-interactor (0.0.1)
+      activejob
+      interactor
     activemodel (6.0.5)
       activesupport (= 6.0.5)
     activerecord (6.0.5)
@@ -185,6 +188,7 @@ GEM
       concurrent-ruby (~> 1.0)
     indefinite_article (0.2.5)
       activesupport
+    interactor (3.1.2)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -344,7 +348,7 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
-    sqlite3 (1.4.2)
+    sqlite3 (1.4.4)
     table_print (1.5.7)
     tabulo (2.8.0)
       tty-screen (= 0.8.1)
@@ -385,6 +389,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activejob-interactor
   amazing_print
   annotate
   bcrypt
@@ -400,6 +405,7 @@ DEPENDENCIES
   grade_runner!
   htmlbeautifier
   http
+  interactor
   jbuilder (~> 2.7)
   listen (~> 3.2)
   nokogiri (>= 1.10.8)
@@ -424,7 +430,7 @@ DEPENDENCIES
   webmock
 
 RUBY VERSION
-   ruby 2.7.3p183
+   ruby 2.7.6p219
 
 BUNDLED WITH
    2.1.4

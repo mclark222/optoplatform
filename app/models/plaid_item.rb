@@ -2,7 +2,7 @@
 #
 # Table name: plaid_items
 #
-#  id                   :integer          not null, primary key
+#  id                   :bigint           not null, primary key
 #  accounts_count       :integer
 #  plaid_access_token   :text
 #  status               :text

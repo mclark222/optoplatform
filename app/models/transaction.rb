@@ -2,7 +2,7 @@
 #
 # Table name: transactions
 #
-#  id                            :integer          not null, primary key
+#  id                            :bigint           not null, primary key
 #  authorized_datetime           :datetime
 #  income_flag                   :boolean
 #  iso_currency_code             :text

@@ -2,7 +2,7 @@
 #
 # Table name: school_event_payments
 #
-#  id                   :integer          not null, primary key
+#  id                   :bigint           not null, primary key
 #  payment_amount       :float
 #  payment_due_datetime :datetime
 #  created_at           :datetime         not null

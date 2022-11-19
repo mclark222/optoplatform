@@ -2,7 +2,7 @@
 #
 # Table name: loan_comparisons
 #
-#  id                            :integer          not null, primary key
+#  id                            :bigint           not null, primary key
 #  apr                           :float
 #  lender_name                   :string
 #  loan_total_cost               :float

@@ -2,7 +2,7 @@
 #
 # Table name: budget_incomes
 #
-#  id                    :integer          not null, primary key
+#  id                    :bigint           not null, primary key
 #  first_recurrence_date :date
 #  income_amount         :float
 #  income_name           :string

@@ -2,7 +2,7 @@
 #
 # Table name: spend_intentions
 #
-#  id              :integer          not null, primary key
+#  id              :bigint           not null, primary key
 #  spend_intention :text
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
