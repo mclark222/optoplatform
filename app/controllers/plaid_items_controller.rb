@@ -18,71 +18,21 @@ class PlaidItemsController < ApplicationController
   end
 
   def create_link_token
-    configuration = Plaid::Configuration.new
-    configuration.server_index = Plaid::Configuration::Environment["sandbox"]
-    configuration.api_key["PLAID-CLIENT-ID"] = "62e9fc1a50f8030013968af0"
-    configuration.api_key["PLAID-SECRET"] = "e863c9a11046dec35f60ef08d7b4af"
+    response = PlaidClient.new.create_link_token(@current_user.id.to_s)
 
-    api_client = Plaid::ApiClient.new(
-      configuration
-    )
-
-    client = Plaid::PlaidApi.new(api_client)
-
-    client_user_id = @current_user.id
-    
-    # Create the link_token with all of your configurations
-    link_token_create_request = Plaid::LinkTokenCreateRequest.new({
-      :user => { :client_user_id => client_user_id.to_s },
-      :client_name => 'Opto',
-      :products => %w[auth transactions],
-      :country_codes => ['US'],
-      :language => 'en'
-    })
-
-    link_token_response = client.link_token_create(
-      link_token_create_request
-    )
-
-    # Pass the result to your client-side app to initialize Link
-    #  and retrieve a public_token
-    link_token = link_token_response.link_token
-
-    request = Plaid::LinkTokenGetRequest.new({ link_token: link_token })
-    response = client.link_token_get(request)
+    # Need to handle error handling here
 
     render json: response
   end
 
   def create_access_token
-    configuration = Plaid::Configuration.new
-    configuration.server_index = Plaid::Configuration::Environment["sandbox"]
-    configuration.api_key["PLAID-CLIENT-ID"] = "62e9fc1a50f8030013968af0"
-    configuration.api_key["PLAID-SECRET"] = "e863c9a11046dec35f60ef08d7b4af"
+    response = PlaidClient.new.exchange_token(params[:public_token])
 
-    api_client = Plaid::ApiClient.new(
-      configuration
+    Finance::SubmitPlaidItem.call(
+      plaid_access_token: response.access_token, plaid_item_id: response.item_id, user: @current_user
     )
 
-    client = Plaid::PlaidApi.new(api_client)
-
-    request = Plaid::ItemPublicTokenExchangeRequest.new
-    request.public_token = params.fetch("public_token")
-
-    response = client.item_public_token_exchange(request)
-
-    PlaidItem.create(
-    :user_id=>@current_user.id,
-    :plaid_access_token=>response.access_token,
-    :plaid_item_id=>response.item_id,
-    :plaid_institution_id=>"",
-    :status=>"",
-    :transactions_cursor=>"",
-    :accounts_count=>"")
-
-    # response contains the access token and item id.
-    # response.access_token
-    # response.item_id
+    # Need to handle error handling here
 
     render json: response
   end

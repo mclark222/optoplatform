@@ -20,10 +20,13 @@
 #  user_id                 :integer
 #
 class Account < ApplicationRecord
-  belongs_to(:user, { :required => true, :class_name => "User", :foreign_key => "user_id", :counter_cache => true })
+  belongs_to :user
+  
+  # No idea about the need of bank accounts & credit card account model here
   has_many(:bank_accounts, { :class_name => "BankAccount", :foreign_key => "account_id", :dependent => :destroy })
-  has_many(:transactions, { :class_name => "Transaction", :foreign_key => "account_id", :dependent => :destroy })
   has_many(:credit_cards, { :class_name => "CreditCard", :foreign_key => "account_id", :dependent => :destroy })
-  belongs_to(:item, { :required => true, :class_name => "PlaidItem", :foreign_key => "item_id", :counter_cache => true })
 
+
+  has_many :transactions, dependent: :destroy
+  belongs_to :item, foreign_key: :item_id, class_name: 'PlaidItem', counter_cache: true
 end
