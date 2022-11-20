@@ -32,10 +32,15 @@
           Transaction amount
         </th>
 
-        <!-- <th>
+        <th>
           Transaction datetime
         </th>
 
+        <th>
+          Authorized datetime
+        </th>
+
+        <!--
         <th>
           Recurring frequency
         </th>
@@ -59,10 +64,11 @@
         <th>
           Iso currency code
         </th>
+        -->
 
         <th>
           Merchant name
-        </th> -->
+        </th>
 
         <th>
           Payment channel
@@ -71,10 +77,6 @@
         <!--
         <th>
           Transaction category plaid
-        </th>
-
-        <th>
-          Authorized datetime
         </th>
 
         <th>
@@ -132,11 +134,15 @@
           <%= a_transaction.transaction_amount %>
         </td>
 
-        <!--
         <td>
           <%= a_transaction.transaction_datetime %>
         </td>
 
+        <td>
+          <%= a_transaction.authorized_datetime %>
+        </td>
+
+        <!--
         <td>
           <%= a_transaction.recurring_frequency %>
         </td>
@@ -160,10 +166,11 @@
         <td>
           <%= a_transaction.iso_currency_code %>
         </td>
+        -->
 
         <td>
           <%= a_transaction.merchant_name %>
-        </td>-->
+        </td>
 
         <td>
           <%= a_transaction.payment_channel %>
@@ -172,10 +179,6 @@
         <!--
         <td>
           <%= a_transaction.transaction_category_plaid %>
-        </td>
-
-        <td>
-          <%= a_transaction.authorized_datetime %>
         </td>
 
         <td>
