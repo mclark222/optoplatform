@@ -57,8 +57,8 @@ RUN curl -sSL https://rvm.io/mpapis.asc | gpg --import - \
     && curl -fsSL https://get.rvm.io | bash -s stable \
     && bash -lc " \
         rvm requirements \
-        && rvm install 2.7.3 \
-        && rvm use 2.7.3 --default \
+        && rvm install 2.7.6 \
+        && rvm use 2.7.6 --default \
         && rvm rubygems current \
         && gem install bundler --no-document" \
     && echo '[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*' >> /home/gitpod/.bashrc.d/70-ruby
