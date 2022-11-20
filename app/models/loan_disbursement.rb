@@ -2,7 +2,7 @@
 #
 # Table name: loan_disbursements
 #
-#  id                    :bigint           not null, primary key
+#  id                    :integer          not null, primary key
 #  disbursement_amount   :float
 #  disbursement_datetime :datetime
 #  created_at            :datetime         not null

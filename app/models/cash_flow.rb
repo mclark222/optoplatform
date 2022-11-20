@@ -2,7 +2,7 @@
 #
 # Table name: cash_flows
 #
-#  id                :bigint           not null, primary key
+#  id                :integer          not null, primary key
 #  first_day_of_week :date
 #  last_day_of_week  :date
 #  remaining_cash    :float

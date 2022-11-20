@@ -2,7 +2,7 @@
 #
 # Table name: users
 #
-#  id                           :bigint           not null, primary key
+#  id                           :integer          not null, primary key
 #  accounts_count               :integer
 #  birth_date                   :date
 #  budget_expenses_count        :integer

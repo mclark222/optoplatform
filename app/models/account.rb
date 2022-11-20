@@ -2,7 +2,7 @@
 #
 # Table name: accounts
 #
-#  id                      :bigint           not null, primary key
+#  id                      :integer          not null, primary key
 #  account_type            :string
 #  available_balance_plaid :float
 #  credit_cards_count      :integer

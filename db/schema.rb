@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_17_084307) do
+ActiveRecord::Schema.define(version: 2022_11_19_234919) do
 
   create_table "accounts", force: :cascade do |t|
     t.string "account_type"
@@ -199,7 +199,7 @@ ActiveRecord::Schema.define(version: 2022_10_17_084307) do
     t.datetime "authorized_datetime"
     t.string "transaction_location"
     t.text "transaction_subcategory_plaid"
-    t.integer "account_id"
+    t.bigint "account_id"
     t.text "plaid_transaction_id"
     t.text "plaid_category_id"
     t.text "type_plaid"

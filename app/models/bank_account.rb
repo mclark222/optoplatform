@@ -2,7 +2,7 @@
 #
 # Table name: bank_accounts
 #
-#  id                   :bigint           not null, primary key
+#  id                   :integer          not null, primary key
 #  account_balance      :float
 #  savings_account_flag :boolean
 #  created_at           :datetime         not null

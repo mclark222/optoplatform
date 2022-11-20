@@ -2,7 +2,7 @@
 #
 # Table name: user_budgets
 #
-#  id                       :bigint           not null, primary key
+#  id                       :integer          not null, primary key
 #  first_day_of_month       :date
 #  last_day_of_month        :date
 #  non_school_expenses      :float

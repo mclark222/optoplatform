@@ -2,7 +2,7 @@
 #
 # Table name: credit_cards
 #
-#  id                   :bigint           not null, primary key
+#  id                   :integer          not null, primary key
 #  apr                  :float
 #  card_name            :string
 #  credit_line          :float

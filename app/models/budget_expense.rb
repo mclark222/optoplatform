@@ -2,7 +2,7 @@
 #
 # Table name: budget_expenses
 #
-#  id                    :bigint           not null, primary key
+#  id                    :integer          not null, primary key
 #  expense_amount        :float
 #  expense_name          :string
 #  first_recurrence_date :date

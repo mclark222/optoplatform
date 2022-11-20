@@ -2,7 +2,7 @@
 #
 # Table name: transaction_categories
 #
-#  id                         :bigint           not null, primary key
+#  id                         :integer          not null, primary key
 #  spend_category_name        :string
 #  spend_sub_category         :string
 #  spend_sub_category_details :text
