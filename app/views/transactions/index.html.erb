@@ -16,6 +16,219 @@
 </div>
 
 <hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Name plaid
+        </th>
+
+        <th>
+          Transaction amount
+        </th>
+
+        <!-- <th>
+          Transaction datetime
+        </th>
+
+        <th>
+          Recurring frequency
+        </th>
+
+        <th>
+          Recurring end date
+        </th>
+
+        <th>
+          Spend category
+        </th>
+
+        <th>
+          Income flag
+        </th>
+
+        <th>
+          Recurring flag
+        </th>
+
+        <th>
+          Iso currency code
+        </th>
+
+        <th>
+          Merchant name
+        </th> -->
+
+        <th>
+          Payment channel
+        </th>
+
+        <!--
+        <th>
+          Transaction category plaid
+        </th>
+
+        <th>
+          Authorized datetime
+        </th>
+
+        <th>
+          Transaction location
+        </th>
+
+        <th>
+          Transaction subcategory plaid
+        </th>-->
+
+        <th>
+          Account
+        </th>
+
+        <th>
+          Plaid Transaction ID
+        </th>
+
+        <!--
+        <th>
+          Plaid Category ID
+        </th>
+
+        <th>
+          Type plaid
+        </th>-->
+
+        <th>
+          Pending
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_transactions.each do |a_transaction| %>
+      <tr>
+        <td>
+          <%= a_transaction.id %>
+        </td>
+
+        <td>
+          <%= a_transaction.name_plaid %>
+        </td>
+
+        <td>
+          <%= a_transaction.transaction_amount %>
+        </td>
+
+        <!--
+        <td>
+          <%= a_transaction.transaction_datetime %>
+        </td>
+
+        <td>
+          <%= a_transaction.recurring_frequency %>
+        </td>
+
+        <td>
+          <%= a_transaction.recurring_end_date %>
+        </td>
+
+        <td>
+          <%= a_transaction.spend_category_id %>
+        </td>
+
+        <td>
+          <%= a_transaction.income_flag %>
+        </td>
+
+        <td>
+          <%= a_transaction.recurring_flag %>
+        </td>
+
+        <td>
+          <%= a_transaction.iso_currency_code %>
+        </td>
+
+        <td>
+          <%= a_transaction.merchant_name %>
+        </td>-->
+
+        <td>
+          <%= a_transaction.payment_channel %>
+        </td>
+
+        <!--
+        <td>
+          <%= a_transaction.transaction_category_plaid %>
+        </td>
+
+        <td>
+          <%= a_transaction.authorized_datetime %>
+        </td>
+
+        <td>
+          <%= a_transaction.transaction_location %>
+        </td>
+
+        <td>
+          <%= a_transaction.transaction_subcategory_plaid %>
+        </td>-->
+
+        <td>
+          <%= a_transaction.account_id %>
+        </td>
+
+        <td>
+          <%= a_transaction.plaid_transaction_id %>
+        </td>
+
+        <!--
+        <td>
+          <%= a_transaction.plaid_category_id %>
+        </td>
+
+        <td>
+          <%= a_transaction.type_plaid %>
+        </td>
+        -->
+
+        <td>
+          <%= a_transaction.pending %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_transaction.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_transaction.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/transactions/<%= a_transaction.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>
+
+<hr>
 
 <div>
   <div>
@@ -184,210 +397,3 @@
     </form>
   </div>
 </div>
-
-<hr>
-<div>
-  <div>
-    <table border="1">
-      <tr>
-        <th>
-          ID
-        </th>
-
-        <th>
-          Name plaid
-        </th>
-
-        <th>
-          Transaction amount
-        </th>
-
-        <th>
-          Transaction datetime
-        </th>
-
-        <th>
-          Recurring frequency
-        </th>
-
-        <th>
-          Recurring end date
-        </th>
-
-        <th>
-          Spend category
-        </th>
-
-        <th>
-          Income flag
-        </th>
-
-        <th>
-          Recurring flag
-        </th>
-
-        <th>
-          Iso currency code
-        </th>
-
-        <th>
-          Merchant name
-        </th>
-
-        <th>
-          Payment channel
-        </th>
-
-        <th>
-          Transaction category plaid
-        </th>
-
-        <th>
-          Authorized datetime
-        </th>
-
-        <th>
-          Transaction location
-        </th>
-
-        <th>
-          Transaction subcategory plaid
-        </th>
-
-        <th>
-          Account
-        </th>
-
-        <th>
-          Plaid transaction
-        </th>
-
-        <th>
-          Plaid category
-        </th>
-
-        <th>
-          Type plaid
-        </th>
-
-        <th>
-          Pending
-        </th>
-
-        <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
-        </th>
-
-        <th>
-        </th>
-      </tr>
-
-      <% @list_of_transactions.each do |a_transaction| %>
-      <tr>
-        <td>
-          <%= a_transaction.id %>
-        </td>
-
-        <td>
-          <%= a_transaction.name_plaid %>
-        </td>
-
-        <td>
-          <%= a_transaction.transaction_amount %>
-        </td>
-
-        <td>
-          <%= a_transaction.transaction_datetime %>
-        </td>
-
-        <td>
-          <%= a_transaction.recurring_frequency %>
-        </td>
-
-        <td>
-          <%= a_transaction.recurring_end_date %>
-        </td>
-
-        <td>
-          <%= a_transaction.spend_category_id %>
-        </td>
-
-        <td>
-          <%= a_transaction.income_flag %>
-        </td>
-
-        <td>
-          <%= a_transaction.recurring_flag %>
-        </td>
-
-        <td>
-          <%= a_transaction.iso_currency_code %>
-        </td>
-
-        <td>
-          <%= a_transaction.merchant_name %>
-        </td>
-
-        <td>
-          <%= a_transaction.payment_channel %>
-        </td>
-
-        <td>
-          <%= a_transaction.transaction_category_plaid %>
-        </td>
-
-        <td>
-          <%= a_transaction.authorized_datetime %>
-        </td>
-
-        <td>
-          <%= a_transaction.transaction_location %>
-        </td>
-
-        <td>
-          <%= a_transaction.transaction_subcategory_plaid %>
-        </td>
-
-        <td>
-          <%= a_transaction.account_id %>
-        </td>
-
-        <td>
-          <%= a_transaction.plaid_transaction_id %>
-        </td>
-
-        <td>
-          <%= a_transaction.plaid_category_id %>
-        </td>
-
-        <td>
-          <%= a_transaction.type_plaid %>
-        </td>
-
-        <td>
-          <%= a_transaction.pending %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(a_transaction.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_transaction.updated_at) %> ago
-        </td>
-
-        <td>
-          <a href="/transactions/<%= a_transaction.id %>">
-            Show details
-          </a>
-        </td>
-      </tr>
-      <% end %>
-    </table>
-  </div>
-</div>
-
-<hr>
