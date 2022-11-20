@@ -5,6 +5,7 @@ module  Finance
     def call
       create_plaid_item
       fetch_and_save_accounts
+      fetch_and_save_transactions
     end
 
     private
@@ -35,6 +36,12 @@ module  Finance
           item: context.plaid_item
         )
       end
+    end
+
+    def fetch_and_save_transactions
+      PlaidClient.new.sync_transactions(
+        context.plaid_item.reload
+      )
     end
   end
 end

@@ -17,7 +17,7 @@ class PlaidClient
 		link_token_create_request = Plaid::LinkTokenCreateRequest.new({
       user: { client_user_id: user_id },
       client_name: 'Opto',
-      products: %w[auth transactions],
+      products: %w[auth transactions identity],
       country_codes: ['US'],
       language: 'en'
     })
@@ -48,7 +48,7 @@ class PlaidClient
 		@client.transactions.get(access_token)
 	end
 
-	def get_transactions_sync(plaid_item)
+	def sync_transactions(plaid_item)
 		cursor = plaid_item.transactions_cursor
 
 		added = []
@@ -77,27 +77,25 @@ class PlaidClient
 			cursor = response.next_cursor
 		end
 
-		# Persist cursor and updated data
-		# plaid_item.transactions_cursor = cursor
-		# plaid_item.save!
-
-
 		# Adjust transactions accordingly
 
-		# added.each do |transaction|
-		# 	Transaction.create!(
-		# 		transaction_id: transaction.transaction_id,
-		# 		amount: transaction.amount,
-		# 		category: transaction.category,
-		# 		category_id: transaction.category_id,
-		# 		date: transaction.date,
-		# 		name: transaction.name,
-		# 		pending: transaction.pending,
-		# 		pending_transaction_id: transaction.pending_transaction_id,
-		# 		account: Account.find_by(plaid_account_id: transaction.account_id),
-		# 		plaid_item: plaid_item
-		# 	)
+		added.each do |transaction|
+			Transaction.create!(
+				transaction_amount: transaction.amount,
+				transaction_datetime: transaction.datetime,
+				name_plaid: transaction.name,
+				merchant_name: transaction.merchant_name,
+				authorized_datetime: transaction.authorized_datetime,
+				account: Account.find_by_plaid_account_id(transaction.account_id),
+				pending:	transaction.pending,
+				plaid_transaction_id: transaction.transaction_id,
+				payment_channel: transaction.payment_channel
+			)
+		end
 
+		# Persist cursor and updated data
+		plaid_item.transactions_cursor = cursor
+		plaid_item.save!
 
 		# database.apply_updates(item_id, added, modified, removed, cursor)
 	end
