@@ -17,7 +17,7 @@ class PlaidClient
 		link_token_create_request = Plaid::LinkTokenCreateRequest.new({
       user: { client_user_id: user_id },
       client_name: 'Opto',
-      products: %w[auth transactions],
+      products: %w[auth identity transactions liabilities],
       country_codes: ['US'],
       language: 'en'
     })
@@ -79,25 +79,30 @@ class PlaidClient
 
 		# Adjust transactions accordingly
 
-		added.each do |transaction|
+		added.each do |t|
+
+			account = Account.find_by(plaid_account_id: t.account_id)
+			next if account.nil?
+
+			transaction_datetime = t.datetime ? t.datetime : t.date
+			authorized_datetime = t.authorized_datetime ? t.authorized_datetime : t.authorized_date
+			
 			Transaction.create!(
-				transaction_amount: transaction.amount,
-				transaction_datetime: transaction.datetime,
-				name_plaid: transaction.name,
-				merchant_name: transaction.merchant_name,
-				authorized_datetime: transaction.authorized_datetime,
-				account: Account.find_by_plaid_account_id(transaction.account_id),
-				pending:	transaction.pending,
-				plaid_transaction_id: transaction.transaction_id,
-				payment_channel: transaction.payment_channel
+				transaction_amount: t.amount,
+				transaction_datetime: transaction_datetime,
+				name_plaid: t.name,
+				merchant_name: t.merchant_name,
+				authorized_datetime: authorized_datetime,
+				account: account,
+				pending:	t.pending,
+				plaid_transaction_id: t.transaction_id,
+				payment_channel: t.payment_channel
 			)
 		end
 
 		# Persist cursor and updated data
 		plaid_item.transactions_cursor = cursor
 		plaid_item.save!
-
-		# database.apply_updates(item_id, added, modified, removed, cursor)
 	end
 
 	def get_balance(access_token)

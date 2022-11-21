@@ -81,41 +81,41 @@
 <hr>
 <div>
   <div>
-    <table border="1">
+    <table class="table table-bordered table-responsive table-sm">
       <tr>
-        <th>
+        <th scope="col">
           ID
-        </th>
+        </th scope="col">
 
-        <th>
+        <th scope="col">
           User ID
-        </th>
+        </th scope="col">
 
-        <th>
+        <th scope="col">
           Plaid Access Token
-        </th>
+        </th scope="col">
 
-        <th>
+        <th scope="col">
           Plaid Item ID
-        </th>
+        </th scope="col">
 
-        <th>
+        <th scope="col">
           Plaid Institution ID
-        </th>
+        </th scope="col">
 
-        <th>
+        <th scope="col">
           Status
-        </th>
+        </th scope="col">
 
-        <th>
+        <th scope="col">
           Transactions Cursor
-        </th>
+        </th scope="col">
 
-        <th>
+        <th scope="col">
           Created At
-        </th>
+        </th scope="col">
 
-        <th>
+        <th scope="col">
           Updated At
         </th>
 
@@ -123,7 +123,7 @@
 
 
       <% for an_item in PlaidItem.where({user_id: @current_user.id}) do %>
-      <tr>
+      <tr class="fs-6 text">
         <td>
           <%= an_item.id %>
         </td>
@@ -288,7 +288,7 @@
 <hr>
 <div>
   <div>
-    <table border="1">
+    <table class="table table-bordered table-responsive table-sm">
       <tr>
         <th>
           ID
@@ -359,7 +359,7 @@
       </tr>
 
       <% @list_of_accounts.each do |an_account| %>
-      <tr>
+      <tr class="fs-6 text">
         <td>
           <%= an_account.id %>
         </td>
