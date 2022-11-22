@@ -4,6 +4,9 @@
 #
 #  id                           :integer          not null, primary key
 #  accounts_count               :integer
+#  activated                    :boolean
+#  activated_at                 :datetime
+#  activation_digest            :string
 #  birth_date                   :date
 #  budget_expenses_count        :integer
 #  budget_incomes_count         :integer
@@ -44,6 +47,9 @@ class User < ApplicationRecord
   has_many(:user_budgets, { :class_name => "UserBudget", :foreign_key => "user_id", :dependent => :destroy })
   has_many(:cash_flows, { :class_name => "CashFlow", :foreign_key => "user_id", :dependent => :destroy })
 
+  attr_accessor :remember_token, :activation_token
+  before_save :downcase_email
+  before_create :create_activation_digest
   after_create :set_defaults
 
   def set_defaults
@@ -166,4 +172,14 @@ class User < ApplicationRecord
   
   end
 
+  private 
+  def downcase_email
+    self.email = email.downcase
+  end
+
+  def create_activation_digest
+    self.activation_token = User.new_token
+    self.activation_digest = User.digest(activation_token)
+  end
+  
 end

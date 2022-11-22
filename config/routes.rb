@@ -360,6 +360,9 @@ Rails.application.routes.draw do
 
   # ------------------------------
 
+  # Account Activation
+  resources :account_activations, only: [:edit]
+  # ------------------------------
   # FORGOT PASSWORD
 
   get("password_reset", { :controller => "user_authentication", :action => "forgot_password" })
