@@ -21,14 +21,12 @@
 #  type_plaid                    :text
 #  created_at                    :datetime         not null
 #  updated_at                    :datetime         not null
-#  account_id                    :integer
+#  account_id                    :bigint
 #  plaid_category_id             :text
 #  plaid_transaction_id          :text
 #  spend_category_id             :integer
 #
 class Transaction < ApplicationRecord
-  belongs_to(:spend_category, { :required => true, :class_name => "TransactionCategory", :foreign_key => "spend_category_id" })
+  # belongs_to(:spend_category, { :required => true, :class_name => "TransactionCategory", :foreign_key => "spend_category_id" })
   belongs_to(:account, { :required => true, :class_name => "Account", :foreign_key => "account_id" })
-
-
 end
