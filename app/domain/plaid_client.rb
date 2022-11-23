@@ -1,10 +1,10 @@
 class PlaidClient
 	def initialize
 		configuration = Plaid::Configuration.new
-		configuration.server_index = Plaid::Configuration::Environment["sandbox"]
+		configuration.server_index = Plaid::Configuration::Environment["development"]
 		# clientID and secrets to be moved to env variables
 		configuration.api_key["PLAID-CLIENT-ID"] = "62e9fc1a50f8030013968af0"
-    configuration.api_key["PLAID-SECRET"] = "e863c9a11046dec35f60ef08d7b4af"
+    configuration.api_key["PLAID-SECRET"] = "20ba4d1adc601be89d9be88472a96d"
 
 		api_client = Plaid::ApiClient.new(
 			configuration
@@ -17,7 +17,7 @@ class PlaidClient
 		link_token_create_request = Plaid::LinkTokenCreateRequest.new({
       user: { client_user_id: user_id },
       client_name: 'Opto',
-      products: %w[auth identity transactions liabilities],
+      products: %w[auth transactions liabilities],
       country_codes: ['US'],
       language: 'en'
     })
