@@ -18,25 +18,29 @@
 <hr>
 <div>
   <div>
-    <table border="1">
+    <table class="table table-bordered table-responsive table-sm">
       <tr>
-        <th>
-          ID
+        <th scope="col">
+          Account
         </th>
 
-        <th>
+        <th scope="col">
+          Trxn ID
+        </th>
+
+        <th scope="col">
           Name plaid
         </th>
 
-        <th>
+        <th scope="col">
           Transaction amount
         </th>
 
-        <th>
+        <th scope="col">
           Transaction datetime
         </th>
 
-        <th>
+        <th scope="col">
           Authorized datetime
         </th>
 
@@ -66,11 +70,11 @@
         </th>
         -->
 
-        <th>
+        <th scope="col">
           Merchant name
         </th>
 
-        <th>
+        <th scope="col">
           Payment channel
         </th>
 
@@ -87,11 +91,7 @@
           Transaction subcategory plaid
         </th>-->
 
-        <th>
-          Account
-        </th>
-
-        <th>
+        <th scope="col">
           Plaid Transaction ID
         </th>
 
@@ -104,24 +104,30 @@
           Type plaid
         </th>-->
 
-        <th>
+        <th scope="col">
           Pending
         </th>
 
-        <th>
+        <th scope="col">
           Created at
         </th>
 
-        <th>
+        <th scope="col">
           Updated at
         </th>
 
-        <th>
+        <th scope="col">
+          Edit Trxn
         </th>
+
       </tr>
 
       <% @list_of_transactions.each do |a_transaction| %>
       <tr>
+        <td>
+          <%= a_transaction.account_id %>
+        </td>
+        
         <td>
           <%= a_transaction.id %>
         </td>
@@ -190,10 +196,6 @@
         </td>-->
 
         <td>
-          <%= a_transaction.account_id %>
-        </td>
-
-        <td>
           <%= a_transaction.plaid_transaction_id %>
         </td>
 
@@ -230,173 +232,3 @@
 </div>
 
 <hr>
-
-<hr>
-
-<div>
-  <div>
-    <h2>
-      Add a new transaction
-    </h2>
-
-    <form action="/insert_transaction" method="post">
-      <div>
-        <label for="name_plaid_box">
-          Name plaid
-        </label>
-
-        <textarea id="name_plaid_box" name="query_name_plaid" rows="3"></textarea>
-      </div>
-
-      <div>
-        <label for="transaction_amount_box">
-          Transaction amount
-        </label>
-
-        <input type="text" id="transaction_amount_box" name="query_transaction_amount">
-      </div>
-
-      <div>
-        <label for="transaction_datetime_box">
-          Transaction datetime
-        </label>
-
-        <input type="datetime-local" id="transaction_datetime_box" name="query_transaction_datetime">
-      </div>
-
-      <div>
-        <label for="recurring_frequency_box">
-          Recurring frequency
-        </label>
-
-        <input type="text" id="recurring_frequency_box" name="query_recurring_frequency">
-      </div>
-
-      <div>
-        <label for="recurring_end_date_box">
-          Recurring end date
-        </label>
-
-        <input type="date" id="recurring_end_date_box" name="query_recurring_end_date">
-      </div>
-
-      <div>
-        <label for="spend_category_id_box">
-          Spend category
-        </label>
-
-        <input type="text" id="spend_category_id_box" name="query_spend_category_id">
-      </div>
-
-      <div>
-        <input type="checkbox" id="income_flag_box" name="query_income_flag" value="1">
-
-        <label for="income_flag_box">Income flag</label>
-      </div>
-
-      <div>
-        <input type="checkbox" id="recurring_flag_box" name="query_recurring_flag" value="1">
-
-        <label for="recurring_flag_box">Recurring flag</label>
-      </div>
-
-      <div>
-        <label for="iso_currency_code_box">
-          Iso currency code
-        </label>
-
-        <textarea id="iso_currency_code_box" name="query_iso_currency_code" rows="3"></textarea>
-      </div>
-
-      <div>
-        <label for="merchant_name_box">
-          Merchant name
-        </label>
-
-        <input type="text" id="merchant_name_box" name="query_merchant_name">
-      </div>
-
-      <div>
-        <label for="payment_channel_box">
-          Payment channel
-        </label>
-
-        <input type="text" id="payment_channel_box" name="query_payment_channel">
-      </div>
-
-      <div>
-        <label for="transaction_category_plaid_box">
-          Transaction category plaid
-        </label>
-
-        <textarea id="transaction_category_plaid_box" name="query_transaction_category_plaid" rows="3"></textarea>
-      </div>
-
-      <div>
-        <label for="authorized_datetime_box">
-          Authorized datetime
-        </label>
-
-        <input type="datetime-local" id="authorized_datetime_box" name="query_authorized_datetime">
-      </div>
-
-      <div>
-        <label for="transaction_location_box">
-          Transaction location
-        </label>
-
-        <input type="text" id="transaction_location_box" name="query_transaction_location">
-      </div>
-
-      <div>
-        <label for="transaction_subcategory_plaid_box">
-          Transaction subcategory plaid
-        </label>
-
-        <textarea id="transaction_subcategory_plaid_box" name="query_transaction_subcategory_plaid" rows="3"></textarea>
-      </div>
-
-      <div>
-        <label for="account_id_box">
-          Account
-        </label>
-
-        <input type="text" id="account_id_box" name="query_account_id">
-      </div>
-
-      <div>
-        <label for="plaid_transaction_id_box">
-          Plaid transaction
-        </label>
-
-        <textarea id="plaid_transaction_id_box" name="query_plaid_transaction_id" rows="3"></textarea>
-      </div>
-
-      <div>
-        <label for="plaid_category_id_box">
-          Plaid category
-        </label>
-
-        <textarea id="plaid_category_id_box" name="query_plaid_category_id" rows="3"></textarea>
-      </div>
-
-      <div>
-        <label for="type_plaid_box">
-          Type plaid
-        </label>
-
-        <textarea id="type_plaid_box" name="query_type_plaid" rows="3"></textarea>
-      </div>
-
-      <div>
-        <input type="checkbox" id="pending_box" name="query_pending" value="1">
-
-        <label for="pending_box">Pending</label>
-      </div>
-
-      <button>
-        Create transaction
-      </button>
-    </form>
-  </div>
-</div>

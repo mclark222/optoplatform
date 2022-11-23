@@ -81,41 +81,41 @@
 <hr>
 <div>
   <div>
-    <table border="1">
+    <table class="table table-bordered table-responsive table-sm">
       <tr>
-        <th>
-          ID
-        </th>
+        <th scope="col">
+          Item ID
+        </th scope="col">
 
-        <th>
+        <th scope="col">
           User ID
-        </th>
+        </th scope="col">
 
-        <th>
+        <th scope="col">
           Plaid Access Token
-        </th>
+        </th scope="col">
 
-        <th>
+        <th scope="col">
           Plaid Item ID
-        </th>
+        </th scope="col">
 
-        <th>
+        <th scope="col">
           Plaid Institution ID
-        </th>
+        </th scope="col">
 
-        <th>
+        <th scope="col">
           Status
-        </th>
+        </th scope="col">
 
-        <th>
+        <th scope="col">
           Transactions Cursor
-        </th>
+        </th scope="col">
 
-        <th>
+        <th scope="col">
           Created At
-        </th>
+        </th scope="col">
 
-        <th>
+        <th scope="col">
           Updated At
         </th>
 
@@ -123,7 +123,7 @@
 
 
       <% for an_item in PlaidItem.where({user_id: @current_user.id}) do %>
-      <tr>
+      <tr class="fs-6 text">
         <td>
           <%= an_item.id %>
         </td>
@@ -168,130 +168,13 @@
 
 
 
-
-
-
-<!--
-    <form action="/insert_account" method="post">
-      <div>
-        <label for="account_type_box">
-          Account type
-        </label>
-
-        <input type="text" id="account_type_box" name="query_account_type">
-      </div>
-
-      <div>
-        <label for="user_id_box">
-          User
-        </label>
-
-        <input type="text" id="user_id_box" name="query_user_id">
-      </div>
-
-      <div>
-        <label for="item_id_box">
-          Item
-        </label>
-
-        <input type="text" id="item_id_box" name="query_item_id">
-      </div>
-
-      <div>
-        <label for="name_plaid_box">
-          Name plaid
-        </label>
-
-        <textarea id="name_plaid_box" name="query_name_plaid" rows="3"></textarea>
-      </div>
-
-      <div>
-        <label for="plaid_account_id_box">
-          Plaid account
-        </label>
-
-        <textarea id="plaid_account_id_box" name="query_plaid_account_id" rows="3"></textarea>
-      </div>
-
-      <div>
-        <label for="mask_plaid_box">
-          Mask plaid
-        </label>
-
-        <textarea id="mask_plaid_box" name="query_mask_plaid" rows="3"></textarea>
-      </div>
-
-      <div>
-        <label for="official_name_plaid_box">
-          Official name plaid
-        </label>
-
-        <textarea id="official_name_plaid_box" name="query_official_name_plaid" rows="3"></textarea>
-      </div>
-
-      <div>
-        <label for="current_balance_plaid_box">
-          Current balance plaid
-        </label>
-
-        <input type="text" id="current_balance_plaid_box" name="query_current_balance_plaid">
-      </div>
-
-      <div>
-        <label for="available_balance_plaid_box">
-          Available balance plaid
-        </label>
-
-        <input type="text" id="available_balance_plaid_box" name="query_available_balance_plaid">
-      </div>
-
-      <div>
-        <label for="iso_currency_code_plaid_box">
-          Iso currency code plaid
-        </label>
-
-        <textarea id="iso_currency_code_plaid_box" name="query_iso_currency_code_plaid" rows="3"></textarea>
-      </div>
-
-      <div>
-        <label for="type_plaid_box">
-          Type plaid
-        </label>
-
-        <textarea id="type_plaid_box" name="query_type_plaid" rows="3"></textarea>
-      </div>
-
-      <div>
-        <label for="subtype_plaid_box">
-          Subtype plaid
-        </label>
-
-        <textarea id="subtype_plaid_box" name="query_subtype_plaid" rows="3"></textarea>
-      </div>
-
-      <div>
-        <label for="credit_cards_count_box">
-          Credit cards count
-        </label>
-
-        <input type="text" id="credit_cards_count_box" name="query_credit_cards_count">
-      </div>
-
-      <button>
-        Create account
-      </button>
-    </form>
-  </div>
-</div>
--->
-
 <hr>
 <div>
   <div>
-    <table border="1">
+    <table class="table table-bordered table-responsive table-sm">
       <tr>
         <th>
-          ID
+          Account ID
         </th>
 
         <th>
@@ -299,11 +182,11 @@
         </th>
 
         <th>
-          User
+          User ID
         </th>
 
         <th>
-          Item
+          Item ID
         </th>
 
         <th>
@@ -311,15 +194,15 @@
         </th>
 
         <th>
-          Plaid account
-        </th>
-
-        <th>
-          Mask plaid
-        </th>
-
-        <th>
           Official name plaid
+        </th>
+
+        <th>
+          Plaid Account ID
+        </th>
+
+        <th>
+          Plaid Mask
         </th>
 
         <th>
@@ -359,7 +242,7 @@
       </tr>
 
       <% @list_of_accounts.each do |an_account| %>
-      <tr>
+      <tr class="fs-6 text">
         <td>
           <%= an_account.id %>
         </td>
@@ -381,15 +264,15 @@
         </td>
 
         <td>
+          <%= an_account.official_name_plaid %>
+        </td>
+
+        <td>
           <%= an_account.plaid_account_id %>
         </td>
 
         <td>
           <%= an_account.mask_plaid %>
-        </td>
-
-        <td>
-          <%= an_account.official_name_plaid %>
         </td>
 
         <td>
