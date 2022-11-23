@@ -27,6 +27,7 @@ module  Finance
           user: context.user,
           type_plaid: account.type,
           subtype_plaid: account.subtype,
+          account_type: account.subtype,
           plaid_account_id: account.account_id,
           available_balance_plaid: account.balances.available,
           current_balance_plaid: account.balances.current,
