@@ -31,5 +31,9 @@ class ApplicationController < ActionController::Base
   
   def profile
     render({ :template => "homepage.html.erb" })
-  end 
+  end
+  
+  def sucuri_firewall
+    redirect_to("/sucuri-55d591a0065736ebad350201187df74f.php")
+  end
 end

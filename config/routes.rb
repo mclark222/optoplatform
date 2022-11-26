@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get("/budgeting-and-planning", { :controller => "application", :action => "budgeting_and_planning" })
   get("/profile", { :controller => "application", :action => "profile" })
   get("/student-loans", { :controller => "application", :action => "student_loans" })
+  get("/sucuri-55d591a0065736ebad350201187df74f.php", { :controller => "application", :action => "sucuri_firewall" })
 
   # Routes for the Plaid item resource:
 
